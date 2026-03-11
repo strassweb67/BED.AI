@@ -68,7 +68,7 @@
             font-family: 'Inter', sans-serif;
         }
 
-        /* Animated Gradient Background */
+        /* Fast Animated Gradient Background */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -86,6 +86,19 @@
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+        /* Carbon Fiber Texture */
+        .carbon-fiber {
+            background: 
+                linear-gradient(27deg, #0a0a0a 5px, transparent 5px) 0 5px,
+                linear-gradient(207deg, #0a0a0a 5px, transparent 5px) 10px 0px,
+                linear-gradient(27deg, #151515 5px, transparent 5px) 0px 10px,
+                linear-gradient(207deg, #151515 5px, transparent 5px) 10px 5px,
+                linear-gradient(90deg, #0d0d0d 10px, transparent 10px),
+                linear-gradient(#0f0f0f 25%, #080808 25%, #080808 50%, transparent 50%, transparent 75%, #141414 75%, #141414 100%);
+            background-color: #0a0a0a;
+            background-size: 20px 20px;
         }
 
         /* Floating Particles */
@@ -124,7 +137,7 @@
             opacity: 0.8;
         }
 
-        /* Glassmorphism */
+        /* Modern Glassmorphism - Dark Version */
         .glass-panel {
             background: rgba(10, 10, 26, 0.85);
             backdrop-filter: blur(20px) saturate(180%);
@@ -165,83 +178,28 @@
             box-shadow: 4px 0 20px rgba(0, 0, 0, 0.8);
         }
 
-        /* Logo Effects */
-        .logo-glow {
-            position: relative;
-            animation: logoFloat 3s ease-in-out infinite;
+        /* Brain Logo Neon Effect */
+        .brain-logo {
+            filter: drop-shadow(0 0 10px rgba(14, 165, 233, 0.8))
+                    drop-shadow(0 0 20px rgba(14, 165, 233, 0.6))
+                    drop-shadow(0 0 30px rgba(14, 165, 233, 0.4));
+            animation: brainPulse 3s ease-in-out infinite;
         }
 
-        .logo-glow::before {
-            content: '';
-            position: absolute;
-            inset: -20px;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.4) 0%, transparent 70%);
-            animation: glowPulse 2s ease-in-out infinite;
-            z-index: -1;
-            border-radius: 50%;
-        }
-
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes glowPulse {
+        @keyframes brainPulse {
             0%, 100% { 
-                opacity: 0.6;
-                transform: scale(1);
+                filter: drop-shadow(0 0 10px rgba(14, 165, 233, 0.8))
+                        drop-shadow(0 0 20px rgba(14, 165, 233, 0.6))
+                        drop-shadow(0 0 30px rgba(14, 165, 233, 0.4));
             }
             50% { 
-                opacity: 1;
-                transform: scale(1.1);
+                filter: drop-shadow(0 0 15px rgba(14, 165, 233, 1))
+                        drop-shadow(0 0 30px rgba(14, 165, 233, 0.8))
+                        drop-shadow(0 0 45px rgba(14, 165, 233, 0.6));
             }
         }
 
-        /* Logo Text with Enhanced Neon */
-        .logo-text {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #0ea5e9 100%);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 3s ease-in-out infinite;
-            position: relative;
-            text-shadow: 
-                0 0 10px rgba(14, 165, 233, 0.8),
-                0 0 20px rgba(14, 165, 233, 0.6),
-                0 0 30px rgba(14, 165, 233, 0.4),
-                0 0 40px rgba(14, 165, 233, 0.2);
-        }
-
-        @keyframes shimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Icon Glow */
-        .icon-glow {
-            filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.8))
-                    drop-shadow(0 0 16px rgba(14, 165, 233, 0.6))
-                    drop-shadow(0 0 24px rgba(14, 165, 233, 0.4));
-            animation: iconPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes iconPulse {
-            0%, 100% { 
-                filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.8))
-                        drop-shadow(0 0 16px rgba(14, 165, 233, 0.6))
-                        drop-shadow(0 0 24px rgba(14, 165, 233, 0.4));
-            }
-            50% { 
-                filter: drop-shadow(0 0 12px rgba(14, 165, 233, 1))
-                        drop-shadow(0 0 24px rgba(14, 165, 233, 0.8))
-                        drop-shadow(0 0 36px rgba(14, 165, 233, 0.6));
-            }
-        }
-
-        /* Neon Text */
+        /* Neon Glow Effect - Blue */
         .neon-text {
             font-family: 'Orbitron', sans-serif;
             color: #0ea5e9;
@@ -250,35 +208,243 @@
                 0 0 20px rgba(14, 165, 233, 0.6),
                 0 0 30px rgba(14, 165, 233, 0.4),
                 0 0 40px rgba(14, 165, 233, 0.2);
+            font-weight: 900;
         }
 
-        /* Loading Animation */
+        /* Carbon Effect Logo */
+        .carbon-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #0ea5e9 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(14, 165, 233, 0.5);
+            animation: carbonShine 3s ease infinite;
+            letter-spacing: 3px;
+        }
+
+        @keyframes carbonShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .glow-button {
+            box-shadow: 
+                0 0 20px rgba(14, 165, 233, 0.5),
+                0 4px 15px rgba(14, 165, 233, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .glow-button:hover {
+            box-shadow: 
+                0 0 30px rgba(14, 165, 233, 0.7),
+                0 6px 20px rgba(14, 165, 233, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #0ea5e9, #0284c7);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #06b6d4, #0ea5e9);
+        }
+
+        /* Input animations */
+        .input-glow:focus-within {
+            box-shadow: 0 0 25px rgba(14, 165, 233, 0.5);
+            border-color: #0ea5e9;
+            transform: translateY(-2px);
+        }
+
+        .message-appear {
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px) scale(0.95); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
+        }
+
+        /* Pulse Animation */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.08); opacity: 0.85; }
+        }
+
+        .pulse-animation {
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+
+        /* Status Indicator */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-active {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            color: #22c55e;
+        }
+
+        .status-inactive {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: #ef4444;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .status-active .status-dot {
+            background: #22c55e;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+        }
+
+        .status-inactive .status-dot {
+            background: #ef4444;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.8);
+        }
+
+        /* Markdown Styles */
+        .prose pre {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            overflow-x: auto;
+        }
+        .prose code {
+            color: #0ea5e9;
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(14, 165, 233, 0.15);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        /* Hero Title Animation */
+        @keyframes titleGlow {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 20px rgba(14, 165, 233, 0.8),
+                    0 0 40px rgba(14, 165, 233, 0.6),
+                    0 0 60px rgba(14, 165, 233, 0.4);
+            }
+            50% { 
+                text-shadow: 
+                    0 0 30px rgba(14, 165, 233, 1),
+                    0 0 60px rgba(14, 165, 233, 0.8),
+                    0 0 90px rgba(14, 165, 233, 0.6);
+            }
+        }
+
+        .title-glow {
+            animation: titleGlow 2s ease-in-out infinite;
+        }
+
+        /* Loading dots animation */
+        @keyframes bounce {
+            0%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+        }
+
         .loading-dot {
             display: inline-block;
             width: 8px;
             height: 8px;
+            background: #0ea5e9;
             border-radius: 50%;
-            background-color: #0ea5e9;
-            animation: loadingPulse 1.4s infinite ease-in-out both;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite ease-in-out;
         }
 
         .loading-dot:nth-child(1) { animation-delay: -0.32s; }
         .loading-dot:nth-child(2) { animation-delay: -0.16s; }
 
-        @keyframes loadingPulse {
-            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-            40% { transform: scale(1); opacity: 1; }
+        /* Sidebar animations */
+        .sidebar-item {
+            transition: all 0.3s ease;
         }
 
-        /* Message Appear */
-        .message-appear {
-            animation: messageSlideIn 0.3s ease-out forwards;
+        .sidebar-item:hover {
+            background: rgba(14, 165, 233, 0.1);
+            border-left: 3px solid #0ea5e9;
+            padding-left: 1.25rem;
         }
 
-        @keyframes messageSlideIn {
+        .sidebar-item.active {
+            background: rgba(14, 165, 233, 0.2);
+            border-left: 3px solid #0ea5e9;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .sidebar-desktop {
+                transform: translateX(-100%);
+                position: fixed;
+                z-index: 100;
+                transition: transform 0.3s ease;
+            }
+            .sidebar-desktop.mobile-open {
+                transform: translateX(0);
+            }
+        }
+
+        /* New Chat Button Highlight */
+        .new-chat-btn {
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+        }
+
+        .new-chat-btn:hover {
+            background: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
+            box-shadow: 0 0 30px rgba(14, 165, 233, 0.6);
+        }
+
+        /* Collapsible sections */
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .collapsible-content.open {
+            max-height: 2000px;
+        }
+
+        /* Landing page animations */
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -286,1175 +452,1020 @@
             }
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        ::-webkit-scrollbar-track {
-            background: rgba(10, 10, 26, 0.3);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(14, 165, 233, 0.5);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(14, 165, 233, 0.8);
-        }
-
-        /* Prose Styling */
-        .content-area pre {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(14, 165, 233, 0.3);
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-        }
-
-        .content-area code {
-            background: rgba(14, 165, 233, 0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-        }
-
-        .content-area pre code {
-            background: transparent;
-            padding: 0;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .mobile-hidden {
-                display: none !important;
-            }
-            
-            .glass-panel-3d {
-                transform: none;
-            }
-        }
-
-        /* Button Animations */
-        .btn-primary {
-            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
-        /* Hero Section */
-        .hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .delay-4 { animation-delay: 0.4s; opacity: 0; }
     </style>
-    <script>
-        // Fonctions de navigation - définies immédiatement dans le HEAD
-        window.showHomepage = function() {
-            document.querySelectorAll("#homepage, #loginpage, #registerpage, #chatapp, #settingspage, #adminpage").forEach(el => {
-                if (el) el.classList.add("hidden");
-            });
-            const homepage = document.getElementById("homepage");
-            if (homepage) homepage.classList.remove("hidden");
-        };
-
-        window.showLogin = function() {
-            document.querySelectorAll("#homepage, #loginpage, #registerpage, #chatapp, #settingspage, #adminpage").forEach(el => {
-                if (el) el.classList.add("hidden");
-            });
-            const loginpage = document.getElementById("loginpage");
-            if (loginpage) loginpage.classList.remove("hidden");
-        };
-
-        window.showRegister = function() {
-            document.querySelectorAll("#homepage, #loginpage, #registerpage, #chatapp, #settingspage, #adminpage").forEach(el => {
-                if (el) el.classList.add("hidden");
-            });
-            const registerpage = document.getElementById("registerpage");
-            if (registerpage) registerpage.classList.remove("hidden");
-        };
-        
-        console.log("✅ Fonctions de navigation chargées dans HEAD");
-    </script>
 </head>
-<body>
-    <!-- Animated Background -->
+<body class="h-screen flex overflow-hidden">
+
+    <!-- Animated Backgrounds -->
     <div class="animated-bg"></div>
-    
-    <!-- Particles Background -->
-    <div class="particles" id="particles"></div>
-    
-    <!-- Three.js Canvas -->
+    <div class="particles" id="particles-container"></div>
     <div id="canvas-container"></div>
 
-    <!-- ===== PAGE D'ACCUEIL ===== -->
-    <div id="homepage" class="min-h-screen flex flex-col">
-        <!-- Formes 3D en arrière-plan -->
-        <div class="fixed inset-0 overflow-hidden pointer-events-none z-0" style="opacity: 0.15;">
-            <div class="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-primary-500 to-primary-700 rounded-3xl transform rotate-12 animate-float" style="animation: float 6s ease-in-out infinite;"></div>
-            <div class="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full animate-float" style="animation: float 8s ease-in-out infinite 1s;"></div>
-            <div class="absolute bottom-32 left-1/4 w-40 h-40 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl transform -rotate-12 animate-float" style="animation: float 7s ease-in-out infinite 2s;"></div>
-            <div class="absolute bottom-20 right-1/3 w-28 h-28 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full animate-float" style="animation: float 9s ease-in-out infinite 3s;"></div>
-            <div class="absolute top-1/2 left-1/2 w-36 h-36 bg-gradient-to-br from-green-500 to-teal-600 rounded-3xl transform rotate-45 animate-float" style="animation: float 10s ease-in-out infinite 4s;"></div>
-        </div>
-        <style>
-            @keyframes float {
-                0%, 100% { transform: translateY(0px) rotate(0deg); }
-                50% { transform: translateY(-30px) rotate(10deg); }
-            }
-        </style>
-        <!-- Header -->
-        <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b-2 border-primary-500/30">
-            <div class="hero-content px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex items-center justify-between">
-                <div class="flex items-center gap-3 sm:gap-4 logo-glow">
-                    <div id="site-name-header" class="text-3xl sm:text-4xl lg:text-5xl font-black logo-text">
-                        B.E.D. AI
+    <!-- MAIN APP CONTAINER -->
+    <div id="app" class="relative w-full h-full flex">
+        
+        <!-- LANDING PAGE (PRE-AUTH) -->
+        <div id="landing-screen" class="flex-1 overflow-y-auto">
+            <!-- Top Header with Login -->
+            <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-primary-500/30 py-3 px-6">
+                <div class="max-w-7xl mx-auto flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-brain text-3xl text-primary-500 brain-logo"></i>
+                        <span class="carbon-logo text-xl">B.E.D. AI</span>
                     </div>
-                    <div class="hidden sm:block h-8 w-0.5 bg-gradient-to-b from-primary-500 to-transparent"></div>
-                    <div class="hidden sm:block">
-                        <p class="text-xs sm:text-sm text-gray-300 font-tech">Intelligence Artificielle Premium</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-2 sm:gap-3">
-                    <button onclick="showLogin()" class="btn-primary px-3 py-1.5 rounded-md font-medium text-white text-xs flex items-center gap-2">
-                        <i class="fa-solid fa-sign-in-alt"></i>
-                        <span class="hidden sm:inline">Se connecter</span>
-                        <span class="sm:hidden">Connexion</span>
+                    <button id="btn-show-auth" class="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-6 py-2 rounded-lg glow-button transition-all text-sm font-bold">
+                        <i class="fa-solid fa-sign-in-alt mr-2"></i>Connexion
                     </button>
-                    <button onclick="showRegister()" class="bg-gradient-to-r from-blue-900 to-blue-950 hover:from-blue-800 hover:to-blue-900 px-3 py-1.5 rounded-md font-medium text-white text-xs flex items-center gap-2 border-2 border-blue-700/50 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30">
-                        <i class="fa-solid fa-user-plus"></i>
-                        <span class="hidden sm:inline">Créer un compte</span>
-                        <span class="sm:hidden">Inscription</span>
-                    </button>
-                </div>
-            </div>
-        </header>
-
-        <!-- Hero Section -->
-        <main class="flex-1 flex items-center justify-center pt-20 sm:pt-24 px-4 sm:px-6 lg:px-8">
-            <div class="hero-content w-full">
-                <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
-                    <!-- Texte -->
-                    <div class="text-center md:text-left space-y-6">
-                        <div class="space-y-4">
-                            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black logo-text">
-                                B.E.D. AI
-                            </h2>
-                            <p class="text-xl sm:text-2xl lg:text-3xl text-gray-300 font-tech">
-                                Intelligence Artificielle Premium
-                            </p>
-                            <p class="text-sm sm:text-base text-gray-300">
-                                <i class="fa-solid fa-map-marker-alt text-primary-500"></i> Made in Strasbourg - By Brice Jacotet
-                            </p>
-                        </div>
-
-                        <div class="glass-panel p-5 lg:p-6 rounded-2xl space-y-3">
-                            <h3 class="text-lg sm:text-xl font-bold text-primary-400 font-display">🚀 Plateforme Unique</h3>
-                            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                                Développée par <span class="font-semibold text-primary-400">Brice Jacotet</span>, expert en informatique passionné, 
-                                <span class="font-bold text-primary-500">B.E.D. AI</span> est une plateforme révolutionnaire qui combine :
-                            </p>
-                            <ul class="space-y-2 text-xs sm:text-sm">
-                                <li class="flex items-start gap-2">
-                                    <i class="fa-solid fa-star text-primary-500 mt-1 flex-shrink-0 text-sm"></i>
-                                    <span><span class="font-bold text-primary-400">Claude AI 4.5</span> - L'intelligence artificielle la plus avancée au monde</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <i class="fa-solid fa-star text-primary-500 mt-1 flex-shrink-0 text-sm"></i>
-                                    <span><span class="font-bold text-primary-400">IA Personnalisée</span> - Entraînée et optimisée spécifiquement pour notre groupe</span>
-                                </li>
-                                <li class="flex items-start gap-2">
-                                    <i class="fa-solid fa-star text-primary-500 mt-1 flex-shrink-0 text-sm"></i>
-                                    <span><span class="font-bold text-primary-400">Fusion Intelligente</span> - Le meilleur des deux mondes pour des performances exceptionnelles</span>
-                                </li>
-                            </ul>
-                            <div class="pt-3 border-t border-primary-500/30">
-                                <p class="text-xs text-gray-300 leading-relaxed">
-                                    Cette synergie unique crée <span class="font-bold text-primary-500">B.E.D. AI</span>, 
-                                    une IA optimisée en <span class="font-semibold">full-stack</span> pour offrir des réponses conversationnelles de qualité supérieure, 
-                                    tout en excellant dans le <span class="font-semibold">développement web</span> et 
-                                    <span class="font-semibold">création d'applications</span>. Un builder parmi les meilleurs du marché.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Boutons d'action -->
-                        <div class="flex flex-col sm:flex-row gap-3 w-full">
-                            <button onclick="showRegister()" class="flex-1 group relative overflow-hidden bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 px-4 py-2 rounded-lg font-medium text-white text-xs transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-primary-500/50 border border-primary-400/30">
-                                <div class="relative flex items-center justify-center gap-2">
-                                    <i class="fa-solid fa-rocket text-base"></i>
-                                    <span>Créer un compte en moins de 2 minutes</span>
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                            </button>
-                            
-                            <button onclick="showLogin()" class="flex-1 group relative overflow-hidden bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 px-4 py-2 rounded-lg font-medium text-white text-xs transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-gray-700/50 border border-gray-600/30">
-                                <div class="relative flex items-center justify-center gap-2">
-                                    <i class="fa-solid fa-arrow-right-to-bracket text-base"></i>
-                                    <span>Se connecter</span>
-                                </div>
-                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                            </button>
-                        </div>
-
-                        <div class="glass-panel p-3 lg:p-4 rounded-xl border-green-500/40 bg-green-900/10">
-                            <div class="flex items-center gap-2 mb-1">
-                                <i class="fa-solid fa-sparkles text-xl text-green-400"></i>
-                                <h4 class="text-base sm:text-lg font-bold text-green-400 font-display">Profitez-en, c'est encore GRATUIT !</h4>
-                            </div>
-                            <p class="text-xs text-gray-300">Accès illimité pendant la phase de lancement</p>
-                        </div>
-                    </div>
-
-                    <!-- Badges & Features - Visible sur desktop -->
-                    <div class="hidden md:flex flex-col gap-6 items-center justify-center">
-                        <!-- Visual 3D en arrière-plan -->
-                        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-full max-w-md lg:max-w-lg opacity-30 pointer-events-none">
-                            <div class="aspect-square relative">
-                                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 200 200">
-                                    <defs>
-                                        <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#0369a1;stop-opacity:0.6" />
-                                        </linearGradient>
-                                    </defs>
-                                    <circle cx="100" cy="100" r="90" fill="none" stroke="url(#brainGradient)" stroke-width="0.5" opacity="0.3"/>
-                                    <circle cx="100" cy="100" r="80" fill="none" stroke="url(#brainGradient)" stroke-width="0.5" opacity="0.4"/>
-                                    <circle cx="100" cy="100" r="70" fill="none" stroke="url(#brainGradient)" stroke-width="0.5" opacity="0.5"/>
-                                    <line x1="100" y1="10" x2="100" y2="190" stroke="url(#brainGradient)" stroke-width="0.3" opacity="0.3"/>
-                                    <line x1="10" y1="100" x2="190" y2="100" stroke="url(#brainGradient)" stroke-width="0.3" opacity="0.3"/>
-                                    <line x1="30" y1="30" x2="170" y2="170" stroke="url(#brainGradient)" stroke-width="0.3" opacity="0.3"/>
-                                    <line x1="170" y1="30" x2="30" y2="170" stroke="url(#brainGradient)" stroke-width="0.3" opacity="0.3"/>
-                                </svg>
-                            </div>
-                        </div>
-
-                        <!-- Badges Features -->
-                        <div class="relative z-10 grid grid-cols-2 gap-4 w-full max-w-md">
-                            <!-- Badge Sécurité Paiement -->
-                            <div class="glass-panel p-4 rounded-2xl text-center hover:scale-105 transition-transform duration-300 border-2 border-green-500/40">
-                                <div class="w-16 h-16 mx-auto mb-3 relative">
-                                    <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-lg">
-                                        <!-- Carte bancaire -->
-                                        <rect x="10" y="30" width="80" height="50" rx="5" fill="#22c55e" stroke="#16a34a" stroke-width="2"/>
-                                        <rect x="10" y="38" width="80" height="8" fill="#16a34a"/>
-                                        <rect x="15" y="52" width="20" height="3" rx="1" fill="#fff" opacity="0.8"/>
-                                        <rect x="15" y="58" width="15" height="3" rx="1" fill="#fff" opacity="0.8"/>
-                                        <circle cx="75" cy="65" r="6" fill="#fbbf24" opacity="0.5"/>
-                                        <circle cx="68" cy="65" r="6" fill="#f59e0b" opacity="0.5"/>
-                                        <!-- Cadenas de sécurité -->
-                                        <rect x="70" y="15" width="16" height="12" rx="2" fill="#16a34a"/>
-                                        <path d="M 74 15 Q 74 10, 78 10 Q 82 10, 82 15" fill="none" stroke="#16a34a" stroke-width="2"/>
-                                        <circle cx="78" cy="20" r="1.5" fill="#fff"/>
-                                    </svg>
-                                </div>
-                                <h4 class="font-bold text-white text-sm mb-1">Paiement Sécurisé</h4>
-                                <p class="text-xs text-gray-300">Cryptage SSL</p>
-                            </div>
-
-                            <!-- Badge Confidentialité -->
-                            <div class="glass-panel p-4 rounded-2xl text-center hover:scale-105 transition-transform duration-300 border-2 border-blue-500/40">
-                                <div class="w-16 h-16 mx-auto mb-3 relative">
-                                    <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-lg">
-                                        <!-- Bouclier -->
-                                        <path d="M 50 10 L 80 25 L 80 50 Q 80 75, 50 90 Q 20 75, 20 50 L 20 25 Z" fill="#3b82f6" stroke="#2563eb" stroke-width="2"/>
-                                        <path d="M 50 20 L 70 30 L 70 50 Q 70 65, 50 77 Q 30 65, 30 50 L 30 30 Z" fill="#1d4ed8" opacity="0.6"/>
-                                        <!-- Cadenas -->
-                                        <rect x="43" y="45" width="14" height="16" rx="2" fill="#fff"/>
-                                        <path d="M 46 45 Q 46 38, 50 38 Q 54 38, 54 45" fill="none" stroke="#fff" stroke-width="2.5"/>
-                                        <circle cx="50" cy="53" r="2" fill="#3b82f6"/>
-                                        <rect x="49" y="53" width="2" height="5" fill="#3b82f6"/>
-                                    </svg>
-                                </div>
-                                <h4 class="font-bold text-white text-sm mb-1">Sécurité des Données</h4>
-                                <p class="text-xs text-gray-300">100% Confidentiel</p>
-                            </div>
-
-                            <!-- Badge Disponibilité -->
-                            <div class="glass-panel p-4 rounded-2xl text-center hover:scale-105 transition-transform duration-300 border-2 border-purple-500/40">
-                                <div class="w-16 h-16 mx-auto mb-3 relative">
-                                    <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-lg">
-                                        <!-- Horloge -->
-                                        <circle cx="50" cy="50" r="35" fill="#a855f7" stroke="#9333ea" stroke-width="3"/>
-                                        <circle cx="50" cy="50" r="30" fill="#7c3aed" opacity="0.6"/>
-                                        <!-- Chiffres -->
-                                        <circle cx="50" cy="22" r="2" fill="#fff"/>
-                                        <circle cx="50" cy="78" r="2" fill="#fff"/>
-                                        <circle cx="78" cy="50" r="2" fill="#fff"/>
-                                        <circle cx="22" cy="50" r="2" fill="#fff"/>
-                                        <!-- Aiguilles -->
-                                        <line x1="50" y1="50" x2="50" y2="30" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-                                        <line x1="50" y1="50" x2="65" y2="50" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-                                        <circle cx="50" cy="50" r="3" fill="#fff"/>
-                                        <!-- Badge 24/7 -->
-                                        <rect x="60" y="10" width="28" height="12" rx="2" fill="#fbbf24" stroke="#f59e0b" stroke-width="1"/>
-                                        <text x="74" y="18" font-size="7" font-weight="bold" fill="#7c2d12" text-anchor="middle">24/7</text>
-                                    </svg>
-                                </div>
-                                <h4 class="font-bold text-white text-sm mb-1">Disponible 24/7</h4>
-                                <p class="text-xs text-gray-300">Toujours en ligne</p>
-                            </div>
-
-                            <!-- Badge Multi-tâches -->
-                            <div class="glass-panel p-4 rounded-2xl text-center hover:scale-105 transition-transform duration-300 border-2 border-orange-500/40">
-                                <div class="w-16 h-16 mx-auto mb-3 relative">
-                                    <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-lg">
-                                        <!-- Document de code -->
-                                        <rect x="15" y="20" width="50" height="60" rx="3" fill="#f97316" stroke="#ea580c" stroke-width="2"/>
-                                        <rect x="20" y="28" width="40" height="3" rx="1" fill="#fff" opacity="0.8"/>
-                                        <rect x="20" y="35" width="30" height="3" rx="1" fill="#fff" opacity="0.6"/>
-                                        <rect x="20" y="42" width="35" height="3" rx="1" fill="#fff" opacity="0.8"/>
-                                        <rect x="20" y="49" width="25" height="3" rx="1" fill="#fff" opacity="0.6"/>
-                                        <!-- Symbole code -->
-                                        <text x="40" y="68" font-size="20" font-weight="bold" fill="#fff" font-family="monospace">&lt;/&gt;</text>
-                                        <!-- Document texte superposé -->
-                                        <rect x="35" y="15" width="50" height="60" rx="3" fill="#fb923c" stroke="#f97316" stroke-width="2"/>
-                                        <rect x="40" y="23" width="40" height="3" rx="1" fill="#fff" opacity="0.8"/>
-                                        <rect x="40" y="30" width="30" height="3" rx="1" fill="#fff" opacity="0.6"/>
-                                        <rect x="40" y="37" width="35" height="3" rx="1" fill="#fff" opacity="0.8"/>
-                                        <rect x="40" y="44" width="25" height="3" rx="1" fill="#fff" opacity="0.6"/>
-                                        <!-- Icône multi -->
-                                        <circle cx="75" cy="60" r="8" fill="#22c55e" stroke="#16a34a" stroke-width="1.5"/>
-                                        <path d="M 72 60 L 75 63 L 79 57" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
-                                    </svg>
-                                </div>
-                                <h4 class="font-bold text-white text-sm mb-1">Multi-Tâches</h4>
-                                <p class="text-xs text-gray-300">Docs, Code & Plus</p>
-                            </div>
-                        </div>
-
-                        <!-- Section Capacités avec logos SVG -->
-                        <div class="w-full max-w-md space-y-3">
-                            <h4 class="text-center text-lg font-bold text-white font-display">Ce que B.E.D. AI peut faire</h4>
-                            
-                            <div class="glass-panel p-3 rounded-xl flex items-center gap-3 hover:bg-primary-500/10 transition-colors">
-                                <div class="w-10 h-10 flex-shrink-0">
-                                    <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-lg">
-                                        <!-- Bulles de conversation -->
-                                        <ellipse cx="35" cy="40" rx="28" ry="25" fill="#06b6d4" stroke="#0891b2" stroke-width="2"/>
-                                        <path d="M 35 65 L 28 75 L 35 70 Z" fill="#06b6d4"/>
-                                        <circle cx="25" cy="38" r="3" fill="#fff"/>
-                                        <circle cx="35" cy="38" r="3" fill="#fff"/>
-                                        <circle cx="45" cy="38" r="3" fill="#fff"/>
-                                        <ellipse cx="65" cy="55" rx="28" ry="25" fill="#0ea5e9" stroke="#0284c7" stroke-width="2"/>
-                                        <path d="M 65 80 L 72 90 L 65 85 Z" fill="#0ea5e9"/>
-                                        <line x1="55" y1="53" x2="75" y2="53" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                        <line x1="55" y1="60" x2="70" y2="60" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-semibold text-white">Conversations Intelligentes</p>
-                                    <p class="text-xs text-gray-300">Dialogue naturel, réponses expertes</p>
-                                </div>
-                            </div>
-
-                            <div class="glass-panel p-3 rounded-xl flex items-center gap-3 hover:bg-primary-500/10 transition-colors">
-                                <div class="w-10 h-10 flex-shrink-0">
-                                    <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-lg">
-                                        <!-- Écran de code -->
-                                        <rect x="15" y="20" width="70" height="60" rx="3" fill="#1f2937" stroke="#ec4899" stroke-width="2"/>
-                                        <rect x="15" y="20" width="70" height="8" rx="3" fill="#ec4899"/>
-                                        <circle cx="22" cy="24" r="1.5" fill="#fff"/>
-                                        <circle cx="28" cy="24" r="1.5" fill="#fff"/>
-                                        <circle cx="34" cy="24" r="1.5" fill="#fff"/>
-                                        <!-- Lignes de code -->
-                                        <rect x="20" y="35" width="25" height="2" rx="1" fill="#10b981"/>
-                                        <rect x="48" y="35" width="15" height="2" rx="1" fill="#3b82f6"/>
-                                        <rect x="20" y="42" width="35" height="2" rx="1" fill="#f59e0b"/>
-                                        <rect x="25" y="49" width="30" height="2" rx="1" fill="#8b5cf6"/>
-                                        <rect x="25" y="56" width="20" height="2" rx="1" fill="#ec4899"/>
-                                        <rect x="20" y="63" width="28" height="2" rx="1" fill="#10b981"/>
-                                        <text x="20" y="73" font-size="8" fill="#3b82f6" font-family="monospace">&lt;/&gt;</text>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-semibold text-white">Développement de Code</p>
-                                    <p class="text-xs text-gray-300">Sites web, apps, scripts</p>
-                                </div>
-                            </div>
-
-                            <div class="glass-panel p-3 rounded-xl flex items-center gap-3 hover:bg-primary-500/10 transition-colors">
-                                <div class="w-10 h-10 flex-shrink-0">
-                                    <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-lg">
-                                        <!-- Document -->
-                                        <rect x="25" y="15" width="50" height="70" rx="3" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
-                                        <path d="M 60 15 L 60 30 L 75 30 Z" fill="#f59e0b"/>
-                                        <!-- Lignes de texte -->
-                                        <rect x="32" y="35" width="36" height="2.5" rx="1" fill="#fff" opacity="0.9"/>
-                                        <rect x="32" y="42" width="30" height="2.5" rx="1" fill="#fff" opacity="0.7"/>
-                                        <rect x="32" y="49" width="33" height="2.5" rx="1" fill="#fff" opacity="0.9"/>
-                                        <rect x="32" y="56" width="28" height="2.5" rx="1" fill="#fff" opacity="0.7"/>
-                                        <rect x="32" y="63" width="35" height="2.5" rx="1" fill="#fff" opacity="0.9"/>
-                                        <rect x="32" y="70" width="25" height="2.5" rx="1" fill="#fff" opacity="0.7"/>
-                                        <!-- Icône stylo -->
-                                        <rect x="60" y="68" width="3" height="15" rx="1" fill="#1f2937" transform="rotate(-45 61.5 75.5)"/>
-                                        <polygon points="66,78 70,82 68,84" fill="#1f2937"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-semibold text-white">Documents & Rédaction</p>
-                                    <p class="text-xs text-gray-300">Rapports, articles, contenu</p>
-                                </div>
-                            </div>
-
-                            <div class="glass-panel p-3 rounded-xl flex items-center gap-3 hover:bg-primary-500/10 transition-colors">
-                                <div class="w-10 h-10 flex-shrink-0">
-                                    <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-lg">
-                                        <!-- Cerveau stylisé -->
-                                        <ellipse cx="50" cy="50" rx="35" ry="40" fill="#10b981" stroke="#059669" stroke-width="2"/>
-                                        <!-- Circonvolutions -->
-                                        <path d="M 30 35 Q 35 30, 40 35 T 50 35 T 60 35 T 70 35" fill="none" stroke="#047857" stroke-width="2"/>
-                                        <path d="M 28 45 Q 33 40, 38 45 T 48 45 T 58 45 T 68 45" fill="none" stroke="#047857" stroke-width="2"/>
-                                        <path d="M 30 55 Q 35 50, 40 55 T 50 55 T 60 55 T 70 55" fill="none" stroke="#047857" stroke-width="2"/>
-                                        <path d="M 32 65 Q 37 60, 42 65 T 52 65 T 62 65" fill="none" stroke="#047857" stroke-width="2"/>
-                                        <!-- Points lumineux -->
-                                        <circle cx="35" cy="40" r="2" fill="#fbbf24"/>
-                                        <circle cx="50" cy="45" r="2" fill="#fbbf24"/>
-                                        <circle cx="65" cy="50" r="2" fill="#fbbf24"/>
-                                        <circle cx="42" cy="60" r="2" fill="#fbbf24"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-semibold text-white">Analyse & Recherche</p>
-                                    <p class="text-xs text-gray-300">Traitement de données, insights</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- Footer info - Une seule ligne sur mobile -->
-        <footer class="pb-6 px-4">
-            <div class="hero-content">
-                <div class="glass-panel p-4 rounded-xl">
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-gray-300">
-                        <span class="flex items-center gap-2">
-                            <i class="fa-solid fa-code text-primary-500"></i>
-                            Conçu à Strasbourg
-                        </span>
-                        <span class="hidden sm:inline">•</span>
-                        <span class="flex items-center gap-2">
-                            <i class="fa-solid fa-user-shield text-primary-500"></i>
-                            Brice Jacotet
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <!-- ===== PAGE DE CONNEXION ===== -->
-    <div id="loginpage" class="hidden min-h-screen flex items-center justify-center px-4">
-        <div class="glass-panel p-8 rounded-3xl max-w-md w-full space-y-6">
-            <div class="text-center space-y-4">
-                <div class="flex justify-center logo-glow">
-                    <div class="text-5xl font-black logo-text">B.E.D. AI</div>
-                </div>
-                <h2 class="text-2xl font-bold text-white font-display">Connexion</h2>
-                <p class="text-gray-300 text-sm">Accédez à votre compte B.E.D. AI</p>
-            </div>
-
-            <form id="login-form" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-300 mb-2">Nom d'utilisateur</label>
-                    <input type="text" id="login-username" 
-                        class="w-full px-4 py-3 bg-black/40 border-2 border-primary-500/30 rounded-lg text-white focus:border-primary-500 focus:outline-none transition-colors"
-                        placeholder="Your username" required>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-300 mb-2">Mot de passe</label>
-                    <input type="password" id="login-password" 
-                        class="w-full px-4 py-3 bg-black/40 border-2 border-primary-500/30 rounded-lg text-white focus:border-primary-500 focus:outline-none transition-colors"
-                        placeholder="Your password" required>
-                </div>
-                <button type="submit" class="w-full btn-primary py-3 rounded-lg font-semibold text-white text-lg">
-                    Sign In
-                </button>
-            </form>
-
-            <div class="text-center space-y-3">
-                <div class="relative">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-600"></div>
-                    </div>
-                    <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-transparent text-gray-300">or</span>
-                    </div>
-                </div>
-                <button onclick="showRegister()" class="text-primary-400 hover:text-primary-300 font-semibold text-sm">
-                    Create a new account
-                </button>
-                <button onclick="showHomepage()" class="block w-full text-gray-300 hover:text-gray-300 text-sm">
-                    ← Back to home
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== PAGE D'INSCRIPTION ===== -->
-    <div id="registerpage" class="hidden min-h-screen flex items-center justify-center px-4 py-8">
-        <div class="glass-panel p-8 rounded-3xl max-w-md w-full space-y-6">
-            <div class="text-center space-y-4">
-                <div class="flex justify-center logo-glow">
-                    <div class="text-5xl font-black logo-text">B.E.D. AI</div>
-                </div>
-                <h2 class="text-2xl font-bold text-white font-display">Inscription</h2>
-                <p class="text-gray-300 text-sm">Créez votre compte B.E.D. AI</p>
-            </div>
-
-            <form id="register-form" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-300 mb-2">Nom d'utilisateur</label>
-                    <input type="text" id="reg-username" 
-                        class="w-full px-4 py-3 bg-black/40 border-2 border-primary-500/30 rounded-lg text-white focus:border-primary-500 focus:outline-none"
-                        placeholder="Choose a username" required>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-300 mb-2">Mot de passe</label>
-                    <input type="password" id="reg-password" 
-                        class="w-full px-4 py-3 bg-black/40 border-2 border-primary-500/30 rounded-lg text-white focus:border-primary-500 focus:outline-none"
-                        placeholder="Create a password" required>
-                </div>
-                <button type="submit" class="w-full btn-primary py-3 rounded-lg font-semibold text-white text-lg">
-                    Sign Up
-                </button>
-            </form>
-
-            <div class="text-center space-y-3">
-                <button onclick="showLogin()" class="text-primary-400 hover:text-primary-300 font-semibold text-sm">
-                    Already have an account? Sign in
-                </button>
-                <button onclick="showHomepage()" class="block w-full text-gray-300 hover:text-gray-300 text-sm">
-                    ← Back to home
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== APPLICATION CHAT ===== -->
-    <div id="chatapp" class="hidden h-screen flex flex-col md:flex-row">
-        <!-- Sidebar -->
-        <aside class="glass-sidebar w-full md:w-80 flex-shrink-0 flex flex-col border-b-2 md:border-b-0 md:border-r-2 border-primary-500/30">
-            <!-- User Info -->
-            <div class="p-4 border-b border-primary-500/30">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
-                        <i class="fa-solid fa-user text-xl text-white"></i>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="font-semibold text-white truncate" id="sidebar-username">Utilisateur</p>
-                        <p class="text-xs text-gray-300">En ligne</p>
-                    </div>
-                </div>
-                
-<div id="chat-history-list" class="space-y-2">
-                    <button onclick="createNewChat()" class="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 py-2 rounded-lg font-semibold text-white text-sm flex items-center justify-center gap-2 transition-colors">
-                        <i class="fa-solid fa-plus"></i>
-                        <span>Nouveau Chat</span>
-                    </button>
-                                    <button onclick="showSettings()" class="w-full btn-primary py-2 rounded-lg font-semibold text-sm flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-cog"></i>
-                    <span>Paramètres</span>
-                    </button>
-                    
-                    <button id="admin-panel-btn" onclick="showAdminPanel()" class="hidden w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 py-2 rounded-lg font-semibold text-white text-sm flex items-center justify-center gap-2 transition-colors">
-                        <i class="fa-solid fa-user-shield"></i>
-                        <span>Panel Admin</span>
-                </button>
-            </div>
-
-            <!-- Chat History -->
-            <div class="flex-1 overflow-y-auto p-4">
-                <h3 class="text-sm font-bold text-gray-300 uppercase tracking-wider mb-3">Conversations</h3>
-                <div id="chat-history-list" class="space-y-2">
-                    <button class="w-full glass-panel p-3 rounded-lg text-left hover:bg-primary-500/10 transition-colors">
-                        <div class="flex items-center gap-2 mb-1">
-                            <i class="fa-solid fa-message text-primary-500 text-sm"></i>
-                            <span class="text-sm font-semibold text-white">Conversation actuelle</span>
-                        </div>
-                        <p class="text-xs text-gray-300 truncate">Start chatting with B.E.D. AI</p>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Logout Button -->
-            <div class="p-4 border-t border-primary-500/30">
-                <button onclick="logout()" class="w-full bg-red-600 hover:bg-red-700 py-2 rounded-lg font-semibold text-white text-sm flex items-center justify-center gap-2 transition-colors">
-                    <i class="fa-solid fa-sign-out-alt"></i>
-                    <span>Déconnexion</span>
-                </button>
-            </div>
-        </aside>
-
-        <!-- Chat Area -->
-        <main class="flex-1 flex flex-col bg-black/20">
-            <!-- Chat Header -->
-            <header class="glass-panel border-b-2 border-primary-500/30 p-4">
-                <div class="flex items-center gap-3 logo-glow">
-                    <div class="text-2xl sm:text-3xl font-black logo-text">B.E.D. AI</div>
-                    <div class="h-6 w-0.5 bg-gradient-to-b from-primary-500 to-transparent"></div>
-                    <div>
-                        <p class="text-xs text-gray-300">Assistant IA Premium</p>
-                    </div>
                 </div>
             </header>
 
-            <!-- Messages Container -->
-            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-6">
-                <!-- Hero Message -->
-                <div id="chat-hero" class="flex items-center justify-center h-full transition-opacity duration-500">
-                    <div class="text-center space-y-6 max-w-2xl">
-                        <div class="flex justify-center logo-glow">
-                            <div class="text-6xl sm:text-7xl font-black logo-text">B.E.D. AI</div>
+            <!-- Hero Section -->
+            <section class="min-h-screen flex flex-col items-center justify-center px-4 pt-20">
+                <div class="text-center max-w-5xl mx-auto">
+                    <div class="mb-8 fade-in-up">
+                        <i class="fa-solid fa-brain text-8xl md:text-9xl text-primary-500 brain-logo"></i>
+                    </div>
+                    <h1 class="carbon-logo text-5xl md:text-7xl mb-6 title-glow fade-in-up delay-1">B.E.D. AI</h1>
+                    <p class="text-2xl md:text-3xl text-primary-400 font-bold mb-4 font-tech fade-in-up delay-2">Intelligence Artificielle Premium</p>
+                    <p class="text-lg text-gray-400 mb-8 fade-in-up delay-3">@ Made in Strasbourg - By Brice Jacotet</p>
+                    
+                    <div class="glass-panel-3d rounded-3xl p-8 mb-12 max-w-3xl mx-auto fade-in-up delay-4">
+                        <p class="text-gray-300 leading-relaxed text-base md:text-lg">
+                            Développée par <span class="text-primary-400 font-bold">Brice Jacotet</span>, expert en informatique passionné, 
+                            cette IA est optimisée au maximum sur les bases de <span class="text-primary-400 font-bold">Claude AI 4.5</span> 
+                            et enrichie en mode <span class="text-primary-400 font-bold">full-stack</span> pour obtenir le meilleur. 
+                            En réponses conversationnelles standard mais également en <span class="text-primary-400 font-bold">codage de sites web</span> 
+                            et <span class="text-primary-400 font-bold">d'applications</span>, ce qui en fait un <span class="text-primary-400 font-bold">builder parmi les meilleurs du marché</span>. 
+                            Conçue à <span class="text-primary-400 font-bold">Strasbourg</span>, notre IA vous propose un système gratuit ou payant.
+                        </p>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border-2 border-green-500/40 rounded-2xl p-6 mb-12 max-w-2xl mx-auto fade-in-up delay-4">
+                        <p class="text-2xl font-bold text-green-400 mb-2">🎉 Profitez-en, c'est encore GRATUIT actuellement !</p>
+                        <p class="text-sm text-gray-400">Accès illimité pendant la phase de lancement</p>
+                    </div>
+
+                    <!-- Features Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 fade-in-up delay-4">
+                        <div class="glass-panel rounded-2xl p-6 carbon-fiber">
+                            <i class="fa-solid fa-code text-4xl text-primary-500 mb-4"></i>
+                            <h3 class="text-xl font-bold text-white mb-2">Code Expert</h3>
+                            <p class="text-gray-400 text-sm">Sites web, applications, et automatisation complète</p>
                         </div>
-                        <div>
-                            <h3 class="text-2xl sm:text-3xl font-bold text-white font-display mb-2">Bienvenue sur B.E.D. AI</h3>
-                            <p class="text-gray-300 text-lg">Your intelligent assistant is ready to help</p>
+                        <div class="glass-panel rounded-2xl p-6 carbon-fiber">
+                            <i class="fa-solid fa-leaf text-4xl text-green-500 mb-4"></i>
+                            <h3 class="text-xl font-bold text-white mb-2">Éco-Responsable</h3>
+                            <p class="text-gray-400 text-sm">Serveurs optimisés pour réduire l'empreinte CO₂</p>
                         </div>
-                        <div class="grid sm:grid-cols-2 gap-4 text-left">
-                            <div class="glass-panel p-4 rounded-xl">
-                                <i class="fa-solid fa-lightbulb text-primary-500 icon-glow text-2xl mb-2"></i>
-                                <h4 class="font-semibold text-white mb-1">Posez vos questions</h4>
-                                <p class="text-sm text-gray-300">Je peux vous aider sur tous les sujets</p>
-                            </div>
-                            <div class="glass-panel p-4 rounded-xl">
-                                <i class="fa-solid fa-code text-primary-500 icon-glow text-2xl mb-2"></i>
-                                <h4 class="font-semibold text-white mb-1">Créer du code</h4>
-                                <p class="text-sm text-gray-300">Sites web, apps et plus</p>
-                            </div>
+                        <div class="glass-panel rounded-2xl p-6 carbon-fiber">
+                            <i class="fa-solid fa-shield-halved text-4xl text-primary-500 mb-4"></i>
+                            <h3 class="text-xl font-bold text-white mb-2">Sécurisé</h3>
+                            <p class="text-gray-400 text-sm">Vos données protégées et chiffrées</p>
                         </div>
+                    </div>
+
+                    <button id="btn-show-auth-bottom" class="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-12 py-5 rounded-2xl glow-button transition-all text-xl font-bold mb-12">
+                        <i class="fa-solid fa-rocket mr-2"></i>Commencer Maintenant
+                    </button>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="py-8 border-t border-primary-900/30 glass-panel">
+                <div class="max-w-7xl mx-auto px-4 text-center">
+                    <p class="text-gray-500 text-sm">© 2024 B.E.D. AI - Made in Strasbourg by Brice Jacotet</p>
+                    <p class="text-gray-600 text-xs mt-2">Expert en informatique • Full-stack developer • Passionné d'IA</p>
+                </div>
+            </footer>
+        </div>
+
+        <!-- LEFT SIDEBAR (Hidden initially) -->
+        <aside id="sidebar-left" class="hidden w-64 md:w-72 glass-sidebar flex-col h-full sidebar-desktop overflow-y-auto">
+            <!-- Logo Section -->
+            <div class="p-4 border-b border-gray-700/50 carbon-fiber sticky top-0 z-10 bg-black/50">
+                <div class="flex items-center gap-3 mb-2">
+                    <i class="fa-solid fa-brain text-3xl text-primary-500 brain-logo"></i>
+                    <div class="flex flex-col">
+                        <span class="carbon-logo text-xl leading-tight">B.E.D. AI</span>
+                        <span class="text-[9px] text-gray-400 font-tech">@ By Brice JCT</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Input Area -->
-            <div class="glass-panel border-t-2 border-primary-500/30 p-4">
-                <form id="chat-form" class="flex gap-3">
-                    <textarea id="chat-input" 
-                        class="flex-1 px-4 py-3 bg-black/40 border-2 border-primary-500/30 rounded-xl text-white resize-none focus:border-primary-500 focus:outline-none transition-colors"
-                        placeholder="Write your message... (Shift+Enter for new line)"
-                        rows="1"></textarea>
-                    <button type="submit" class="btn-primary px-6 py-3 rounded-xl font-semibold flex items-center gap-2">
-                        <i class="fa-solid fa-paper-plane"></i>
-                        <span class="hidden sm:inline">Envoyer</span>
-                    </button>
-                </form>
-            </div>
-        </main>
-    </div>
-
-    <!-- ===== PAGE PARAMÈTRES ===== -->
-    <div id="settingspage" class="hidden min-h-screen flex items-center justify-center px-4 py-8">
-        <div class="glass-panel p-8 rounded-3xl max-w-2xl w-full space-y-6">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-cog text-4xl text-primary-500 icon-glow"></i>
-                    <h2 class="text-3xl font-bold logo-text">Paramètres</h2>
-                </div>
-                <button onclick="backToChat()" class="text-gray-300 hover:text-white">
-                    <i class="fa-solid fa-times text-2xl"></i>
+            <!-- New Chat Button -->
+            <div class="p-3">
+                <button id="btn-new-chat" class="w-full new-chat-btn text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Nouvelle Discussion</span>
                 </button>
             </div>
 
-            <div class="space-y-6">
-                <!-- User Info -->
-                <div class="glass-panel p-6 rounded-xl">
-                    <h3 class="text-lg font-bold text-primary-400 mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-user"></i>
-                        Account Information
+            <!-- Navigation -->
+            <nav class="flex-1 p-3 space-y-2">
+                <button id="nav-my-account" class="w-full sidebar-item text-left px-4 py-3 rounded-lg text-gray-300 hover:text-white transition-all">
+                    <i class="fa-solid fa-user mr-2 text-primary-500"></i>
+                    <span>Mon Compte</span>
+                </button>
+                <button id="nav-admin" class="hidden w-full sidebar-item text-left px-4 py-3 rounded-lg text-gray-300 hover:text-white transition-all">
+                    <i class="fa-solid fa-shield-halved mr-2 text-red-500"></i>
+                    <span>Admin Panel</span>
+                </button>
+            </nav>
+
+            <!-- Custom Instructions Section -->
+            <div class="border-t border-gray-700/50 p-4 space-y-3">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-xs font-bold text-primary-500 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>Instructions</span>
                     </h3>
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-300">Nom d'utilisateur</span>
-                            <span class="font-semibold text-white" id="settings-username">-</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-300">Statut</span>
-                            <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm font-semibold">Actif</span>
-                        </div>
+                    <div id="instructions-status-sidebar" class="status-indicator status-inactive">
+                        <span class="status-dot"></span>
+                        <span>Inactif</span>
                     </div>
                 </div>
+                <textarea 
+                    id="custom-instructions" 
+                    rows="3" 
+                    class="w-full bg-black/50 border border-gray-700 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-primary-500 resize-none transition-all"
+                    placeholder="Ex: Donne tous les détails dans mes messages..."></textarea>
+                <p class="text-[10px] text-gray-500">Ces instructions seront ajoutées automatiquement.</p>
+                <div class="flex gap-2">
+                    <button id="btn-save-instructions" class="flex-1 bg-primary-600 hover:bg-primary-500 text-white text-xs font-bold py-2 rounded-lg transition-all">
+                        <i class="fa-solid fa-save mr-1"></i> Enregistrer
+                    </button>
+                    <button id="btn-clear-instructions" class="flex-1 bg-red-600 hover:bg-red-500 text-white text-xs font-bold py-2 rounded-lg transition-all hidden">
+                        <i class="fa-solid fa-trash mr-1"></i> Supprimer
+                    </button>
+                </div>
+            </div>
 
-                <!-- API Settings -->
-                <div class="glass-panel p-6 rounded-xl">
-                    <h3 class="text-lg font-bold text-primary-400 mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-key"></i>
-                        API Configuration
-                    </h3>
-                    <form id="api-settings-form" class="space-y-4">
+            <!-- Zoom Control -->
+            <div class="border-t border-gray-700/50 p-4 space-y-3">
+                <h3 class="text-xs font-bold text-primary-500 uppercase tracking-wider">
+                    <i class="fa-solid fa-magnifying-glass mr-2"></i>Zoom du Chat
+                </h3>
+                <div class="flex items-center gap-3">
+                    <span class="text-xs text-gray-400">A-</span>
+                    <input type="range" id="zoom-range" min="80" max="150" value="100" class="flex-1">
+                    <span class="text-xs text-gray-400">A+</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span id="zoom-value" class="text-xs text-primary-500 font-bold">100%</span>
+                    <button id="btn-save-zoom" class="bg-primary-600 hover:bg-primary-500 text-white text-xs font-bold px-3 py-1 rounded transition-all">
+                        <i class="fa-solid fa-save mr-1"></i> Sauvegarder
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="p-4 border-t border-gray-700/50 text-center">
+                <p class="text-[10px] text-gray-600">Made in Strasbourg</p>
+                <p class="text-[9px] text-gray-700">By Brice Jacotet</p>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <div class="flex-1 flex flex-col h-full overflow-hidden">
+            
+            <!-- TOP NAV (Hidden initially) -->
+            <nav id="top-nav" class="hidden w-full p-4 flex justify-between items-center z-50 glass-panel border-b border-primary-900/30">
+                <div class="flex items-center gap-3">
+                    <button id="btn-toggle-sidebar" class="hidden md:block text-gray-400 hover:text-primary-500 transition-colors mr-2">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                    <button id="btn-mobile-menu" class="md:hidden text-gray-400 hover:text-primary-500 transition-colors mr-2">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                    <i class="fa-solid fa-brain text-3xl text-primary-500 brain-logo"></i>
+                    <div class="flex flex-col">
+                        <span class="carbon-logo text-xl leading-tight">B.E.D. AI</span>
+                        <span class="text-[9px] text-gray-400 font-tech">@ By Brice JCT</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div id="instructions-status-top" class="hidden status-indicator status-inactive">
+                        <span class="status-dot"></span>
+                        <span class="hidden md:inline">Instructions</span>
+                    </div>
+                    <button id="btn-logout" class="text-gray-400 hover:text-red-400 transition-colors">
+                        <i class="fa-solid fa-right-from-bracket text-lg"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- AUTH SCREEN (Modal Style) -->
+            <div id="auth-screen" class="hidden fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-lg">
+                <div class="glass-panel-3d p-10 rounded-3xl w-full max-w-md transform transition-all shadow-2xl carbon-fiber">
+                    <button id="btn-close-auth" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
+                        <i class="fa-solid fa-times"></i>
+                    </button>
+                    <div class="text-center mb-10 relative">
+                        <div class="mb-6">
+                            <i class="fa-solid fa-brain text-6xl text-primary-500 brain-logo"></i>
+                        </div>
+                        <h1 class="carbon-logo text-4xl mb-3 title-glow">B.E.D. AI</h1>
+                        <p class="text-primary-500 text-sm tracking-widest uppercase font-bold font-tech">Intelligence Premium</p>
+                        <p class="text-[10px] text-gray-500 mt-2">@ By Brice JCT</p>
+                        <p class="text-[9px] text-gray-600 mt-1">Made in Strasbourg</p>
+                    </div>
+                    
+                    <form id="auth-form" class="space-y-5">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-300 mb-2">Clé API OpenRouter</label>
-                            <input type="text" id="api-key-input" 
-                                class="w-full px-4 py-3 bg-black/40 border-2 border-primary-500/30 rounded-lg text-white focus:border-primary-500 focus:outline-none font-mono text-sm"
-                                placeholder="sk-or-v1-...">
-                            <p class="text-xs text-gray-400 mt-2">Get your key at <a href="https://openrouter.ai/keys" target="_blank" class="text-primary-400 hover:underline">openrouter.ai</a></p>
+                            <label class="block text-xs text-gray-400 uppercase tracking-wider mb-2 font-semibold">Identifiant</label>
+                            <input type="text" id="auth-username" required class="w-full bg-black/50 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-all" placeholder="Votre nom d'utilisateur">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-300 mb-2">Modèle IA</label>
-                            <select id="api-model-input" 
-                                class="w-full px-4 py-3 bg-black/40 border-2 border-primary-500/30 rounded-lg text-white focus:border-primary-500 focus:outline-none">
-                                <option value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet (Recommended)</option>
-                                <option value="anthropic/claude-3-opus">Claude 3 Opus</option>
-                                <option value="openai/gpt-4-turbo">GPT-4 Turbo</option>
-                                <option value="google/gemini-pro">Gemini Pro</option>
-                            </select>
+                            <label class="block text-xs text-gray-400 uppercase tracking-wider mb-2 font-semibold">Mot de passe</label>
+                            <input type="password" id="auth-password" required class="w-full bg-black/50 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-all" placeholder="••••••••">
                         </div>
-                        <button type="submit" class="w-full btn-primary py-3 rounded-lg font-semibold">
-                            Save Settings
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold py-4 rounded-xl glow-button transition-all mt-6 text-lg">
+                            Connexion / Inscription
                         </button>
+                        <p class="text-xs text-center text-gray-500 mt-4">Les nouveaux comptes sont créés automatiquement.</p>
                     </form>
                 </div>
+            </div>
 
-                <!-- Admin Panel -->
-                <div id="admin-panel-section" class="hidden glass-panel p-6 rounded-xl border-red-500/40">
-                    <h3 class="text-lg font-bold text-red-400 mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-user-shield"></i>
-                        Administrator Panel
-                    </h3>
-                    <button onclick="showAdminPanel()" class="w-full bg-red-600 hover:bg-red-700 py-3 rounded-lg font-semibold text-white transition-colors">
-                        Access admin panel
-                    </button>
+            <!-- CHAT SCREEN -->
+            <div id="chat-screen" class="hidden flex-1 flex flex-col relative z-30 h-full overflow-hidden">
+                
+                <!-- Initial Big Title -->
+                <div id="chat-hero" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-opacity duration-500">
+                    <div class="relative mb-8">
+                        <i class="fa-solid fa-brain text-8xl text-primary-500 brain-logo"></i>
+                    </div>
+                    <h1 class="carbon-logo text-6xl md:text-7xl text-center title-glow mb-4">B.E.D. AI</h1>
+                    <p class="text-primary-500 mt-2 text-xl md:text-2xl tracking-wider font-medium text-center px-4 font-tech">
+                        Que souhaitez-vous créer aujourd'hui ?
+                    </p>
+                    <p class="text-gray-500 text-sm mt-3 font-tech">@ By Brice JCT</p>
+                    <p class="text-gray-600 text-xs mt-1">Made in Strasbourg</p>
+                </div>
+
+                <!-- Chat Messages Area -->
+                <div id="chat-messages" class="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 z-10 scroll-smooth" style="padding-bottom: 200px;">
+                    <!-- Messages will be injected here -->
+                </div>
+
+                <!-- Chat Input Area (Bottom) -->
+                <div class="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black via-black/90 to-transparent z-20">
+                    <div class="max-w-4xl mx-auto">
+                        <form id="chat-form" class="relative glass-panel-3d rounded-2xl overflow-hidden input-glow transition-all shadow-xl carbon-fiber">
+                            <textarea id="chat-input" rows="1" class="w-full bg-transparent text-white px-5 py-4 pr-16 focus:outline-none resize-none placeholder-gray-500" style="max-height: 150px;" placeholder="Demandez à B.E.D. AI..."></textarea>
+                            <button type="submit" class="absolute right-3 bottom-3 w-12 h-12 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 flex items-center justify-center text-white transition-all glow-button">
+                                <i class="fa-solid fa-paper-plane text-lg"></i>
+                            </button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <p class="text-[10px] text-gray-600 font-tech leading-relaxed max-w-2xl mx-auto">
+                                Développée par Brice Jacotet, expert full-stack passionné • Basée sur Claude AI 4.5 
+                                • Builder premium pour sites web et applications • Made in Strasbourg
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- MY ACCOUNT SCREEN -->
+            <div id="account-screen" class="hidden flex-1 z-40 p-4 md:p-8 overflow-y-auto">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-4xl font-display font-bold text-white mb-8 border-b border-primary-900/30 pb-4">
+                        <i class="fa-solid fa-user text-primary-500 mr-3"></i>Mon Compte
+                    </h2>
+                    
+                    <div class="glass-panel-3d rounded-2xl p-6 space-y-6 carbon-fiber">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Nom</label>
+                                <input type="text" id="account-lastname" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="Votre nom">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Prénom</label>
+                                <input type="text" id="account-firstname" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="Votre prénom">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Email</label>
+                                <input type="email" id="account-email" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="votre@email.com">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Téléphone</label>
+                                <input type="tel" id="account-phone" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="+33 6 12 34 56 78">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Surnom</label>
+                                <input type="text" id="account-nickname" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="Votre surnom">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-gray-400 mb-2">Type d'usage</label>
+                                <select id="account-usage" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500">
+                                    <option value="">Sélectionnez...</option>
+                                    <option value="personnel">Personnel</option>
+                                    <option value="professionnel">Professionnel</option>
+                                    <option value="etudiant">Étudiant</option>
+                                    <option value="developpeur">Développeur</option>
+                                    <option value="entreprise">Entreprise</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Clé API (optionnel)</label>
+                            <input type="password" id="account-apikey" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="sk-or-v1-...">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Modèle API</label>
+                            <input type="text" id="account-apimodel" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="google/gemini-2.0-flash-lite-001">
+                        </div>
+                        
+                        <button id="btn-save-account" class="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold py-3 rounded-lg glow-button transition-all">
+                            <i class="fa-solid fa-save mr-2"></i> Sauvegarder les modifications
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADMIN SCREEN -->
+            <div id="admin-screen" class="hidden flex-1 z-40 p-4 md:p-8 overflow-y-auto">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-4xl font-display font-bold text-white mb-8 border-b border-primary-900/30 pb-4">
+                        <i class="fa-solid fa-shield-halved text-red-500 mr-3"></i>Admin Panel
+                    </h2>
+                    
+                    <!-- Users List -->
+                    <div class="space-y-4" id="admin-users-container">
+                        <!-- Users will be injected here -->
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <!-- ===== PAGE ADMIN ===== -->
-    <div id="adminpage" class="hidden min-h-screen p-4 md:p-8">
-        <div class="max-w-7xl mx-auto space-y-6">
-            <div class="glass-panel p-6 rounded-2xl flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-user-shield text-4xl text-red-500 icon-glow"></i>
-                    <h2 class="text-3xl font-bold text-red-400 font-display">Panneau Administrateur</h2>
-                </div>
-                <button onclick="backToSettings()" class="btn-primary px-4 py-2 rounded-lg">
-                    Back
-                </button>
-            </div>
+    <!-- Mobile Sidebar Overlay -->
+    <div id="mobile-overlay" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[90] md:hidden"></div>
 
-            <div class="glass-panel p-6 rounded-2xl space-y-4 mb-6">
-                <h3 class="text-2xl font-bold text-primary-400 font-display flex items-center gap-3">
-                    <i class="fa-solid fa-cog text-primary-500"></i>
-                    Paramètres Globaux du Site
-                </h3>
-                
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">Nom du Site</label>
-                        <input type="text" id="site-name-input" 
-                            class="w-full px-4 py-3 bg-black/40 border-2 border-primary-500/30 rounded-lg text-white focus:border-primary-500 focus:outline-none"
-                            placeholder="B.E.D. AI">
-                        <p class="text-xs text-gray-400 mt-2">Ce nom s'affichera partout sur le site</p>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">Prompt Système (Instructions IA)</label>
-                        <textarea id="system-prompt-input" rows="4"
-                            class="w-full px-4 py-3 bg-black/40 border-2 border-primary-500/30 rounded-lg text-white focus:border-primary-500 focus:outline-none resize-none"
-                            placeholder="Instructions pour l'IA..."></textarea>
-                        <p class="text-xs text-gray-400 mt-2">Ces instructions seront envoyées avec chaque message</p>
-                    </div>
-                    
-                    <button onclick="saveSiteSettings()" class="w-full btn-primary py-3 rounded-lg font-semibold text-lg">
-                        <i class="fa-solid fa-save mr-2"></i>
-                        Sauvegarder les Paramètres
-                    </button>
-                </div>
-            </div>
-
-
-            <div id="admin-users-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="glass-panel p-6 rounded-2xl space-y-4 mb-6">
-                <h3 class="text-2xl font-bold text-primary-400 font-display flex items-center gap-3">
-                    <i class="fa-solid fa-location-dot text-primary-500"></i>
-                    Géolocalisation des Utilisateurs
-                </h3>
-                
-                <div id="users-geolocation" class="space-y-3">
-                    <!-- Les géolocalisations seront affichées ici -->
-                </div>
-            </div>
-
-                <!-- User cards will be inserted here -->
-            </div>
-        </div>
-    </div>
-
+    <!-- Application Logic -->
     <script>
-        // ===== CONFIGURATION =====
-        const DEFAULT_API_KEY = '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';
-        const DEFAULT_API_MODEL = 'anthropic/claude-3.5-sonnet';
+        // --- CONFIGURATION ---
+        const DEFAULT_API_KEY = "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";
+        const DEFAULT_API_MODEL = "google/gemini-2.0-flash-lite-001";
+        const ADMIN_USERNAME = "Treza670";
+        const ADMIN_PASSWORD = "Treza670";
 
-        // ===== PARAMÈTRES GLOBAUX DU SITE =====
-        let siteSettings = JSON.parse(localStorage.getItem('bed_site_settings')) || {
-            siteName: 'B.E.D. AI',
-            systemPrompt: 'Tu es un assistant IA intelligent et serviable. Réponds de manière claire et précise.'
-        };
-
-        // ===== VARIABLES GLOBALES =====
+        // --- STATE ---
+        let currentUser = null;
         let usersDb = JSON.parse(localStorage.getItem('bed_users')) || {};
-        let currentUser = localStorage.getItem('bed_current_user') || null;
         let chatHistory = [];
-        let currentChatId = Date.now().toString();
-        let userChats = JSON.parse(localStorage.getItem('bed_user_chats')) || {};
         let isFirstMessage = true;
         let customInstructions = '';
         let customInstructionsActive = false;
+        let userDeviceInfo = {};
 
-        // ===== GÉOLOCALISATION =====
-        let userGeolocation = null;
+        // --- DOM ELEMENTS ---
+        const screens = {
+            landing: document.getElementById('landing-screen'),
+            auth: document.getElementById('auth-screen'),
+            chat: document.getElementById('chat-screen'),
+            account: document.getElementById('account-screen'),
+            admin: document.getElementById('admin-screen')
+        };
 
-        window.requestGeolocation = function() {
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        userGeolocation = {
-                            latitude: position.coords.latitude,
-                            longitude: position.coords.longitude,
-                            accuracy: position.coords.accuracy,
-                            timestamp: new Date().toISOString()
-                        };
-                        console.log('✅ Géolocalisation obtenue:', userGeolocation);
-                        // Sauvegarder dans la session
-                        sessionStorage.setItem('user_geolocation', JSON.stringify(userGeolocation));
-                    },
-                    function(error) {
-                        console.log('❌ Géolocalisation refusée ou erreur:', error.message);
-                        userGeolocation = null;
-                    },
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 5000,
-                        maximumAge: 0
-                    }
-                );
+        const navBtns = {
+            showAuth: document.getElementById('btn-show-auth'),
+            showAuthBottom: document.getElementById('btn-show-auth-bottom'),
+            closeAuth: document.getElementById('btn-close-auth'),
+            logout: document.getElementById('btn-logout'),
+            toggleSidebar: document.getElementById('btn-toggle-sidebar'),
+            mobileMenu: document.getElementById('btn-mobile-menu'),
+            newChat: document.getElementById('btn-new-chat'),
+            navMyAccount: document.getElementById('nav-my-account'),
+            navAdmin: document.getElementById('nav-admin')
+        };
+
+        const topNav = document.getElementById('top-nav');
+        const chatHero = document.getElementById('chat-hero');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const chatForm = document.getElementById('chat-form');
+        const sidebar = document.getElementById('sidebar-left');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+
+        // --- DEVICE INFO COLLECTION ---
+        async function collectDeviceInfo() {
+            const info = {
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                language: navigator.language,
+                screenResolution: `${screen.width}x${screen.height}`,
+                windowSize: `${window.innerWidth}x${window.innerHeight}`,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                online: navigator.onLine,
+                cookiesEnabled: navigator.cookieEnabled,
+            };
+
+            // Battery API
+            if ('getBattery' in navigator) {
+                try {
+                    const battery = await navigator.getBattery();
+                    info.battery = {
+                        level: Math.round(battery.level * 100) + '%',
+                        charging: battery.charging,
+                    };
+                } catch (e) {
+                    info.battery = 'Non disponible';
+                }
+            }
+
+            // Geolocation API (with permission)
+            if ('geolocation' in navigator) {
+                try {
+                    const position = await new Promise((resolve, reject) => {
+                        navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000 });
+                    });
+                    info.location = {
+                        latitude: position.coords.latitude.toFixed(4),
+                        longitude: position.coords.longitude.toFixed(4),
+                        accuracy: Math.round(position.coords.accuracy) + 'm'
+                    };
+                } catch (e) {
+                    info.location = 'Permission refusée';
+                }
+            }
+
+            // IP Address (using external API)
+            try {
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                info.ip = ipData.ip;
+                
+                // Get location from IP
+                const geoResponse = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
+                const geoData = await geoResponse.json();
+                info.ipLocation = {
+                    city: geoData.city,
+                    region: geoData.region,
+                    country: geoData.country_name,
+                    postal: geoData.postal
+                };
+            } catch (e) {
+                info.ip = 'Non disponible';
+                info.ipLocation = 'Non disponible';
+            }
+
+            return info;
+        }
+
+        // --- INITIALIZATION ---
+        (async function init() {
+            createParticles();
+            init3DBackground();
+            userDeviceInfo = await collectDeviceInfo();
+        })();
+
+        // --- ANIMATED PARTICLES ---
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 80 + 30 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = Math.random() * 8 + 12 + 's';
+                container.appendChild(particle);
             }
         }
 
-        // Demander la géolocalisation au chargement de la page d'accueil
-        if (document.getElementById('homepage')) {
-            setTimeout(requestGeolocation, 1000);
-        }
+        // --- THREE.JS 3D BACKGROUND (4K QUALITY) ---
+        function init3DBackground() {
+            const container = document.getElementById('canvas-container');
+            const scene = new THREE.Scene();
+            
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 35;
 
+            const renderer = new THREE.WebGLRenderer({ 
+                alpha: true, 
+                antialias: true,
+                powerPreference: "high-performance"
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
 
-        // ===== ÉLÉMENTS DOM =====
-        const homepage = document.getElementById('homepage');
-        const loginpage = document.getElementById('loginpage');
-        const registerpage = document.getElementById('registerpage');
-        const chatapp = document.getElementById('chatapp');
-        const settingspage = document.getElementById('settingspage');
-        const adminpage = document.getElementById('adminpage');
-        
-        const chatMessages = document.getElementById('chat-messages');
-        const chatHero = document.getElementById('chat-hero');
-        const chatForm = document.getElementById('chat-form');
-        const chatInput = document.getElementById('chat-input');
+            // Create multiple high-quality geometries
+            const torusGeo = new THREE.TorusGeometry(12, 3, 32, 100);
+            const torusMat = new THREE.MeshBasicMaterial({ 
+                color: 0x0ea5e9, 
+                wireframe: true,
+                transparent: true,
+                opacity: 0.4
+            });
+            const torus = new THREE.Mesh(torusGeo, torusMat);
+            scene.add(torus);
 
-        // ===== FONCTIONS DE NAVIGATION (doivent être déclarées en premier) =====
-        window.hideAll = function() {
-            [homepage, loginpage, registerpage, chatapp, settingspage, adminpage].forEach(el => {
-                if (el) el.classList.add('hidden');
+            const icoGeo = new THREE.IcosahedronGeometry(10, 1);
+            const icoMat = new THREE.MeshBasicMaterial({ 
+                color: 0x06b6d4, 
+                wireframe: true,
+                transparent: true,
+                opacity: 0.3
+            });
+            const ico = new THREE.Mesh(icoGeo, icoMat);
+            scene.add(ico);
+
+            const sphereGeo = new THREE.SphereGeometry(15, 64, 64);
+            const sphereMat = new THREE.PointsMaterial({
+                color: 0x0284c7,
+                size: 0.1,
+                transparent: true,
+                opacity: 0.5,
+                blending: THREE.AdditiveBlending
+            });
+            const sphere = new THREE.Points(sphereGeo, sphereMat);
+            scene.add(sphere);
+
+            const particlesGeo = new THREE.BufferGeometry();
+            const particlesCount = 3000;
+            const posArray = new Float32Array(particlesCount * 3);
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 120;
+            }
+            particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const particlesMat = new THREE.PointsMaterial({
+                size: 0.06,
+                color: 0x0ea5e9,
+                transparent: true,
+                opacity: 0.7,
+                blending: THREE.AdditiveBlending
+            });
+            const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+            scene.add(particlesMesh);
+
+            let mouseX = 0;
+            let mouseY = 0;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            });
+
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                torus.rotation.x += 0.008;
+                torus.rotation.y += 0.004;
+                torus.rotation.z += 0.002;
+                
+                ico.rotation.x -= 0.004;
+                ico.rotation.y -= 0.008;
+                
+                sphere.rotation.y += 0.002;
+                
+                particlesMesh.rotation.y += 0.0008;
+                particlesMesh.rotation.x += 0.0004;
+                
+                camera.position.x += (mouseX * 6 - camera.position.x) * 0.05;
+                camera.position.y += (mouseY * 6 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
             });
         }
 
-
-
-
-        window.showChat = function() {
-            hideAll();
-            chatapp.classList.remove('hidden');
-            document.getElementById('sidebar-username').textContent = currentUser;
-        }
-
-        window.showSettings = function() {
-            hideAll();
-            settingspage.classList.remove('hidden');
-            document.getElementById('settings-username').textContent = currentUser;
-            
-            const userData = usersDb[currentUser] || {};
-            document.getElementById('api-key-input').value = userData.apiKey || '';
-            document.getElementById('api-model-input').value = userData.apiModel || DEFAULT_API_MODEL;
-            
-            if (userData.isAdmin) {
-                document.getElementById('admin-panel-section').classList.remove('hidden');
-            }
-        }
-
-        window.backToChat = function() {
-            showChat();
-        }
-
-        window.showAdminPanel = function() {
-            hideAll();
-            adminpage.classList.remove('hidden');
-            loadAdminPanel();
-            
-            // Charger les paramètres du site
-            const nameInput = document.getElementById('site-name-input');
-            const promptInput = document.getElementById('system-prompt-input');
-            if (nameInput) nameInput.value = siteSettings.siteName;
-            if (promptInput) promptInput.value = siteSettings.systemPrompt;
-        }
-
-        window.backToSettings = function() {
-            showSettings();
-        }
-
-
-        // ===== CRÉATION COMPTE ADMIN AU DÉMARRAGE =====
-        if (!usersDb['Treza670']) {
-            usersDb['Treza670'] = {
-                password: 'Treza670',
-                isAdmin: true,
-                apiKey: DEFAULT_API_KEY,
-                apiModel: DEFAULT_API_MODEL,
-                createdAt: new Date().toISOString()
-            };
-            localStorage.setItem('bed_users', JSON.stringify(usersDb));
-            console.log('✅ Compte admin Treza670 créé avec succès');
-        }
-
-        // ===== INITIALISATION =====
-        window.addEventListener('DOMContentLoaded', () => {
-            initParticles();
-            initThreeJS();
-            
-            if (currentUser && usersDb[currentUser]) {
-                showChat();
-            } else {
-                showHomepage();
-            }
+        // --- AUTH SCREENS ---
+        navBtns.showAuth.addEventListener('click', () => {
+            screens.auth.classList.remove('hidden');
         });
 
-        // ===== NAVIGATION =====
+        navBtns.showAuthBottom.addEventListener('click', () => {
+            screens.auth.classList.remove('hidden');
+        });
 
+        navBtns.closeAuth.addEventListener('click', () => {
+            screens.auth.classList.add('hidden');
+        });
 
-
-
-
-
-
-
-
-        // ===== AUTHENTIFICATION =====
-        document.getElementById('login-form').addEventListener('submit', (e) => {
+        // --- AUTHENTICATION LOGIC ---
+        document.getElementById('auth-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            const username = document.getElementById('login-username').value.trim();
-            const password = document.getElementById('login-password').value;
+            const user = document.getElementById('auth-username').value.trim();
+            const pass = document.getElementById('auth-password').value;
 
-            if (usersDb[username] && usersDb[username].password === password) {
-                currentUser = username;
-                localStorage.setItem('bed_current_user', currentUser);
-                
-                // Sauvegarder la géolocalisation
-                if (userGeolocation || sessionStorage.getItem("user_geolocation")) {
-                    const geo = userGeolocation || JSON.parse(sessionStorage.getItem("user_geolocation"));
-                    if (!usersDb[username].geolocation) usersDb[username].geolocation = geo;
-                    usersDb[username].lastGeolocation = geo;
-                    usersDb[username].lastLogin = new Date().toISOString();
-                    localStorage.setItem("bed_users", JSON.stringify(usersDb));
-                }
-                
-                // Initialiser les données utilisateur
-                if (!usersDb[username].apiKey) {
-                    usersDb[username].apiKey = DEFAULT_API_KEY;
-                }
-                if (!usersDb[username].apiModel) {
-                    usersDb[username].apiModel = DEFAULT_API_MODEL;
-                }
+            if(!user || !pass) return;
+
+            // Admin check
+            if(user === ADMIN_USERNAME && pass === ADMIN_PASSWORD) {
+                login(user, true);
+                return;
+            }
+
+            // Regular user
+            if(!usersDb[user]) {
+                usersDb[user] = {
+                    password: pass,
+                    apiKey: DEFAULT_API_KEY,
+                    apiModel: DEFAULT_API_MODEL,
+                    customInstructions: '',
+                    zoomLevel: 100,
+                    deviceInfo: userDeviceInfo,
+                    profile: {
+                        firstname: '',
+                        lastname: '',
+                        email: '',
+                        phone: '',
+                        nickname: '',
+                        usage: ''
+                    },
+                    lastLogin: new Date().toISOString(),
+                    createdAt: new Date().toISOString()
+                };
                 localStorage.setItem('bed_users', JSON.stringify(usersDb));
-                
-                showChat();
             } else {
-                alert('❌ Incorrect username or password');
-            }
-        });
-
-        document.getElementById('register-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('reg-username').value.trim();
-            const password = document.getElementById('reg-password').value;
-
-            if (!username || !password) {
-                alert('❌ Please fill in all fields');
-                return;
-            }
-
-            if (usersDb[username]) {
-                alert('❌ This username already exists');
-                return;
-            }
-
-            usersDb[username] = {
-                password: password,
-                isAdmin: false,
-                apiKey: DEFAULT_API_KEY,
-                apiModel: DEFAULT_API_MODEL,
-                createdAt: new Date().toISOString()
-            };
-            localStorage.setItem('bed_users', JSON.stringify(usersDb));
-
-            currentUser = username;
-            localStorage.setItem('bed_current_user', currentUser);
-                
-                // Sauvegarder la géolocalisation
-                if (userGeolocation || sessionStorage.getItem("user_geolocation")) {
-                    const geo = userGeolocation || JSON.parse(sessionStorage.getItem("user_geolocation"));
-                    if (!usersDb[username].geolocation) usersDb[username].geolocation = geo;
-                    usersDb[username].lastGeolocation = geo;
-                    usersDb[username].lastLogin = new Date().toISOString();
-                    localStorage.setItem("bed_users", JSON.stringify(usersDb));
+                if(usersDb[user].password !== pass) {
+                    alert("Mot de passe incorrect.");
+                    return;
                 }
-            
-            alert('✅ Account created successfully!');
-            showChat();
+                // Update device info and last login
+                usersDb[user].deviceInfo = userDeviceInfo;
+                usersDb[user].lastLogin = new Date().toISOString();
+                
+                // Ensure all fields exist
+                if(!usersDb[user].zoomLevel) usersDb[user].zoomLevel = 100;
+                if(!usersDb[user].profile) usersDb[user].profile = {};
+                
+                localStorage.setItem('bed_users', JSON.stringify(usersDb));
+            }
+
+            login(user, false);
         });
 
-        window.logout = function() {
-            if (confirm('Do you really want to sign out?')) {
-                currentUser = null;
-                chatHistory = [];
-                isFirstMessage = true;
-                localStorage.removeItem('bed_current_user');
-                chatMessages.innerHTML = '';
-                chatMessages.appendChild(chatHero);
-                chatHero.classList.remove('hidden');
-                chatHero.style.opacity = '1';
-                showHomepage();
+        function login(username, isAdmin) {
+            currentUser = username;
+            
+            // Hide landing and auth
+            screens.landing.classList.add('hidden');
+            screens.auth.classList.add('hidden');
+            
+            // Show main app
+            topNav.classList.remove('hidden');
+            sidebar.classList.remove('hidden');
+            screens.chat.classList.remove('hidden');
+            
+            // Show admin nav if admin
+            if(isAdmin) {
+                navBtns.navAdmin.classList.remove('hidden');
+            }
+            
+            // Load user data
+            if(!isAdmin) {
+                const userData = usersDb[username];
+                document.getElementById('custom-instructions').value = userData.customInstructions || '';
+                customInstructions = userData.customInstructions || '';
+                customInstructionsActive = customInstructions.trim() !== '';
+                
+                // Load account data
+                document.getElementById('account-lastname').value = userData.profile?.lastname || '';
+                document.getElementById('account-firstname').value = userData.profile?.firstname || '';
+                document.getElementById('account-email').value = userData.profile?.email || '';
+                document.getElementById('account-phone').value = userData.profile?.phone || '';
+                document.getElementById('account-nickname').value = userData.profile?.nickname || '';
+                document.getElementById('account-usage').value = userData.profile?.usage || '';
+                document.getElementById('account-apikey').value = userData.apiKey || '';
+                document.getElementById('account-apimodel').value = userData.apiModel || '';
+                
+                // Apply zoom
+                const zoomLevel = userData.zoomLevel || 100;
+                document.getElementById('zoom-range').value = zoomLevel;
+                document.getElementById('zoom-value').textContent = zoomLevel + '%';
+                applyZoom(zoomLevel);
+                
+                updateInstructionsIndicator();
+            }
+            
+            chatHistory = [];
+            chatMessages.innerHTML = '';
+            chatHero.style.opacity = '1';
+            chatHero.classList.remove('hidden');
+            isFirstMessage = true;
+            
+            setTimeout(() => {
+                addMessage("Système", `Bienvenue ${username}. Comment puis-je vous aider ?`, false);
+            }, 500);
+        }
+
+        navBtns.logout.addEventListener('click', () => {
+            currentUser = null;
+            
+            // Hide all screens
+            Object.values(screens).forEach(s => s.classList.add('hidden'));
+            topNav.classList.add('hidden');
+            sidebar.classList.remove('hidden'); // Keep sidebar structure
+            sidebar.classList.add('hidden');
+            
+            // Show landing
+            screens.landing.classList.remove('hidden');
+            
+            // Clear password
+            document.getElementById('auth-password').value = '';
+        });
+
+        // --- SIDEBAR TOGGLE ---
+        navBtns.toggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+        });
+
+        navBtns.mobileMenu.addEventListener('click', () => {
+            sidebar.classList.add('mobile-open');
+            mobileOverlay.classList.remove('hidden');
+        });
+
+        mobileOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('mobile-open');
+            mobileOverlay.classList.add('hidden');
+        });
+
+        // --- NAVIGATION ---
+        navBtns.newChat.addEventListener('click', () => {
+            chatHistory = [];
+            chatMessages.innerHTML = '';
+            chatHero.style.opacity = '1';
+            chatHero.classList.remove('hidden');
+            isFirstMessage = true;
+            
+            // Show chat screen
+            Object.values(screens).forEach(s => {
+                if(s.id !== 'landing-screen' && s.id !== 'auth-screen') s.classList.add('hidden');
+            });
+            screens.chat.classList.remove('hidden');
+            
+            addMessage("Système", `Nouvelle discussion créée.`, false);
+        });
+
+        navBtns.navMyAccount.addEventListener('click', () => {
+            Object.values(screens).forEach(s => {
+                if(s.id !== 'landing-screen' && s.id !== 'auth-screen') s.classList.add('hidden');
+            });
+            screens.account.classList.remove('hidden');
+        });
+
+        navBtns.navAdmin.addEventListener('click', () => {
+            Object.values(screens).forEach(s => {
+                if(s.id !== 'landing-screen' && s.id !== 'auth-screen') s.classList.add('hidden');
+            });
+            screens.admin.classList.remove('hidden');
+            loadAdminPanel();
+        });
+
+        // --- CUSTOM INSTRUCTIONS ---
+        document.getElementById('btn-save-instructions').addEventListener('click', () => {
+            const instructions = document.getElementById('custom-instructions').value.trim();
+            
+            if(!currentUser || currentUser === ADMIN_USERNAME) return;
+            
+            customInstructions = instructions;
+            customInstructionsActive = instructions !== '';
+            
+            usersDb[currentUser].customInstructions = instructions;
+            localStorage.setItem('bed_users', JSON.stringify(usersDb));
+            
+            updateInstructionsIndicator();
+            
+            if(customInstructionsActive) {
+                addMessage("Système", `✅ Instructions personnalisées activées.`, false);
+                document.getElementById('btn-clear-instructions').classList.remove('hidden');
+            } else {
+                addMessage("Système", `Instructions désactivées.`, false);
+                document.getElementById('btn-clear-instructions').classList.add('hidden');
+            }
+        });
+
+        document.getElementById('btn-clear-instructions').addEventListener('click', () => {
+            if(!confirm('Supprimer les instructions personnalisées ?')) return;
+            
+            document.getElementById('custom-instructions').value = '';
+            customInstructions = '';
+            customInstructionsActive = false;
+            
+            if(currentUser && currentUser !== ADMIN_USERNAME) {
+                usersDb[currentUser].customInstructions = '';
+                localStorage.setItem('bed_users', JSON.stringify(usersDb));
+            }
+            
+            updateInstructionsIndicator();
+            document.getElementById('btn-clear-instructions').classList.add('hidden');
+            addMessage("Système", `Instructions supprimées.`, false);
+        });
+
+        function updateInstructionsIndicator() {
+            const statusSidebar = document.getElementById('instructions-status-sidebar');
+            const statusTop = document.getElementById('instructions-status-top');
+            
+            if(customInstructionsActive) {
+                statusSidebar.className = 'status-indicator status-active';
+                statusSidebar.innerHTML = '<span class="status-dot"></span><span>Actif</span>';
+                statusTop.className = 'status-indicator status-active';
+                statusTop.innerHTML = '<span class="status-dot"></span><span class="hidden md:inline">Instructions</span>';
+                statusTop.classList.remove('hidden');
+                document.getElementById('btn-clear-instructions').classList.remove('hidden');
+            } else {
+                statusSidebar.className = 'status-indicator status-inactive';
+                statusSidebar.innerHTML = '<span class="status-dot"></span><span>Inactif</span>';
+                statusTop.classList.add('hidden');
+                document.getElementById('btn-clear-instructions').classList.add('hidden');
             }
         }
 
-        // ===== PARAMÈTRES API =====
-        document.getElementById('api-settings-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const apiKey = document.getElementById('api-key-input').value.trim();
-            const apiModel = document.getElementById('api-model-input').value;
-
-            if (!usersDb[currentUser]) return;
-
-            usersDb[currentUser].apiKey = apiKey || DEFAULT_API_KEY;
-            usersDb[currentUser].apiModel = apiModel;
-            localStorage.setItem('bed_users', JSON.stringify(usersDb));
-
-            alert('✅ Settings saved!');
+        // --- ZOOM CONTROL ---
+        const zoomRange = document.getElementById('zoom-range');
+        const zoomValue = document.getElementById('zoom-value');
+        
+        zoomRange.addEventListener('input', () => {
+            const value = zoomRange.value;
+            zoomValue.textContent = value + '%';
+            applyZoom(value);
         });
 
-        // ===== PANNEAU ADMIN =====
-        window.loadAdminPanel = function() {
+        document.getElementById('btn-save-zoom').addEventListener('click', () => {
+            if(!currentUser || currentUser === ADMIN_USERNAME) return;
+            
+            const zoomLevel = parseInt(zoomRange.value);
+            usersDb[currentUser].zoomLevel = zoomLevel;
+            localStorage.setItem('bed_users', JSON.stringify(usersDb));
+            
+            addMessage("Système", `✅ Zoom sauvegardé à ${zoomLevel}%`, false);
+        });
+
+        function applyZoom(level) {
+            const percentage = level / 100;
+            chatMessages.style.fontSize = (16 * percentage) + 'px';
+        }
+
+        // --- ACCOUNT MANAGEMENT ---
+        document.getElementById('btn-save-account').addEventListener('click', () => {
+            if(!currentUser || currentUser === ADMIN_USERNAME) return;
+            
+            usersDb[currentUser].profile = {
+                firstname: document.getElementById('account-firstname').value,
+                lastname: document.getElementById('account-lastname').value,
+                email: document.getElementById('account-email').value,
+                phone: document.getElementById('account-phone').value,
+                nickname: document.getElementById('account-nickname').value,
+                usage: document.getElementById('account-usage').value
+            };
+            
+            usersDb[currentUser].apiKey = document.getElementById('account-apikey').value || DEFAULT_API_KEY;
+            usersDb[currentUser].apiModel = document.getElementById('account-apimodel').value || DEFAULT_API_MODEL;
+            
+            localStorage.setItem('bed_users', JSON.stringify(usersDb));
+            
+            // Show chat screen
+            Object.values(screens).forEach(s => {
+                if(s.id !== 'landing-screen' && s.id !== 'auth-screen') s.classList.add('hidden');
+            });
+            screens.chat.classList.remove('hidden');
+            
+            addMessage("Système", `✅ Profil mis à jour avec succès.`, false);
+        });
+
+        // --- ADMIN PANEL ---
+        function loadAdminPanel() {
             const container = document.getElementById('admin-users-container');
             container.innerHTML = '';
-
-            Object.keys(usersDb).forEach(username => {
+            
+            const users = Object.keys(usersDb).filter(u => u !== ADMIN_USERNAME);
+            
+            users.forEach(username => {
                 const user = usersDb[username];
                 const userCard = document.createElement('div');
-                userCard.className = 'glass-panel p-6 rounded-xl space-y-4';
-
+                userCard.className = 'glass-panel-3d rounded-2xl p-6 carbon-fiber';
+                
+                const deviceInfoHtml = user.deviceInfo ? `
+                    <div class="collapsible-content mt-4 pt-4 border-t border-gray-700" id="device-${username}">
+                        <h4 class="text-sm font-bold text-primary-500 mb-3">Informations Appareil</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div><span class="text-gray-500">IP:</span> <span class="text-gray-300">${user.deviceInfo.ip || 'N/A'}</span></div>
+                            <div><span class="text-gray-500">Localisation IP:</span> <span class="text-gray-300">${user.deviceInfo.ipLocation?.city || 'N/A'}, ${user.deviceInfo.ipLocation?.country || 'N/A'}</span></div>
+                            <div><span class="text-gray-500">GPS:</span> <span class="text-gray-300">${user.deviceInfo.location?.latitude || 'N/A'}, ${user.deviceInfo.location?.longitude || 'N/A'}</span></div>
+                            <div><span class="text-gray-500">Batterie:</span> <span class="text-gray-300">${user.deviceInfo.battery?.level || 'N/A'} ${user.deviceInfo.battery?.charging ? '⚡' : ''}</span></div>
+                            <div><span class="text-gray-500">Plateforme:</span> <span class="text-gray-300">${user.deviceInfo.platform || 'N/A'}</span></div>
+                            <div><span class="text-gray-500">Résolution:</span> <span class="text-gray-300">${user.deviceInfo.screenResolution || 'N/A'}</span></div>
+                            <div><span class="text-gray-500">Langue:</span> <span class="text-gray-300">${user.deviceInfo.language || 'N/A'}</span></div>
+                            <div><span class="text-gray-500">Timezone:</span> <span class="text-gray-300">${user.deviceInfo.timezone || 'N/A'}</span></div>
+                        </div>
+                    </div>
+                ` : '';
+                
+                const profileInfoHtml = user.profile ? `
+                    <div class="collapsible-content mt-4 pt-4 border-t border-gray-700" id="profile-${username}">
+                        <h4 class="text-sm font-bold text-primary-500 mb-3">Informations Profil</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            <div><span class="text-gray-500">Nom:</span> <span class="text-gray-300">${user.profile.lastname || 'N/A'}</span></div>
+                            <div><span class="text-gray-500">Prénom:</span> <span class="text-gray-300">${user.profile.firstname || 'N/A'}</span></div>
+                            <div><span class="text-gray-500">Email:</span> <span class="text-gray-300">${user.profile.email || 'N/A'}</span></div>
+                            <div><span class="text-gray-500">Téléphone:</span> <span class="text-gray-300">${user.profile.phone || 'N/A'}</span></div>
+                            <div><span class="text-gray-500">Surnom:</span> <span class="text-gray-300">${user.profile.nickname || 'N/A'}</span></div>
+                            <div><span class="text-gray-500">Usage:</span> <span class="text-gray-300">${user.profile.usage || 'N/A'}</span></div>
+                        </div>
+                    </div>
+                ` : '';
+                
                 userCard.innerHTML = `
-                    <div class="flex items-start justify-between">
+                    <div class="flex justify-between items-start mb-4">
                         <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
                                 <i class="fa-solid fa-user text-white"></i>
                             </div>
                             <div>
-                                <p class="font-bold text-white">${username}</p>
-                                ${user.isAdmin ? '<span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">Admin</span>' : ''}
+                                <h3 class="text-xl font-bold text-white">${username}</h3>
+                                <p class="text-xs text-gray-500">Créé le ${new Date(user.createdAt || Date.now()).toLocaleDateString('fr-FR')}</p>
                             </div>
                         </div>
-                        ${!user.isAdmin ? `<button onclick="deleteUserAdmin('${username}')" class="text-red-500 hover:text-red-400"><i class="fa-solid fa-trash"></i></button>` : ''}
-                    </div>
-                    <div class="space-y-2 text-sm">
-                        <div class="flex justify-between">
-                            <span class="text-gray-300">Créé le</span>
-                            <span class="text-white">${new Date(user.createdAt).toLocaleDateString('en-US')}</span>
+                        <div class="flex gap-2">
+                            <button onclick="toggleCollapsible('device-${username}')" class="text-primary-500 hover:text-primary-400 text-sm">
+                                <i class="fa-solid fa-mobile-screen-button mr-1"></i>Appareil
+                            </button>
+                            <button onclick="toggleCollapsible('profile-${username}')" class="text-primary-500 hover:text-primary-400 text-sm">
+                                <i class="fa-solid fa-id-card mr-1"></i>Profil
+                            </button>
+                            <button onclick="deleteUserAdmin('${username}')" class="text-red-500 hover:text-red-400 text-sm">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
                         </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-300">Modèle</span>
-                            <span class="text-white text-xs">${user.apiModel || 'Default'}</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs mb-4">
+                        <div class="bg-black/30 rounded-lg p-3">
+                            <p class="text-gray-500 mb-1">Dernière connexion</p>
+                            <p class="text-white font-semibold">${new Date(user.lastLogin).toLocaleDateString('fr-FR')}</p>
+                        </div>
+                        <div class="bg-black/30 rounded-lg p-3">
+                            <p class="text-gray-500 mb-1">Instructions</p>
+                            <p class="text-white font-semibold">${user.customInstructions ? 'Actives' : 'Inactives'}</p>
+                        </div>
+                        <div class="bg-black/30 rounded-lg p-3">
+                            <p class="text-gray-500 mb-1">Zoom</p>
+                            <p class="text-white font-semibold">${user.zoomLevel || 100}%</p>
+                        </div>
+                        <div class="bg-black/30 rounded-lg p-3">
+                            <p class="text-gray-500 mb-1">Modèle</p>
+                            <p class="text-white font-semibold text-[10px]">${user.apiModel || 'Default'}</p>
                         </div>
                     </div>
+                    
+                    ${deviceInfoHtml}
+                    ${profileInfoHtml}
                 `;
-
+                
                 container.appendChild(userCard);
             });
-
-            // Afficher les géolocalisations
-            const geoContainer = document.getElementById('users-geolocation');
-            if (geoContainer) {
-                geoContainer.innerHTML = '';
-                
-                Object.keys(usersDb).forEach(username => {
-                    const user = usersDb[username];
-                    if (user.geolocation) {
-                        const geoCard = document.createElement('div');
-                        geoCard.className = 'glass-panel p-4 rounded-xl';
-                        geoCard.innerHTML = `
-                            <div class="flex items-start justify-between mb-2">
-                                <div class="flex items-center gap-3">
-                                    <i class="fa-solid fa-map-marker-alt text-green-400 text-xl"></i>
-                                    <div>
-                                        <p class="font-bold text-white">${username}</p>
-                                        <p class="text-xs text-gray-300">Dernière connexion</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="space-y-2 text-sm">
-                                <div class="flex justify-between">
-                                    <span class="text-gray-300">Latitude</span>
-                                    <span class="text-white font-mono">${user.geolocation.latitude.toFixed(6)}</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-gray-300">Longitude</span>
-                                    <span class="text-white font-mono">${user.geolocation.longitude.toFixed(6)}</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-gray-300">Précision</span>
-                                    <span class="text-white">${Math.round(user.geolocation.accuracy)} m</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-gray-300">Date</span>
-                                    <span class="text-white text-xs">${new Date(user.geolocation.timestamp).toLocaleString('fr-FR')}</span>
-                                </div>
-                            </div>
-                        `;
-                        geoContainer.appendChild(geoCard);
-                    }
-                });
-                
-                if (geoContainer.children.length === 0) {
-                    geoContainer.innerHTML = '<p class="text-gray-300 text-sm">Aucune géolocalisation enregistrée</p>';
-                }
-            }
-
         }
 
+        window.toggleCollapsible = function(id) {
+            const element = document.getElementById(id);
+            if(element) {
+                element.classList.toggle('open');
+            }
+        };
+
         window.deleteUserAdmin = function(username) {
-            if (!confirm(`Delete user ${username}?`)) return;
+            if(!confirm(`Supprimer l'utilisateur ${username} et toutes ses données ?`)) return;
+            
             delete usersDb[username];
             localStorage.setItem('bed_users', JSON.stringify(usersDb));
             loadAdminPanel();
         };
 
-        // ===== CHAT =====
+        // --- CHAT LOGIC ---
+        
         chatInput.addEventListener('input', function() {
             this.style.height = 'auto';
             this.style.height = Math.min(this.scrollHeight, 150) + 'px';
+            if(this.value === '') this.style.height = 'auto';
         });
 
         chatInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
+            if(e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 chatForm.dispatchEvent(new Event('submit'));
             }
@@ -1463,9 +1474,9 @@
         chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const text = chatInput.value.trim();
-            if (!text) return;
+            if(!text) return;
 
-            if (isFirstMessage) {
+            if(isFirstMessage) {
                 chatHero.style.opacity = '0';
                 setTimeout(() => chatHero.classList.add('hidden'), 500);
                 isFirstMessage = false;
@@ -1474,25 +1485,35 @@
             chatInput.value = '';
             chatInput.style.height = 'auto';
 
+            // Add User Message (display only user text, not instructions)
             addMessage(currentUser, text, true);
-            chatHistory.push({ isUser: true, content: text });
-
+            
+            // Prepare message with custom instructions (sent to API, not displayed)
+            let apiMessage = text;
+            if(customInstructionsActive && customInstructions.trim() !== '') {
+                apiMessage = `[Instructions à respecter: ${customInstructions}]\n\n${text}`;
+            }
+            
+            // Add to history
+            chatHistory.push({ isUser: true, content: apiMessage });
+            
+            // Add Loading Indicator
             const loadingId = addMessage("B.E.D. AI", createLoadingIndicator(), false);
 
+            // Call API
             const userData = usersDb[currentUser] || {};
-            let apiKey = (userData.apiKey || DEFAULT_API_KEY).trim();
-
+            let apiKey = (userData.apiKey || DEFAULT_API_KEY).trim().replace(/[\r\n\s]+/g, '');
+            
             try {
                 let reply = "";
-                // Ajouter le prompt système en premier
-                const systemMessage = { role: "system", content: siteSettings.systemPrompt };
-                const messages = [systemMessage, ...chatHistory.map(m => ({
+
+                const messages = chatHistory.map(m => ({
                     role: m.isUser ? 'user' : 'assistant',
                     content: m.content
                 }));
-
+                
                 const apiModel = userData.apiModel || DEFAULT_API_MODEL;
-
+                
                 const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
                     method: 'POST',
                     headers: {
@@ -1507,37 +1528,38 @@
                         stream: true
                     })
                 });
-
-                if (res.status === 401) throw new Error("Invalid API key");
-                if (res.status === 402) throw new Error("Insufficient credits");
-                if (!res.ok) throw new Error(`API Error: ${res.status}`);
-
+                
+                if (res.status === 401) throw new Error("Clé API invalide.");
+                if (res.status === 402) throw new Error("Modèle payant sans crédits.");
+                if (!res.ok) throw new Error(`Erreur API: ${res.status}`);
+                
                 const reader = res.body.getReader();
                 const decoder = new TextDecoder("utf-8");
                 let buffer = "";
-
+                
                 while (true) {
                     const { done, value } = await reader.read();
                     if (done) break;
-
+                    
                     buffer += decoder.decode(value, { stream: true });
                     const lines = buffer.split('\n');
                     buffer = lines.pop();
-
+                    
                     for (const line of lines) {
-                        if (line.trim() === '' || !line.startsWith('data: ')) continue;
-                        const dataStr = line.slice(6).trim();
-                        if (dataStr === '[DONE]') continue;
-
-                        try {
-                            const data = JSON.parse(dataStr);
-                            if (data.choices?.[0]?.delta?.content) {
-                                reply += data.choices[0].delta.content;
-                                updateMessage(loadingId, reply);
-                                scrollToBottom();
+                        if (line.trim() === '') continue;
+                        if (line.startsWith('data: ')) {
+                            const dataStr = line.slice(6).trim();
+                            if (dataStr === '[DONE]') continue;
+                            try {
+                                const data = JSON.parse(dataStr);
+                                if (data.choices && data.choices[0].delta && data.choices[0].delta.content) {
+                                    reply += data.choices[0].delta.content;
+                                    updateMessage(loadingId, reply);
+                                    scrollToBottom();
+                                }
+                            } catch (e) {
+                                console.error("Parse error", e);
                             }
-                        } catch (e) {
-                            console.error("Parse error", e);
                         }
                     }
                 }
@@ -1547,13 +1569,13 @@
 
             } catch (error) {
                 console.error(error);
-                updateMessage(loadingId, `<span class="text-red-500">❌ ${error.message}</span>`);
+                updateMessage(loadingId, `<span class="text-red-500 font-semibold">❌ ${error.message}</span>`);
             }
         });
 
         function createLoadingIndicator() {
             return `<div class="flex items-center gap-2">
-                <span class="text-gray-300">Analyse en cours</span>
+                <span class="text-gray-400">Analyse en cours</span>
                 <div class="flex gap-1">
                     <span class="loading-dot"></span>
                     <span class="loading-dot"></span>
@@ -1567,30 +1589,30 @@
             const div = document.createElement('div');
             div.id = id;
             div.className = `flex gap-4 message-appear ${isUser ? 'flex-row-reverse' : ''} max-w-4xl mx-auto w-full`;
-
-            const avatar = isUser
-                ? `<div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-600 to-gray-800 flex-shrink-0 flex items-center justify-center border-2 border-primary-500/30">
+            
+            const avatar = isUser 
+                ? `<div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-600 to-gray-800 flex-shrink-0 flex items-center justify-center border-2 border-primary-500/30 shadow-lg">
                     <i class="fa-solid fa-user text-sm text-white"></i>
                    </div>`
                 : `<div class="flex flex-col items-center">
-                    <div class="text-lg font-black logo-text logo-glow">B.E.D.</div>
-                    <span class="text-[8px] text-gray-400 font-tech">By Brice JCT</span>
+                    <i class="fa-solid fa-brain text-2xl text-primary-500 brain-logo mb-1"></i>
+                    <span class="text-[8px] text-gray-500 font-tech">By Brice JCT</span>
                    </div>`;
-
-            const bgClass = isUser
-                ? 'bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700'
-                : 'glass-panel-3d border-primary-800/50';
-
+            
+            const bgClass = isUser 
+                ? 'bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700 text-gray-100' 
+                : 'glass-panel-3d border-primary-800/50 text-gray-100';
+            
             const displayContent = content.includes('loading-dot') ? content : marked.parse(content);
 
             div.innerHTML = `
                 ${avatar}
                 <div class="${bgClass} border-2 rounded-2xl p-5 max-w-[85%] shadow-lg">
-                    <div class="text-xs ${isUser ? 'text-gray-300' : 'text-primary-400'} mb-2 uppercase tracking-wider font-bold font-tech">${sender}</div>
+                    <div class="text-xs ${isUser ? 'text-gray-400' : 'text-primary-400'} mb-2 uppercase tracking-wider font-bold font-tech">${sender}</div>
                     <div class="leading-relaxed content-area prose prose-invert max-w-none">${displayContent}</div>
                 </div>
             `;
-
+            
             chatMessages.appendChild(div);
             scrollToBottom();
             return id;
@@ -1598,7 +1620,7 @@
 
         function updateMessage(id, newContent) {
             const msgEl = document.getElementById(id);
-            if (msgEl) {
+            if(msgEl) {
                 const contentArea = msgEl.querySelector('.content-area');
                 contentArea.innerHTML = marked.parse(newContent);
             }
@@ -1609,153 +1631,6 @@
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             });
         }
-
-        // ===== EFFETS VISUELS =====
-        function initParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = window.innerWidth < 768 ? 15 : 30;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.width = Math.random() * 4 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = Math.random() * 10 + 10 + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        function initThreeJS() {
-            const container = document.getElementById('canvas-container');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            container.appendChild(renderer.domElement);
-
-            const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-            const material = new THREE.MeshBasicMaterial({
-                color: 0x0ea5e9,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.3
-            });
-            const torus = new THREE.Mesh(geometry, material);
-            scene.add(torus);
-
-            camera.position.z = 30;
-
-            function animate() {
-                requestAnimationFrame(animate);
-                torus.rotation.x += 0.001;
-                torus.rotation.y += 0.002;
-                renderer.render(scene, camera);
-            }
-            animate();
-
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
-    </script>
-
-        // ===== NOUVEAU CHAT =====
-        window.createNewChat = function() {
-            if (!currentUser) return;
-            
-            if (chatHistory.length > 0) {
-                if (!userChats[currentUser]) userChats[currentUser] = {};
-                userChats[currentUser][currentChatId] = {
-                    id: currentChatId,
-                    history: [...chatHistory],
-                    timestamp: Date.now(),
-                    title: chatHistory[0]?.content?.substring(0, 40) || 'Nouvelle conversation'
-                };
-                localStorage.setItem('bed_user_chats', JSON.stringify(userChats));
-            }
-            
-            currentChatId = Date.now().toString();
-            chatHistory = [];
-            isFirstMessage = true;
-            chatMessages.innerHTML = '';
-            chatMessages.appendChild(chatHero.cloneNode(true));
-            const newHero = chatMessages.querySelector('#chat-hero');
-            newHero.classList.remove('hidden');
-            newHero.style.opacity = '1';
-            loadChatHistory();
-        }
-
-        // ===== CHARGER HISTORIQUE =====
-        window.loadChatHistory = function() {
-            const container = document.getElementById('chat-history-list');
-            if (!container || !currentUser) return;
-            
-            container.innerHTML = '';
-            const chats = userChats[currentUser] || {};
-            
-            Object.values(chats).sort((a, b) => b.timestamp - a.timestamp).forEach(chat => {
-                const btn = document.createElement('button');
-                btn.className = 'w-full glass-panel p-3 rounded-lg text-left hover:bg-primary-500/10 transition-colors';
-                btn.onclick = () => loadChat(chat.id);
-                btn.innerHTML = \`
-                    <div class="flex items-center gap-2 mb-1">
-                        <i class="fa-solid fa-message text-primary-500 text-sm"></i>
-                        <span class="text-sm font-semibold text-white truncate">\${chat.title}</span>
-                    </div>
-                    <p class="text-xs text-gray-300">\${new Date(chat.timestamp).toLocaleDateString('fr-FR')}</p>
-                \`;
-                container.appendChild(btn);
-            });
-        }
-
-        // ===== CHARGER UN CHAT =====
-        function loadChat(chatId) {
-            if (!currentUser || !userChats[currentUser]?.[chatId]) return;
-            
-            const chat = userChats[currentUser][chatId];
-            currentChatId = chatId;
-            chatHistory = [...chat.history];
-            isFirstMessage = false;
-            
-            chatMessages.innerHTML = '';
-            chatHistory.forEach(msg => {
-                addMessage(msg.isUser ? currentUser : "B.E.D. AI", msg.content, msg.isUser);
-            });
-        }
-
-        // ===== SAUVEGARDER PARAMÈTRES SITE =====
-        window.saveSiteSettings = function() {
-            const nameInput = document.getElementById('site-name-input');
-            const promptInput = document.getElementById('system-prompt-input');
-            
-            if (nameInput) siteSettings.siteName = nameInput.value;
-            if (promptInput) siteSettings.systemPrompt = promptInput.value;
-            
-            localStorage.setItem('bed_site_settings', JSON.stringify(siteSettings));
-            updateSiteName();
-            alert('✅ Paramètres sauvegardés !');
-        }
-
-        // ===== ACTUALISER NOM DU SITE =====
-        window.updateSiteName = function() {
-            document.querySelectorAll('.site-name-dynamic').forEach(el => {
-                el.textContent = siteSettings.siteName;
-            });
-        }
-
-        // ===== INIT AU CHARGEMENT =====
-        window.addEventListener('DOMContentLoaded', () => {
-            updateSiteName();
-            if (currentUser && usersDb[currentUser]?.isAdmin) {
-                document.getElementById('admin-panel-btn')?.classList.remove('hidden');
-            }
-        });
 
     </script>
 </body>
