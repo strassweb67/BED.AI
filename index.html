@@ -1,1638 +1,1376 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>B.E.D. AI - Intelligence Artificielle Premium</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Three.js for 3D Background -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
-    <!-- Marked.js for Markdown parsing -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#000814">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BED.AI">
+<link rel="manifest" href="#" id="pwa-manifest">
+<title>B.E.D.AI — Intelligence Artificielle Révolutionnaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --neon-blue: #00d4ff;
+  --neon-blue-dim: #0099cc;
+  --deep-blue: #001f3f;
+  --ocean-blue: #003d6b;
+  --black: #000814;
+  --carbon: #0a0e14;
+  --carbon2: #111820;
+  --white: #e8f4ff;
+  --gray: #4a6080;
+  --neon-glow: 0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 40px #00d4ff44;
+  --border-neon: 1px solid #00d4ff44;
+  --sidebar-w: 280px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;background:var(--black);color:var(--white);font-family:'Rajdhani',sans-serif;}
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#1a2332',
-                            100: '#1f2937',
-                            200: '#374151',
-                            300: '#4b5563',
-                            400: '#6b7280',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
-                        },
-                        carbon: {
-                            900: '#0a0a0a',
-                            800: '#121212',
-                            700: '#1a1a1a',
-                            600: '#2a2a2a',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Orbitron', 'sans-serif'],
-                        tech: ['Rajdhani', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:#000;}
+::-webkit-scrollbar-thumb{background:#00d4ff55;border-radius:2px;}
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* ===== CANVAS PLANET ===== */
+#planet-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
 
-        body {
-            overflow-x: hidden;
-            background: #000;
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-        }
+/* ===== LANDING PAGE ===== */
+#landing{position:fixed;top:0;left:0;width:100%;height:100%;z-index:100;display:flex;flex-direction:column;overflow-y:auto;background:transparent;}
+#landing.hidden{display:none;}
 
-        /* Fast Animated Gradient Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(-45deg, #0a0a1a, #1a0a2e, #0a1a2e, #0a2e1a);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
-            opacity: 0.7;
-            z-index: -2;
-        }
+.landing-nav{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:rgba(0,8,20,0.7);backdrop-filter:blur(20px);border-bottom:var(--border-neon);position:sticky;top:0;z-index:10;}
+.logo-nav{display:flex;align-items:center;gap:10px;}
+.logo-nav .logo-icon{width:36px;height:36px;}
+.logo-nav .logo-text{font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;background:linear-gradient(90deg,#00d4ff,#0066ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;white-space:nowrap;}
+.nav-btns{display:flex;gap:12px;}
+.btn-outline{background:transparent;border:1px solid #00d4ff55;color:#00d4ff;padding:8px 20px;border-radius:6px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:600;transition:all .3s;letter-spacing:1px;}
+.btn-outline:hover{border-color:#00d4ff;box-shadow:var(--neon-glow);background:#00d4ff11;}
+.btn-primary{background:linear-gradient(135deg,#00d4ff,#0066ff);border:none;color:#000;padding:8px 20px;border-radius:6px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:.9rem;font-weight:700;transition:all .3s;letter-spacing:1px;}
+.btn-primary:hover{box-shadow:var(--neon-glow);transform:translateY(-1px);}
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+.hero{text-align:center;padding:80px 20px 40px;position:relative;}
+.hero-badge{display:inline-block;background:#00d4ff11;border:1px solid #00d4ff44;color:#00d4ff;padding:6px 16px;border-radius:20px;font-size:.8rem;letter-spacing:2px;margin-bottom:24px;font-family:'Share Tech Mono',monospace;}
+.hero h1{font-family:'Orbitron',monospace;font-size:clamp(2.5rem,8vw,5rem);font-weight:900;line-height:1.1;margin-bottom:20px;}
+.hero h1 .glow{color:#00d4ff;text-shadow:var(--neon-glow);}
+.hero p{font-size:1.2rem;color:#8ab4cc;max-width:700px;margin:0 auto 40px;line-height:1.8;}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn-xl{padding:14px 36px;font-size:1.1rem;border-radius:8px;}
 
-        /* Carbon Fiber Texture */
-        .carbon-fiber {
-            background: 
-                linear-gradient(27deg, #0a0a0a 5px, transparent 5px) 0 5px,
-                linear-gradient(207deg, #0a0a0a 5px, transparent 5px) 10px 0px,
-                linear-gradient(27deg, #151515 5px, transparent 5px) 0px 10px,
-                linear-gradient(207deg, #151515 5px, transparent 5px) 10px 5px,
-                linear-gradient(90deg, #0d0d0d 10px, transparent 10px),
-                linear-gradient(#0f0f0f 25%, #080808 25%, #080808 50%, transparent 50%, transparent 75%, #141414 75%, #141414 100%);
-            background-color: #0a0a0a;
-            background-size: 20px 20px;
-        }
+/* Features */
+.features{padding:80px 40px;max-width:1200px;margin:0 auto;width:100%;}
+.section-title{text-align:center;margin-bottom:60px;}
+.section-title h2{font-family:'Orbitron',monospace;font-size:2rem;color:#00d4ff;text-shadow:var(--neon-glow);margin-bottom:12px;}
+.section-title p{color:#6a9ab8;font-size:1.1rem;}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+.feature-card{background:rgba(0,30,60,0.5);border:var(--border-neon);border-radius:12px;padding:28px;transition:all .3s;backdrop-filter:blur(10px);}
+.feature-card:hover{border-color:#00d4ff;box-shadow:0 0 30px #00d4ff22;transform:translateY(-4px);}
+.feature-icon{font-size:2.5rem;margin-bottom:16px;}
+.feature-card h3{font-family:'Orbitron',monospace;font-size:.95rem;color:#00d4ff;margin-bottom:10px;letter-spacing:1px;}
+.feature-card p{color:#8ab4cc;font-size:.9rem;line-height:1.6;}
 
-        /* Floating Particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-            opacity: 0.4;
-        }
+/* Pricing */
+.pricing{padding:80px 40px;max-width:1200px;margin:0 auto;width:100%;}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:40px;}
+.price-card{background:rgba(0,20,40,0.7);border:var(--border-neon);border-radius:16px;padding:32px 24px;text-align:center;transition:all .3s;backdrop-filter:blur(10px);position:relative;overflow:hidden;}
+.price-card.popular{border-color:#00d4ff;box-shadow:0 0 40px #00d4ff33;}
+.price-card.popular::before{content:'POPULAIRE';position:absolute;top:12px;right:-20px;background:#00d4ff;color:#000;font-size:.65rem;font-weight:700;padding:4px 28px;transform:rotate(45deg);font-family:'Orbitron',monospace;letter-spacing:1px;}
+.price-card:hover{transform:translateY(-6px);box-shadow:0 0 50px #00d4ff22;}
+.price-msgs{font-size:.85rem;color:#00d4ff;letter-spacing:1px;margin-bottom:8px;font-family:'Share Tech Mono',monospace;}
+.price-amount{font-family:'Orbitron',monospace;font-size:2.5rem;font-weight:900;color:#fff;margin:12px 0;}
+.price-amount span{font-size:1rem;color:#8ab4cc;}
+.price-period{font-size:.8rem;color:#6a9ab8;margin-bottom:20px;}
+.price-features{text-align:left;margin:20px 0;font-size:.85rem;color:#8ab4cc;line-height:2;}
+.price-features li{list-style:none;padding-left:20px;position:relative;}
+.price-features li::before{content:'✦';position:absolute;left:0;color:#00d4ff;font-size:.6rem;top:4px;}
 
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, rgba(14,165,233,0.9) 0%, rgba(14,165,233,0) 70%);
-            border-radius: 50%;
-            animation: float 15s infinite ease-in-out;
-        }
+/* Footer */
+.landing-footer{background:rgba(0,8,20,0.9);border-top:var(--border-neon);padding:24px 40px;text-align:center;color:#4a6080;font-size:.85rem;}
+.landing-footer strong{color:#00d4ff;}
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-            33% { transform: translateY(-120px) translateX(120px) scale(1.2); }
-            66% { transform: translateY(-60px) translateX(-120px) scale(0.8); }
-        }
+/* ===== AUTH MODAL ===== */
+#auth-modal{position:fixed;top:0;left:0;width:100%;height:100%;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(0,8,20,0.85);backdrop-filter:blur(20px);}
+#auth-modal.show{display:flex;}
+.auth-box{background:var(--carbon);border:var(--border-neon);border-radius:16px;padding:40px;width:100%;max-width:420px;position:relative;box-shadow:0 0 60px #00d4ff22;}
+.auth-box .close-btn{position:absolute;top:16px;right:16px;background:rgba(0,212,255,0.1);border:1px solid #00d4ff44;color:#00d4ff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.auth-box .close-btn:hover{background:#00d4ff;color:#000;}
+.auth-logo{text-align:center;margin-bottom:28px;}
+.auth-logo .logo-icon{width:50px;height:50px;margin:0 auto 10px;}
+.auth-logo h2{font-family:'Orbitron',monospace;font-size:1.4rem;color:#00d4ff;text-shadow:var(--neon-glow);}
+.auth-tabs{display:flex;margin-bottom:24px;background:#0a0e14;border-radius:8px;padding:4px;}
+.auth-tab{flex:1;padding:8px;text-align:center;cursor:pointer;border-radius:6px;font-size:.9rem;font-weight:600;transition:all .3s;letter-spacing:1px;font-family:'Rajdhani',sans-serif;}
+.auth-tab.active{background:#00d4ff;color:#000;}
+.auth-tab:not(.active){color:#8ab4cc;}
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;font-size:.8rem;color:#8ab4cc;margin-bottom:6px;letter-spacing:1px;font-family:'Share Tech Mono',monospace;}
+.form-group input,.form-group select{width:100%;background:#0a1628;border:1px solid #00d4ff33;color:#fff;padding:10px 14px;border-radius:8px;font-family:'Rajdhani',sans-serif;font-size:.95rem;transition:all .3s;outline:none;}
+.form-group input:focus,.form-group select:focus{border-color:#00d4ff;box-shadow:0 0 15px #00d4ff22;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-submit{width:100%;background:linear-gradient(135deg,#00d4ff,#0066ff);border:none;color:#000;padding:12px;border-radius:8px;cursor:pointer;font-family:'Orbitron',monospace;font-size:.9rem;font-weight:700;letter-spacing:2px;transition:all .3s;margin-top:8px;}
+.form-submit:hover{box-shadow:var(--neon-glow);transform:translateY(-1px);}
 
-        #canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.8;
-        }
+/* ===== MAIN APP ===== */
+#app{position:fixed;top:0;left:0;width:100%;height:100%;z-index:50;display:none;}
+#app.show{display:flex;}
 
-        /* Modern Glassmorphism - Dark Version */
-        .glass-panel {
-            background: rgba(10, 10, 26, 0.85);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 2px solid rgba(14, 165, 233, 0.3);
-            box-shadow: 
-                0 10px 40px 0 rgba(0, 0, 0, 0.7),
-                inset 0 0 30px rgba(14, 165, 233, 0.1),
-                0 0 0 1px rgba(14, 165, 233, 0.2);
-        }
+/* SIDEBAR */
+.sidebar{width:var(--sidebar-w);background:rgba(0,8,20,0.95);border-right:var(--border-neon);display:flex;flex-direction:column;height:100%;transition:transform .3s;flex-shrink:0;z-index:10;overflow:hidden;}
+.sidebar-header{padding:16px 20px;border-bottom:var(--border-neon);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.sidebar-logo{display:flex;align-items:center;gap:8px;}
+.sidebar-logo svg{width:28px;height:28px;flex-shrink:0;}
+.sidebar-logo .logo-text{font-family:'Orbitron',monospace;font-size:.9rem;font-weight:900;background:linear-gradient(90deg,#00d4ff,#0066ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;}
+.sidebar-close-btn{display:none;background:none;border:none;color:#00d4ff;cursor:pointer;font-size:1.2rem;padding:4px;}
+.sidebar-nav{flex:1;overflow-y:auto;padding:16px 12px;}
+.sidebar-nav button{width:100%;background:none;border:none;color:#8ab4cc;padding:10px 14px;border-radius:8px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:600;text-align:left;display:flex;align-items:center;gap:10px;transition:all .3s;margin-bottom:4px;letter-spacing:.5px;}
+.sidebar-nav button:hover{background:#00d4ff11;color:#00d4ff;}
+.sidebar-nav button.active{background:#00d4ff22;color:#00d4ff;border-left:2px solid #00d4ff;}
+.sidebar-nav .admin-btn{color:#ff4444;margin-top:8px;}
+.sidebar-nav .admin-btn:hover{background:#ff444411;color:#ff4444;}
 
-        .glass-panel-3d {
-            background: rgba(10, 10, 26, 0.85);
-            backdrop-filter: blur(20px) saturate(180%);
-            border: 2px solid rgba(14, 165, 233, 0.4);
-            box-shadow: 
-                0 15px 50px 0 rgba(0, 0, 0, 0.8),
-                inset 0 2px 20px rgba(14, 165, 233, 0.15),
-                0 0 0 1px rgba(14, 165, 233, 0.3),
-                0 20px 60px rgba(14, 165, 233, 0.2);
-            transform: perspective(1000px) rotateX(2deg);
-            transition: all 0.3s ease;
-        }
+/* Sidebar bottom block - custom prompt */
+.sidebar-bottom{padding:12px;border-top:var(--border-neon);flex-shrink:0;}
+.custom-prompt-block{background:#0a1628;border:var(--border-neon);border-radius:10px;padding:12px;}
+.custom-prompt-block h4{font-size:.7rem;color:#00d4ff;letter-spacing:1px;margin-bottom:8px;font-family:'Share Tech Mono',monospace;display:flex;align-items:center;gap:6px;}
+.custom-prompt-block textarea{width:100%;background:transparent;border:none;color:#8ab4cc;font-family:'Rajdhani',sans-serif;font-size:.8rem;resize:none;height:70px;outline:none;line-height:1.5;}
+.custom-prompt-actions{display:flex;gap:8px;margin-top:8px;}
+.btn-brain{background:linear-gradient(135deg,#00d4ff,#0066ff);border:none;color:#000;padding:7px 12px;border-radius:8px;cursor:pointer;font-size:.75rem;font-weight:700;font-family:'Rajdhani',sans-serif;display:flex;align-items:center;gap:5px;flex:1;justify-content:center;transition:all .3s;}
+.btn-brain:hover{box-shadow:var(--neon-glow);}
+.btn-brain .brain-icon{width:20px;height:20px;border-radius:50%;background:#00022a;display:flex;align-items:center;justify-content:center;font-size:.7rem;}
+.btn-clear-prompt{background:#1a2a3a;border:1px solid #00d4ff33;color:#8ab4cc;padding:7px 10px;border-radius:8px;cursor:pointer;font-size:.75rem;transition:all .3s;}
+.btn-clear-prompt:hover{border-color:#ff4444;color:#ff4444;}
 
-        .glass-panel-3d:hover {
-            transform: perspective(1000px) rotateX(0deg) translateY(-5px);
-            box-shadow: 
-                0 20px 60px 0 rgba(0, 0, 0, 0.9),
-                inset 0 2px 30px rgba(14, 165, 233, 0.2),
-                0 0 0 2px rgba(14, 165, 233, 0.4),
-                0 25px 70px rgba(14, 165, 233, 0.3);
-        }
+/* MAIN CONTENT */
+.main-content{flex:1;display:flex;flex-direction:column;height:100%;overflow:hidden;position:relative;}
 
-        .glass-sidebar {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(30px) saturate(180%);
-            border-right: 2px solid rgba(14, 165, 233, 0.3);
-            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.8);
-        }
+/* TOPBAR */
+.topbar{padding:12px 20px;border-bottom:var(--border-neon);display:flex;align-items:center;gap:12px;background:rgba(0,8,20,0.9);flex-shrink:0;}
+.hamburger{display:none;background:none;border:1px solid #00d4ff33;color:#00d4ff;width:36px;height:36px;border-radius:6px;cursor:pointer;font-size:1.1rem;align-items:center;justify-content:center;flex-shrink:0;}
+.api-badge{background:#0a1628;border:var(--border-neon);border-radius:6px;padding:6px 12px;font-size:.75rem;font-family:'Share Tech Mono',monospace;}
+.api-badge strong{color:#00d4ff;}
+.api-badge small{color:#4a6080;display:block;font-size:.65rem;margin-top:2px;}
+.topbar-user{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.user-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#00d4ff,#0066ff);display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:.85rem;font-weight:700;color:#000;cursor:pointer;flex-shrink:0;}
+.user-name{font-size:.9rem;font-weight:600;color:#8ab4cc;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 
-        /* Brain Logo Neon Effect */
-        .brain-logo {
-            filter: drop-shadow(0 0 10px rgba(14, 165, 233, 0.8))
-                    drop-shadow(0 0 20px rgba(14, 165, 233, 0.6))
-                    drop-shadow(0 0 30px rgba(14, 165, 233, 0.4));
-            animation: brainPulse 3s ease-in-out infinite;
-        }
+/* CHAT */
+.chat-container{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px;}
+.chat-messages.scroll-locked{overflow-y:auto;}
 
-        @keyframes brainPulse {
-            0%, 100% { 
-                filter: drop-shadow(0 0 10px rgba(14, 165, 233, 0.8))
-                        drop-shadow(0 0 20px rgba(14, 165, 233, 0.6))
-                        drop-shadow(0 0 30px rgba(14, 165, 233, 0.4));
-            }
-            50% { 
-                filter: drop-shadow(0 0 15px rgba(14, 165, 233, 1))
-                        drop-shadow(0 0 30px rgba(14, 165, 233, 0.8))
-                        drop-shadow(0 0 45px rgba(14, 165, 233, 0.6));
-            }
-        }
+.welcome-msg{text-align:center;padding:40px 20px;max-width:600px;margin:0 auto;}
+.welcome-msg .planet-mini{font-size:4rem;margin-bottom:16px;}
+.welcome-msg h2{font-family:'Orbitron',monospace;font-size:1.5rem;color:#00d4ff;text-shadow:var(--neon-glow);margin-bottom:12px;}
+.welcome-msg p{color:#8ab4cc;line-height:1.8;font-size:.95rem;}
 
-        /* Neon Glow Effect - Blue */
-        .neon-text {
-            font-family: 'Orbitron', sans-serif;
-            color: #0ea5e9;
-            text-shadow: 
-                0 0 10px rgba(14, 165, 233, 0.8),
-                0 0 20px rgba(14, 165, 233, 0.6),
-                0 0 30px rgba(14, 165, 233, 0.4),
-                0 0 40px rgba(14, 165, 233, 0.2);
-            font-weight: 900;
-        }
+.msg{display:flex;gap:12px;max-width:800px;}
+.msg.user{flex-direction:row-reverse;margin-left:auto;}
+.msg-avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;}
+.msg.ai .msg-avatar{background:#001f3f;border:1px solid #00d4ff44;color:#00d4ff;font-family:'Orbitron',monospace;}
+.msg.user .msg-avatar{background:linear-gradient(135deg,#00d4ff,#0066ff);color:#000;font-family:'Orbitron',monospace;}
+.msg-content{background:#0a1628;border:var(--border-neon);border-radius:12px;padding:14px 18px;font-size:.9rem;line-height:1.7;color:#c8dff0;flex:1;white-space:pre-wrap;word-break:break-word;}
+.msg.user .msg-content{background:#001f3f;border-color:#0066ff44;}
+.msg-content code{background:#000814;border:1px solid #00d4ff22;padding:2px 6px;border-radius:4px;font-family:'Share Tech Mono',monospace;font-size:.8rem;color:#00d4ff;}
+.msg-content pre{background:#000814;border:1px solid #00d4ff22;padding:16px;border-radius:8px;overflow-x:auto;margin:10px 0;}
+.msg-content pre code{background:none;border:none;padding:0;}
+.typing-indicator{display:flex;gap:4px;align-items:center;padding:4px 0;}
+.typing-dot{width:8px;height:8px;background:#00d4ff;border-radius:50%;animation:typingBounce 1s infinite;}
+.typing-dot:nth-child(2){animation-delay:.2s;}
+.typing-dot:nth-child(3){animation-delay:.4s;}
+@keyframes typingBounce{0%,80%,100%{transform:scale(1);opacity:.5;}40%{transform:scale(1.3);opacity:1;}}
 
-        /* Carbon Effect Logo */
-        .carbon-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #0ea5e9 100%);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(14, 165, 233, 0.5);
-            animation: carbonShine 3s ease infinite;
-            letter-spacing: 3px;
-        }
+/* CHAT INPUT */
+.chat-input-area{padding:16px 20px;border-top:var(--border-neon);background:rgba(0,8,20,0.95);flex-shrink:0;}
+.chat-input-wrapper{display:flex;align-items:flex-end;gap:10px;background:#0a1628;border:var(--border-neon);border-radius:12px;padding:10px 14px;transition:all .3s;}
+.chat-input-wrapper:focus-within{border-color:#00d4ff;box-shadow:0 0 20px #00d4ff22;}
+.chat-input{flex:1;background:none;border:none;color:#fff;font-family:'Rajdhani',sans-serif;font-size:.95rem;outline:none;resize:none;min-height:24px;max-height:120px;overflow-y:auto;line-height:1.5;}
+.chat-input::placeholder{color:#4a6080;}
+.chat-send-btn{background:linear-gradient(135deg,#00d4ff,#0066ff);border:none;color:#000;width:36px;height:36px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0;}
+.chat-send-btn:hover{box-shadow:var(--neon-glow);}
+.chat-send-btn:disabled{opacity:.4;cursor:default;}
 
-        @keyframes carbonShine {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
+/* ===== MODAL OVERLAY ===== */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:300;display:none;align-items:center;justify-content:center;background:rgba(0,8,20,0.6);backdrop-filter:blur(10px);}
+.modal-overlay.show{display:flex;}
+.modal-box{background:var(--carbon);border:var(--border-neon);border-radius:16px;width:100%;max-width:500px;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 60px #00d4ff22;margin:20px;}
+.modal-header{padding:20px 24px;border-bottom:var(--border-neon);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+.modal-header h3{font-family:'Orbitron',monospace;font-size:1rem;color:#00d4ff;letter-spacing:1px;}
+.modal-close{background:rgba(0,212,255,0.1);border:1px solid #00d4ff44;color:#00d4ff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.modal-close:hover{background:#00d4ff;color:#000;}
+.modal-body{padding:24px;overflow-y:auto;flex:1;}
+.modal-footer{padding:16px 24px;border-top:var(--border-neon);display:flex;justify-content:flex-end;gap:12px;flex-shrink:0;}
 
-        .glow-button {
-            box-shadow: 
-                0 0 20px rgba(14, 165, 233, 0.5),
-                0 4px 15px rgba(14, 165, 233, 0.3);
-            transition: all 0.3s ease;
-        }
+/* TOAST */
+.toast{position:fixed;bottom:30px;right:30px;background:#0a1628;border:1px solid #00d4ff;color:#00d4ff;padding:14px 20px;border-radius:10px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.9rem;z-index:1000;box-shadow:var(--neon-glow);transform:translateY(100px);opacity:0;transition:all .4s;max-width:300px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.error{border-color:#ff4444;color:#ff4444;box-shadow:0 0 20px #ff444433;}
+.toast.success{border-color:#00ff88;color:#00ff88;box-shadow:0 0 20px #00ff8833;}
 
-        .glow-button:hover {
-            box-shadow: 
-                0 0 30px rgba(14, 165, 233, 0.7),
-                0 6px 20px rgba(14, 165, 233, 0.5);
-            transform: translateY(-2px);
-        }
+/* ADMIN PANEL */
+#admin-panel{position:fixed;top:0;left:0;width:100%;height:100%;z-index:400;display:none;background:var(--black);}
+#admin-panel.show{display:flex;flex-direction:column;}
+.admin-topbar{padding:16px 24px;border-bottom:2px solid #ff444444;background:rgba(10,14,20,0.98);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.admin-topbar h1{font-family:'Orbitron',monospace;font-size:1.1rem;color:#ff4444;text-shadow:0 0 20px #ff444488;letter-spacing:2px;}
+.admin-content{flex:1;overflow-y:auto;padding:24px;}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:30px;}
+.stat-card{background:#0a1628;border:1px solid #ff444433;border-radius:12px;padding:20px;text-align:center;}
+.stat-card .stat-num{font-family:'Orbitron',monospace;font-size:2.2rem;font-weight:900;color:#ff4444;text-shadow:0 0 20px #ff444466;}
+.stat-card .stat-label{font-size:.8rem;color:#888;letter-spacing:1px;margin-top:6px;font-family:'Share Tech Mono',monospace;}
+.admin-section{background:#0a1628;border:1px solid #ff444422;border-radius:12px;padding:20px;margin-bottom:20px;}
+.admin-section h3{font-family:'Orbitron',monospace;font-size:.85rem;color:#ff4444;margin-bottom:16px;letter-spacing:1px;padding-bottom:8px;border-bottom:1px solid #ff444422;}
+.user-row{background:#000814;border:1px solid #ff444422;border-radius:8px;padding:12px 16px;margin-bottom:8px;cursor:pointer;transition:all .3s;}
+.user-row:hover{border-color:#ff4444;}
+.user-row-header{display:flex;align-items:center;justify-content:space-between;}
+.user-row-info{display:none;margin-top:12px;padding-top:12px;border-top:1px solid #ff444422;font-size:.8rem;color:#888;line-height:2;}
+.user-row-info span{color:#fff;}
+.user-row.expanded .user-row-info{display:block;}
+.online-dot{width:8px;height:8px;border-radius:50%;background:#00ff88;box-shadow:0 0 6px #00ff88;flex-shrink:0;}
+.offline-dot{width:8px;height:8px;border-radius:50%;background:#666;flex-shrink:0;}
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #0ea5e9, #0284c7);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #06b6d4, #0ea5e9);
-        }
+/* THEMES */
+.theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;}
+.theme-card{border-radius:10px;padding:4px;cursor:pointer;border:2px solid transparent;transition:all .3s;aspect-ratio:16/9;overflow:hidden;position:relative;}
+.theme-card:hover,.theme-card.selected{border-color:#00d4ff;}
+.theme-card canvas{width:100%;height:100%;border-radius:8px;}
+.theme-label{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-size:.6rem;color:#fff;font-family:'Share Tech Mono',monospace;background:rgba(0,0,0,.5);padding:2px;}
 
-        /* Input animations */
-        .input-glow:focus-within {
-            box-shadow: 0 0 25px rgba(14, 165, 233, 0.5);
-            border-color: #0ea5e9;
-            transform: translateY(-2px);
-        }
+/* SCROLL TO BOTTOM BTN */
+.scroll-bottom-btn{position:absolute;bottom:90px;right:20px;background:#0a1628;border:1px solid #00d4ff44;color:#00d4ff;width:36px;height:36px;border-radius:50%;cursor:pointer;display:none;align-items:center;justify-content:center;transition:all .3s;font-size:1rem;}
+.scroll-bottom-btn.visible{display:flex;}
+.scroll-bottom-btn:hover{background:#00d4ff;color:#000;}
 
-        .message-appear {
-            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+/* RESPONSIVE */
+@media(max-width:768px){
+  :root{--sidebar-w:260px;}
+  .sidebar{position:fixed;left:0;top:0;height:100%;transform:translateX(-100%);z-index:50;}
+  .sidebar.open{transform:translateX(0);box-shadow:4px 0 30px #000a;}
+  .sidebar-close-btn{display:block;}
+  .hamburger{display:flex;}
+  .features{padding:40px 20px;}
+  .pricing{padding:40px 20px;}
+  .landing-nav{padding:14px 20px;}
+  .hero{padding:40px 20px 30px;}
+  .hero h1{font-size:2rem;}
+  .form-row{grid-template-columns:1fr;}
+  .admin-stats{grid-template-columns:1fr 1fr;}
+  .theme-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));}
+}
 
-        @keyframes slideUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px) scale(0.95); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1); 
-            }
-        }
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulseNeon{0%,100%{text-shadow:0 0 10px #00d4ff,0 0 20px #00d4ff,0 0 40px #00d4ff44;}50%{text-shadow:0 0 20px #00d4ff,0 0 40px #00d4ff,0 0 80px #00d4ff66;}}
+.pulse-neon{animation:pulseNeon 3s ease-in-out infinite;}
 
-        /* Pulse Animation */
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.08); opacity: 0.85; }
-        }
+/* ACCOUNT/API/SETTINGS in sidebar */
+.sidebar-section-label{font-size:.65rem;color:#4a6080;letter-spacing:2px;padding:12px 14px 6px;font-family:'Share Tech Mono',monospace;}
 
-        .pulse-animation {
-            animation: pulse 2.5s ease-in-out infinite;
-        }
-
-        /* Status Indicator */
-        .status-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .status-active {
-            background: rgba(34, 197, 94, 0.2);
-            border: 1px solid rgba(34, 197, 94, 0.5);
-            color: #22c55e;
-        }
-
-        .status-inactive {
-            background: rgba(239, 68, 68, 0.2);
-            border: 1px solid rgba(239, 68, 68, 0.5);
-            color: #ef4444;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .status-active .status-dot {
-            background: #22c55e;
-            box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
-        }
-
-        .status-inactive .status-dot {
-            background: #ef4444;
-            box-shadow: 0 0 10px rgba(239, 68, 68, 0.8);
-        }
-
-        /* Markdown Styles */
-        .prose pre {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
-            border: 1px solid rgba(14, 165, 233, 0.3);
-            border-radius: 0.75rem;
-            padding: 1.25rem;
-            overflow-x: auto;
-        }
-        .prose code {
-            color: #0ea5e9;
-            font-family: 'JetBrains Mono', monospace;
-            background: rgba(14, 165, 233, 0.15);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-        
-        /* Hero Title Animation */
-        @keyframes titleGlow {
-            0%, 100% { 
-                text-shadow: 
-                    0 0 20px rgba(14, 165, 233, 0.8),
-                    0 0 40px rgba(14, 165, 233, 0.6),
-                    0 0 60px rgba(14, 165, 233, 0.4);
-            }
-            50% { 
-                text-shadow: 
-                    0 0 30px rgba(14, 165, 233, 1),
-                    0 0 60px rgba(14, 165, 233, 0.8),
-                    0 0 90px rgba(14, 165, 233, 0.6);
-            }
-        }
-
-        .title-glow {
-            animation: titleGlow 2s ease-in-out infinite;
-        }
-
-        /* Loading dots animation */
-        @keyframes bounce {
-            0%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-        }
-
-        .loading-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #0ea5e9;
-            border-radius: 50%;
-            margin: 0 2px;
-            animation: bounce 1.4s infinite ease-in-out;
-        }
-
-        .loading-dot:nth-child(1) { animation-delay: -0.32s; }
-        .loading-dot:nth-child(2) { animation-delay: -0.16s; }
-
-        /* Sidebar animations */
-        .sidebar-item {
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-item:hover {
-            background: rgba(14, 165, 233, 0.1);
-            border-left: 3px solid #0ea5e9;
-            padding-left: 1.25rem;
-        }
-
-        .sidebar-item.active {
-            background: rgba(14, 165, 233, 0.2);
-            border-left: 3px solid #0ea5e9;
-        }
-
-        /* Mobile adjustments */
-        @media (max-width: 768px) {
-            .sidebar-desktop {
-                transform: translateX(-100%);
-                position: fixed;
-                z-index: 100;
-                transition: transform 0.3s ease;
-            }
-            .sidebar-desktop.mobile-open {
-                transform: translateX(0);
-            }
-        }
-
-        /* New Chat Button Highlight */
-        .new-chat-btn {
-            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
-            box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
-        }
-
-        .new-chat-btn:hover {
-            background: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
-            box-shadow: 0 0 30px rgba(14, 165, 233, 0.6);
-        }
-
-        /* Collapsible sections */
-        .collapsible-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-
-        .collapsible-content.open {
-            max-height: 2000px;
-        }
-
-        /* Landing page animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .delay-1 { animation-delay: 0.1s; opacity: 0; }
-        .delay-2 { animation-delay: 0.2s; opacity: 0; }
-        .delay-3 { animation-delay: 0.3s; opacity: 0; }
-        .delay-4 { animation-delay: 0.4s; opacity: 0; }
-    </style>
+/* Pricetable fix */
+ul.price-features{padding:0;}
+</style>
 </head>
-<body class="h-screen flex overflow-hidden">
+<body>
 
-    <!-- Animated Backgrounds -->
-    <div class="animated-bg"></div>
-    <div class="particles" id="particles-container"></div>
-    <div id="canvas-container"></div>
+<!-- PLANET CANVAS -->
+<canvas id="planet-canvas"></canvas>
 
-    <!-- MAIN APP CONTAINER -->
-    <div id="app" class="relative w-full h-full flex">
-        
-        <!-- LANDING PAGE (PRE-AUTH) -->
-        <div id="landing-screen" class="flex-1 overflow-y-auto">
-            <!-- Top Header with Login -->
-            <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-primary-500/30 py-3 px-6">
-                <div class="max-w-7xl mx-auto flex justify-between items-center">
-                    <div class="flex items-center gap-3">
-                        <i class="fa-solid fa-brain text-3xl text-primary-500 brain-logo"></i>
-                        <span class="carbon-logo text-xl">B.E.D. AI</span>
-                    </div>
-                    <button id="btn-show-auth" class="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-6 py-2 rounded-lg glow-button transition-all text-sm font-bold">
-                        <i class="fa-solid fa-sign-in-alt mr-2"></i>Connexion
-                    </button>
-                </div>
-            </header>
+<!-- LANDING PAGE -->
+<div id="landing">
+  <nav class="landing-nav">
+    <div class="logo-nav">
+      <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" stroke="#00d4ff" stroke-width="1.5" opacity=".4"/>
+        <circle cx="20" cy="20" r="12" fill="#001f3f" stroke="#00d4ff" stroke-width="1.5"/>
+        <circle cx="20" cy="20" r="6" fill="#00d4ff" opacity=".8"/>
+        <ellipse cx="20" cy="20" rx="18" ry="6" stroke="#00d4ff" stroke-width="1" stroke-dasharray="3 2" opacity=".5"/>
+      </svg>
+      <span class="logo-text">B.E.D.AI</span>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-outline" onclick="showAuth('login')">Connexion</button>
+      <button class="btn-primary" onclick="showAuth('register')">Commencer</button>
+    </div>
+  </nav>
 
-            <!-- Hero Section -->
-            <section class="min-h-screen flex flex-col items-center justify-center px-4 pt-20">
-                <div class="text-center max-w-5xl mx-auto">
-                    <div class="mb-8 fade-in-up">
-                        <i class="fa-solid fa-brain text-8xl md:text-9xl text-primary-500 brain-logo"></i>
-                    </div>
-                    <h1 class="carbon-logo text-5xl md:text-7xl mb-6 title-glow fade-in-up delay-1">B.E.D. AI</h1>
-                    <p class="text-2xl md:text-3xl text-primary-400 font-bold mb-4 font-tech fade-in-up delay-2">Intelligence Artificielle Premium</p>
-                    <p class="text-lg text-gray-400 mb-8 fade-in-up delay-3">@ Made in Strasbourg - By Brice Jacotet</p>
-                    
-                    <div class="glass-panel-3d rounded-3xl p-8 mb-12 max-w-3xl mx-auto fade-in-up delay-4">
-                        <p class="text-gray-300 leading-relaxed text-base md:text-lg">
-                            Développée par <span class="text-primary-400 font-bold">Brice Jacotet</span>, expert en informatique passionné, 
-                            cette IA est optimisée au maximum sur les bases de <span class="text-primary-400 font-bold">Claude AI 4.5</span> 
-                            et enrichie en mode <span class="text-primary-400 font-bold">full-stack</span> pour obtenir le meilleur. 
-                            En réponses conversationnelles standard mais également en <span class="text-primary-400 font-bold">codage de sites web</span> 
-                            et <span class="text-primary-400 font-bold">d'applications</span>, ce qui en fait un <span class="text-primary-400 font-bold">builder parmi les meilleurs du marché</span>. 
-                            Conçue à <span class="text-primary-400 font-bold">Strasbourg</span>, notre IA vous propose un système gratuit ou payant.
-                        </p>
-                    </div>
+  <div class="hero">
+    <div class="hero-badge">⚡ PROPULSÉ PAR CLAUDE 4.5 ULTRA — DÉVELOPPÉ À STRASBOURG</div>
+    <h1>L'IA qui <span class="glow pulse-neon">révolutionne</span><br>tout ce que vous faites</h1>
+    <p>B.E.D.AI est l'intelligence artificielle la plus avancée jamais créée. Conçue par <strong>@Brice Jct</strong>, ingénieur expert strasbourgeois, passionné au service de l'innovation et de l'avancée technologique. Cybersécurité, B2B, développement, codage — aucune limite.</p>
+    <div class="hero-btns">
+      <button class="btn-primary btn-xl" onclick="showAuth('register')">🚀 Créer mon compte gratuit</button>
+      <button class="btn-outline btn-xl" onclick="showAuth('login')">Se connecter</button>
+    </div>
+  </div>
 
-                    <div class="bg-gradient-to-r from-green-500/20 to-emerald-500/20 border-2 border-green-500/40 rounded-2xl p-6 mb-12 max-w-2xl mx-auto fade-in-up delay-4">
-                        <p class="text-2xl font-bold text-green-400 mb-2">🎉 Profitez-en, c'est encore GRATUIT actuellement !</p>
-                        <p class="text-sm text-gray-400">Accès illimité pendant la phase de lancement</p>
-                    </div>
+  <div class="features">
+    <div class="section-title">
+      <h2>POURQUOI B.E.D.AI EST RÉVOLUTIONNAIRE</h2>
+      <p>Une IA 1000x plus puissante, plus intelligente, plus rapide que tout ce qui existe</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">🛡️</div><h3>CYBERSÉCURITÉ AVANCÉE</h3><p>Analyse de vulnérabilités, tests de pénétration, protection des systèmes. L'IA de référence pour les experts en cybersécurité.</p></div>
+      <div class="feature-card"><div class="feature-icon">💼</div><h3>B2B & ENTREPRISES</h3><p>Solutions professionnelles pour PME et grands comptes. Automatisation, gestion, optimisation de vos processus métier.</p></div>
+      <div class="feature-card"><div class="feature-icon">💻</div><h3>DÉVELOPPEMENT CODE</h3><p>Génération de code tous langages, debugging, architecture logicielle. Le copilote idéal de tous les développeurs.</p></div>
+      <div class="feature-card"><div class="feature-icon">📦</div><h3>GESTION DE STOCK</h3><p>Optimisation logistique, prévisions de demande, automatisation des commandes. Révolutionnez votre supply chain.</p></div>
+      <div class="feature-card"><div class="feature-icon">🧠</div><h3>IA ADAPTATIVE</h3><p>S'adapte à votre profil, votre âge, votre façon de communiquer. Une IA qui vous comprend vraiment.</p></div>
+      <div class="feature-card"><div class="feature-icon">⚡</div><h3>VITESSE ABSOLUE</h3><p>Réponses instantanées, traitement en temps réel, disponible 24/7. Performance maximale sans compromis.</p></div>
+    </div>
+  </div>
 
-                    <!-- Features Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 fade-in-up delay-4">
-                        <div class="glass-panel rounded-2xl p-6 carbon-fiber">
-                            <i class="fa-solid fa-code text-4xl text-primary-500 mb-4"></i>
-                            <h3 class="text-xl font-bold text-white mb-2">Code Expert</h3>
-                            <p class="text-gray-400 text-sm">Sites web, applications, et automatisation complète</p>
-                        </div>
-                        <div class="glass-panel rounded-2xl p-6 carbon-fiber">
-                            <i class="fa-solid fa-leaf text-4xl text-green-500 mb-4"></i>
-                            <h3 class="text-xl font-bold text-white mb-2">Éco-Responsable</h3>
-                            <p class="text-gray-400 text-sm">Serveurs optimisés pour réduire l'empreinte CO₂</p>
-                        </div>
-                        <div class="glass-panel rounded-2xl p-6 carbon-fiber">
-                            <i class="fa-solid fa-shield-halved text-4xl text-primary-500 mb-4"></i>
-                            <h3 class="text-xl font-bold text-white mb-2">Sécurisé</h3>
-                            <p class="text-gray-400 text-sm">Vos données protégées et chiffrées</p>
-                        </div>
-                    </div>
+  <div class="pricing">
+    <div class="section-title">
+      <h2>TARIFS TRANSPARENTS</h2>
+      <p>Identiques au mois ou à l'année — bénéficiez de toutes les dernières options révolutionnaires</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-msgs">50 MESSAGES</div>
+        <div class="price-amount">19<span>€</span></div>
+        <div class="price-period">/ mois ou / an</div>
+        <ul class="price-features">
+          <li>50 requêtes IA avancées</li>
+          <li>Toutes les fonctionnalités</li>
+          <li>Support prioritaire</li>
+          <li>Mise à jour automatique</li>
+        </ul>
+        <button class="btn-primary" style="width:100%" onclick="showAuth('register')">Commencer</button>
+      </div>
+      <div class="price-card popular">
+        <div class="price-msgs">450 MESSAGES</div>
+        <div class="price-amount">39<span>€</span></div>
+        <div class="price-period">/ mois ou / an</div>
+        <ul class="price-features">
+          <li>450 requêtes IA avancées</li>
+          <li>Toutes les fonctionnalités</li>
+          <li>API personnalisée</li>
+          <li>Support 24/7</li>
+        </ul>
+        <button class="btn-primary" style="width:100%" onclick="showAuth('register')">Commencer</button>
+      </div>
+      <div class="price-card">
+        <div class="price-msgs">1000 MESSAGES</div>
+        <div class="price-amount">79<span>€</span></div>
+        <div class="price-period">/ mois ou / an</div>
+        <ul class="price-features">
+          <li>1000 requêtes IA avancées</li>
+          <li>Accès Pro complet</li>
+          <li>Multi-API</li>
+          <li>Tableau de bord B2B</li>
+        </ul>
+        <button class="btn-primary" style="width:100%" onclick="showAuth('register')">Commencer</button>
+      </div>
+      <div class="price-card">
+        <div class="price-msgs">ILLIMITÉ +1 000 000</div>
+        <div class="price-amount">250<span>€</span></div>
+        <div class="price-period">/ mois ou / an</div>
+        <ul class="price-features">
+          <li>Messages illimités</li>
+          <li>Accès total entreprise</li>
+          <li>API dédiée</li>
+          <li>SLA garanti 99.9%</li>
+        </ul>
+        <button class="btn-primary" style="width:100%" onclick="showAuth('register')">Nous contacter</button>
+      </div>
+    </div>
+  </div>
 
-                    <button id="btn-show-auth-bottom" class="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-12 py-5 rounded-2xl glow-button transition-all text-xl font-bold mb-12">
-                        <i class="fa-solid fa-rocket mr-2"></i>Commencer Maintenant
-                    </button>
-                </div>
-            </section>
+  <footer class="landing-footer">
+    <p>Powered by <strong>@Brice Jct AI Ultim</strong> — Basé sur Claude 4.5, amélioré x1000 en puissance, vitesse et intelligence par Brice Jacotet, développeur expert à Strasbourg.</p>
+    <p style="margin-top:8px;font-size:.75rem;opacity:.6;">© 2025 B.E.D.AI — Tous droits réservés. Strasbourg, France.</p>
+  </footer>
+</div>
 
-            <!-- Footer -->
-            <footer class="py-8 border-t border-primary-900/30 glass-panel">
-                <div class="max-w-7xl mx-auto px-4 text-center">
-                    <p class="text-gray-500 text-sm">© 2024 B.E.D. AI - Made in Strasbourg by Brice Jacotet</p>
-                    <p class="text-gray-600 text-xs mt-2">Expert en informatique • Full-stack developer • Passionné d'IA</p>
-                </div>
-            </footer>
-        </div>
+<!-- AUTH MODAL -->
+<div id="auth-modal" class="modal-overlay" onclick="if(event.target===this)hideAuth()">
+  <div class="auth-box">
+    <button class="close-btn" onclick="hideAuth()">✕</button>
+    <div class="auth-logo">
+      <svg class="logo-icon" viewBox="0 0 50 50" fill="none">
+        <circle cx="25" cy="25" r="22" stroke="#00d4ff" stroke-width="1.5" opacity=".4"/>
+        <circle cx="25" cy="25" r="14" fill="#001f3f" stroke="#00d4ff" stroke-width="1.5"/>
+        <circle cx="25" cy="25" r="7" fill="#00d4ff" opacity=".9"/>
+        <ellipse cx="25" cy="25" rx="22" ry="7" stroke="#00d4ff" stroke-width="1" stroke-dasharray="4 2" opacity=".5"/>
+      </svg>
+      <h2>B.E.D.AI</h2>
+    </div>
+    <div class="auth-tabs">
+      <div class="auth-tab active" id="tab-login" onclick="switchTab('login')">CONNEXION</div>
+      <div class="auth-tab" id="tab-register" onclick="switchTab('register')">INSCRIPTION</div>
+    </div>
+    <!-- LOGIN FORM -->
+    <div id="form-login">
+      <div class="form-group"><label>ADRESSE EMAIL</label><input type="email" id="login-email" placeholder="votre@email.com"></div>
+      <div class="form-group"><label>MOT DE PASSE</label><input type="password" id="login-password" placeholder="••••••••"></div>
+      <button class="form-submit" onclick="doLogin()">SE CONNECTER</button>
+    </div>
+    <!-- REGISTER FORM -->
+    <div id="form-register" style="display:none">
+      <div class="form-group"><label>ADRESSE EMAIL *</label><input type="email" id="reg-email" placeholder="votre@email.com"></div>
+      <div class="form-row">
+        <div class="form-group"><label>PRÉNOM</label><input type="text" id="reg-prenom" placeholder="Jean"></div>
+        <div class="form-group"><label>NOM</label><input type="text" id="reg-nom" placeholder="Dupont"></div>
+      </div>
+      <div class="form-group"><label>COMMENT L'IA VOUS APPELLE ?</label><input type="text" id="reg-display" placeholder="Ex: Prof. Martin, Boss, Ami..."></div>
+      <div class="form-row">
+        <div class="form-group"><label>TÉLÉPHONE</label><input type="tel" id="reg-tel" placeholder="+33 6 00 00 00 00"></div>
+        <div class="form-group"><label>ÂGE</label><input type="number" id="reg-age" placeholder="25" min="13" max="120"></div>
+      </div>
+      <div class="form-group"><label>MOT DE PASSE *</label><input type="password" id="reg-password" placeholder="Minimum 8 caractères"></div>
+      <button class="form-submit" onclick="doRegister()">CRÉER MON COMPTE</button>
+    </div>
+  </div>
+</div>
 
-        <!-- LEFT SIDEBAR (Hidden initially) -->
-        <aside id="sidebar-left" class="hidden w-64 md:w-72 glass-sidebar flex-col h-full sidebar-desktop overflow-y-auto">
-            <!-- Logo Section -->
-            <div class="p-4 border-b border-gray-700/50 carbon-fiber sticky top-0 z-10 bg-black/50">
-                <div class="flex items-center gap-3 mb-2">
-                    <i class="fa-solid fa-brain text-3xl text-primary-500 brain-logo"></i>
-                    <div class="flex flex-col">
-                        <span class="carbon-logo text-xl leading-tight">B.E.D. AI</span>
-                        <span class="text-[9px] text-gray-400 font-tech">@ By Brice JCT</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- New Chat Button -->
-            <div class="p-3">
-                <button id="btn-new-chat" class="w-full new-chat-btn text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-plus"></i>
-                    <span>Nouvelle Discussion</span>
-                </button>
-            </div>
-
-            <!-- Navigation -->
-            <nav class="flex-1 p-3 space-y-2">
-                <button id="nav-my-account" class="w-full sidebar-item text-left px-4 py-3 rounded-lg text-gray-300 hover:text-white transition-all">
-                    <i class="fa-solid fa-user mr-2 text-primary-500"></i>
-                    <span>Mon Compte</span>
-                </button>
-                <button id="nav-admin" class="hidden w-full sidebar-item text-left px-4 py-3 rounded-lg text-gray-300 hover:text-white transition-all">
-                    <i class="fa-solid fa-shield-halved mr-2 text-red-500"></i>
-                    <span>Admin Panel</span>
-                </button>
-            </nav>
-
-            <!-- Custom Instructions Section -->
-            <div class="border-t border-gray-700/50 p-4 space-y-3">
-                <div class="flex items-center justify-between mb-2">
-                    <h3 class="text-xs font-bold text-primary-500 uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        <span>Instructions</span>
-                    </h3>
-                    <div id="instructions-status-sidebar" class="status-indicator status-inactive">
-                        <span class="status-dot"></span>
-                        <span>Inactif</span>
-                    </div>
-                </div>
-                <textarea 
-                    id="custom-instructions" 
-                    rows="3" 
-                    class="w-full bg-black/50 border border-gray-700 rounded-lg px-3 py-2 text-xs text-gray-300 focus:outline-none focus:border-primary-500 resize-none transition-all"
-                    placeholder="Ex: Donne tous les détails dans mes messages..."></textarea>
-                <p class="text-[10px] text-gray-500">Ces instructions seront ajoutées automatiquement.</p>
-                <div class="flex gap-2">
-                    <button id="btn-save-instructions" class="flex-1 bg-primary-600 hover:bg-primary-500 text-white text-xs font-bold py-2 rounded-lg transition-all">
-                        <i class="fa-solid fa-save mr-1"></i> Enregistrer
-                    </button>
-                    <button id="btn-clear-instructions" class="flex-1 bg-red-600 hover:bg-red-500 text-white text-xs font-bold py-2 rounded-lg transition-all hidden">
-                        <i class="fa-solid fa-trash mr-1"></i> Supprimer
-                    </button>
-                </div>
-            </div>
-
-            <!-- Zoom Control -->
-            <div class="border-t border-gray-700/50 p-4 space-y-3">
-                <h3 class="text-xs font-bold text-primary-500 uppercase tracking-wider">
-                    <i class="fa-solid fa-magnifying-glass mr-2"></i>Zoom du Chat
-                </h3>
-                <div class="flex items-center gap-3">
-                    <span class="text-xs text-gray-400">A-</span>
-                    <input type="range" id="zoom-range" min="80" max="150" value="100" class="flex-1">
-                    <span class="text-xs text-gray-400">A+</span>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span id="zoom-value" class="text-xs text-primary-500 font-bold">100%</span>
-                    <button id="btn-save-zoom" class="bg-primary-600 hover:bg-primary-500 text-white text-xs font-bold px-3 py-1 rounded transition-all">
-                        <i class="fa-solid fa-save mr-1"></i> Sauvegarder
-                    </button>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="p-4 border-t border-gray-700/50 text-center">
-                <p class="text-[10px] text-gray-600">Made in Strasbourg</p>
-                <p class="text-[9px] text-gray-700">By Brice Jacotet</p>
-            </div>
-        </aside>
-
-        <!-- MAIN CONTENT AREA -->
-        <div class="flex-1 flex flex-col h-full overflow-hidden">
-            
-            <!-- TOP NAV (Hidden initially) -->
-            <nav id="top-nav" class="hidden w-full p-4 flex justify-between items-center z-50 glass-panel border-b border-primary-900/30">
-                <div class="flex items-center gap-3">
-                    <button id="btn-toggle-sidebar" class="hidden md:block text-gray-400 hover:text-primary-500 transition-colors mr-2">
-                        <i class="fa-solid fa-bars text-xl"></i>
-                    </button>
-                    <button id="btn-mobile-menu" class="md:hidden text-gray-400 hover:text-primary-500 transition-colors mr-2">
-                        <i class="fa-solid fa-bars text-xl"></i>
-                    </button>
-                    <i class="fa-solid fa-brain text-3xl text-primary-500 brain-logo"></i>
-                    <div class="flex flex-col">
-                        <span class="carbon-logo text-xl leading-tight">B.E.D. AI</span>
-                        <span class="text-[9px] text-gray-400 font-tech">@ By Brice JCT</span>
-                    </div>
-                </div>
-                <div class="flex items-center gap-4">
-                    <div id="instructions-status-top" class="hidden status-indicator status-inactive">
-                        <span class="status-dot"></span>
-                        <span class="hidden md:inline">Instructions</span>
-                    </div>
-                    <button id="btn-logout" class="text-gray-400 hover:text-red-400 transition-colors">
-                        <i class="fa-solid fa-right-from-bracket text-lg"></i>
-                    </button>
-                </div>
-            </nav>
-
-            <!-- AUTH SCREEN (Modal Style) -->
-            <div id="auth-screen" class="hidden fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-lg">
-                <div class="glass-panel-3d p-10 rounded-3xl w-full max-w-md transform transition-all shadow-2xl carbon-fiber">
-                    <button id="btn-close-auth" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
-                        <i class="fa-solid fa-times"></i>
-                    </button>
-                    <div class="text-center mb-10 relative">
-                        <div class="mb-6">
-                            <i class="fa-solid fa-brain text-6xl text-primary-500 brain-logo"></i>
-                        </div>
-                        <h1 class="carbon-logo text-4xl mb-3 title-glow">B.E.D. AI</h1>
-                        <p class="text-primary-500 text-sm tracking-widest uppercase font-bold font-tech">Intelligence Premium</p>
-                        <p class="text-[10px] text-gray-500 mt-2">@ By Brice JCT</p>
-                        <p class="text-[9px] text-gray-600 mt-1">Made in Strasbourg</p>
-                    </div>
-                    
-                    <form id="auth-form" class="space-y-5">
-                        <div>
-                            <label class="block text-xs text-gray-400 uppercase tracking-wider mb-2 font-semibold">Identifiant</label>
-                            <input type="text" id="auth-username" required class="w-full bg-black/50 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-all" placeholder="Votre nom d'utilisateur">
-                        </div>
-                        <div>
-                            <label class="block text-xs text-gray-400 uppercase tracking-wider mb-2 font-semibold">Mot de passe</label>
-                            <input type="password" id="auth-password" required class="w-full bg-black/50 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary-500 transition-all" placeholder="••••••••">
-                        </div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold py-4 rounded-xl glow-button transition-all mt-6 text-lg">
-                            Connexion / Inscription
-                        </button>
-                        <p class="text-xs text-center text-gray-500 mt-4">Les nouveaux comptes sont créés automatiquement.</p>
-                    </form>
-                </div>
-            </div>
-
-            <!-- CHAT SCREEN -->
-            <div id="chat-screen" class="hidden flex-1 flex flex-col relative z-30 h-full overflow-hidden">
-                
-                <!-- Initial Big Title -->
-                <div id="chat-hero" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-opacity duration-500">
-                    <div class="relative mb-8">
-                        <i class="fa-solid fa-brain text-8xl text-primary-500 brain-logo"></i>
-                    </div>
-                    <h1 class="carbon-logo text-6xl md:text-7xl text-center title-glow mb-4">B.E.D. AI</h1>
-                    <p class="text-primary-500 mt-2 text-xl md:text-2xl tracking-wider font-medium text-center px-4 font-tech">
-                        Que souhaitez-vous créer aujourd'hui ?
-                    </p>
-                    <p class="text-gray-500 text-sm mt-3 font-tech">@ By Brice JCT</p>
-                    <p class="text-gray-600 text-xs mt-1">Made in Strasbourg</p>
-                </div>
-
-                <!-- Chat Messages Area -->
-                <div id="chat-messages" class="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 z-10 scroll-smooth" style="padding-bottom: 200px;">
-                    <!-- Messages will be injected here -->
-                </div>
-
-                <!-- Chat Input Area (Bottom) -->
-                <div class="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black via-black/90 to-transparent z-20">
-                    <div class="max-w-4xl mx-auto">
-                        <form id="chat-form" class="relative glass-panel-3d rounded-2xl overflow-hidden input-glow transition-all shadow-xl carbon-fiber">
-                            <textarea id="chat-input" rows="1" class="w-full bg-transparent text-white px-5 py-4 pr-16 focus:outline-none resize-none placeholder-gray-500" style="max-height: 150px;" placeholder="Demandez à B.E.D. AI..."></textarea>
-                            <button type="submit" class="absolute right-3 bottom-3 w-12 h-12 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 flex items-center justify-center text-white transition-all glow-button">
-                                <i class="fa-solid fa-paper-plane text-lg"></i>
-                            </button>
-                        </form>
-                        <div class="text-center mt-3">
-                            <p class="text-[10px] text-gray-600 font-tech leading-relaxed max-w-2xl mx-auto">
-                                Développée par Brice Jacotet, expert full-stack passionné • Basée sur Claude AI 4.5 
-                                • Builder premium pour sites web et applications • Made in Strasbourg
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- MY ACCOUNT SCREEN -->
-            <div id="account-screen" class="hidden flex-1 z-40 p-4 md:p-8 overflow-y-auto">
-                <div class="max-w-4xl mx-auto">
-                    <h2 class="text-4xl font-display font-bold text-white mb-8 border-b border-primary-900/30 pb-4">
-                        <i class="fa-solid fa-user text-primary-500 mr-3"></i>Mon Compte
-                    </h2>
-                    
-                    <div class="glass-panel-3d rounded-2xl p-6 space-y-6 carbon-fiber">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm text-gray-400 mb-2">Nom</label>
-                                <input type="text" id="account-lastname" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="Votre nom">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-gray-400 mb-2">Prénom</label>
-                                <input type="text" id="account-firstname" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="Votre prénom">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-gray-400 mb-2">Email</label>
-                                <input type="email" id="account-email" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="votre@email.com">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-gray-400 mb-2">Téléphone</label>
-                                <input type="tel" id="account-phone" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="+33 6 12 34 56 78">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-gray-400 mb-2">Surnom</label>
-                                <input type="text" id="account-nickname" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="Votre surnom">
-                            </div>
-                            <div>
-                                <label class="block text-sm text-gray-400 mb-2">Type d'usage</label>
-                                <select id="account-usage" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500">
-                                    <option value="">Sélectionnez...</option>
-                                    <option value="personnel">Personnel</option>
-                                    <option value="professionnel">Professionnel</option>
-                                    <option value="etudiant">Étudiant</option>
-                                    <option value="developpeur">Développeur</option>
-                                    <option value="entreprise">Entreprise</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">Clé API (optionnel)</label>
-                            <input type="password" id="account-apikey" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="sk-or-v1-...">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-2">Modèle API</label>
-                            <input type="text" id="account-apimodel" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary-500" placeholder="google/gemini-2.0-flash-lite-001">
-                        </div>
-                        
-                        <button id="btn-save-account" class="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold py-3 rounded-lg glow-button transition-all">
-                            <i class="fa-solid fa-save mr-2"></i> Sauvegarder les modifications
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ADMIN SCREEN -->
-            <div id="admin-screen" class="hidden flex-1 z-40 p-4 md:p-8 overflow-y-auto">
-                <div class="max-w-7xl mx-auto">
-                    <h2 class="text-4xl font-display font-bold text-white mb-8 border-b border-primary-900/30 pb-4">
-                        <i class="fa-solid fa-shield-halved text-red-500 mr-3"></i>Admin Panel
-                    </h2>
-                    
-                    <!-- Users List -->
-                    <div class="space-y-4" id="admin-users-container">
-                        <!-- Users will be injected here -->
-                    </div>
-                </div>
-            </div>
-
-        </div>
+<!-- MAIN APP -->
+<div id="app">
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="18" stroke="#00d4ff" stroke-width="1.5" opacity=".4"/>
+          <circle cx="20" cy="20" r="11" fill="#001f3f" stroke="#00d4ff" stroke-width="1.5"/>
+          <circle cx="20" cy="20" r="5" fill="#00d4ff" opacity=".9"/>
+          <ellipse cx="20" cy="20" rx="18" ry="5.5" stroke="#00d4ff" stroke-width="1" stroke-dasharray="3 2" opacity=".5"/>
+        </svg>
+        <span class="logo-text">B.E.D.AI</span>
+      </div>
+      <button class="sidebar-close-btn" onclick="closeSidebar()">✕</button>
     </div>
 
-    <!-- Mobile Sidebar Overlay -->
-    <div id="mobile-overlay" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[90] md:hidden"></div>
+    <div class="sidebar-nav">
+      <div class="sidebar-section-label">NAVIGATION</div>
+      <button onclick="newChat()" class="active" id="btn-new-chat">
+        <span>✦</span> Nouvelle Discussion
+      </button>
 
-    <!-- Application Logic -->
-    <script>
-        // --- CONFIGURATION ---
-        const DEFAULT_API_KEY = "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";
-        const DEFAULT_API_MODEL = "google/gemini-2.0-flash-lite-001";
-        const ADMIN_USERNAME = "Treza670";
-        const ADMIN_PASSWORD = "Treza670";
+      <div class="sidebar-section-label">MON ESPACE</div>
+      <button onclick="openModal('modal-account')">
+        <span>👤</span> Mon Compte
+      </button>
+      <button onclick="openModal('modal-api')">
+        <span>🔑</span> Gestion des Clés API
+      </button>
+      <button onclick="openModal('modal-settings')">
+        <span>⚙️</span> Paramètres
+      </button>
 
-        // --- STATE ---
-        let currentUser = null;
-        let usersDb = JSON.parse(localStorage.getItem('bed_users')) || {};
-        let chatHistory = [];
-        let isFirstMessage = true;
-        let customInstructions = '';
-        let customInstructionsActive = false;
-        let userDeviceInfo = {};
+      <div id="admin-btn-container" style="display:none">
+        <div class="sidebar-section-label">ADMINISTRATION</div>
+        <button class="admin-btn" onclick="openAdminPanel()">
+          <span>🛡️</span> Panel ADMIN
+        </button>
+      </div>
+    </div>
 
-        // --- DOM ELEMENTS ---
-        const screens = {
-            landing: document.getElementById('landing-screen'),
-            auth: document.getElementById('auth-screen'),
-            chat: document.getElementById('chat-screen'),
-            account: document.getElementById('account-screen'),
-            admin: document.getElementById('admin-screen')
-        };
+    <div class="sidebar-bottom">
+      <div class="custom-prompt-block">
+        <h4>
+          <span>🧠</span> RECHERCHE EXTRÊME
+        </h4>
+        <textarea id="custom-prompt-text" placeholder="Définissez comment l'IA doit vous répondre... Ex: Réponds comme un expert en cybersécurité, sois direct et technique..."></textarea>
+        <div class="custom-prompt-actions">
+          <button class="btn-brain" onclick="saveCustomPrompt()">
+            <div class="brain-icon">🧠</div>
+            Activer
+          </button>
+          <button class="btn-clear-prompt" onclick="clearCustomPrompt()">Effacer</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        const navBtns = {
-            showAuth: document.getElementById('btn-show-auth'),
-            showAuthBottom: document.getElementById('btn-show-auth-bottom'),
-            closeAuth: document.getElementById('btn-close-auth'),
-            logout: document.getElementById('btn-logout'),
-            toggleSidebar: document.getElementById('btn-toggle-sidebar'),
-            mobileMenu: document.getElementById('btn-mobile-menu'),
-            newChat: document.getElementById('btn-new-chat'),
-            navMyAccount: document.getElementById('nav-my-account'),
-            navAdmin: document.getElementById('nav-admin')
-        };
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="topbar">
+      <button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+      <div class="api-badge">
+        <strong>🤖 B.E.D.AI</strong>
+        <small>Intelligence inspirée et améliorée x1000 • Cybersécurité • B2B • Pro</small>
+      </div>
+      <div class="topbar-user">
+        <span class="user-name" id="topbar-username">Utilisateur</span>
+        <div class="user-avatar" id="topbar-avatar" onclick="openModal('modal-account')">U</div>
+      </div>
+    </div>
 
-        const topNav = document.getElementById('top-nav');
-        const chatHero = document.getElementById('chat-hero');
-        const chatMessages = document.getElementById('chat-messages');
-        const chatInput = document.getElementById('chat-input');
-        const chatForm = document.getElementById('chat-form');
-        const sidebar = document.getElementById('sidebar-left');
-        const mobileOverlay = document.getElementById('mobile-overlay');
+    <div class="chat-container">
+      <div class="chat-messages" id="chat-messages" onscroll="handleChatScroll()">
+        <div class="welcome-msg" id="welcome-msg">
+          <div class="planet-mini">🌐</div>
+          <h2>Bonjour ! Je suis B.E.D.AI 👋</h2>
+          <p>Je suis votre intelligence artificielle révolutionnaire, développée à Strasbourg par <strong>@Brice Jct</strong>, expert passionné au service de l'innovation.<br><br>Posez-moi n'importe quelle question — cybersécurité, développement, B2B, gestion, ou tout autre sujet. Je suis ici pour vous aider avec le meilleur de l'IA actuelle !</p>
+        </div>
+      </div>
+      <button class="scroll-bottom-btn" id="scroll-bottom-btn" onclick="scrollToBottom()">↓</button>
+    </div>
 
-        // --- DEVICE INFO COLLECTION ---
-        async function collectDeviceInfo() {
-            const info = {
-                timestamp: new Date().toISOString(),
-                userAgent: navigator.userAgent,
-                platform: navigator.platform,
-                language: navigator.language,
-                screenResolution: `${screen.width}x${screen.height}`,
-                windowSize: `${window.innerWidth}x${window.innerHeight}`,
-                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                online: navigator.onLine,
-                cookiesEnabled: navigator.cookieEnabled,
-            };
+    <div class="chat-input-area">
+      <div class="chat-input-wrapper">
+        <textarea class="chat-input" id="chat-input" placeholder="Posez votre question à B.E.D.AI..." rows="1" onkeydown="handleKeyDown(event)" oninput="autoResize(this)"></textarea>
+        <button class="chat-send-btn" id="send-btn" onclick="sendMessage()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
-            // Battery API
-            if ('getBattery' in navigator) {
-                try {
-                    const battery = await navigator.getBattery();
-                    info.battery = {
-                        level: Math.round(battery.level * 100) + '%',
-                        charging: battery.charging,
-                    };
-                } catch (e) {
-                    info.battery = 'Non disponible';
-                }
-            }
+<!-- MODAL: MON COMPTE -->
+<div class="modal-overlay" id="modal-account" onclick="if(event.target===this)closeModal('modal-account')">
+  <div class="modal-box" style="max-width:520px">
+    <div class="modal-header">
+      <h3>👤 MON COMPTE</h3>
+      <button class="modal-close" onclick="closeModal('modal-account')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="account-content"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-outline" onclick="closeModal('modal-account')">Fermer</button>
+      <button class="btn-primary" onclick="saveAccount()">Sauvegarder</button>
+    </div>
+  </div>
+</div>
 
-            // Geolocation API (with permission)
-            if ('geolocation' in navigator) {
-                try {
-                    const position = await new Promise((resolve, reject) => {
-                        navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000 });
-                    });
-                    info.location = {
-                        latitude: position.coords.latitude.toFixed(4),
-                        longitude: position.coords.longitude.toFixed(4),
-                        accuracy: Math.round(position.coords.accuracy) + 'm'
-                    };
-                } catch (e) {
-                    info.location = 'Permission refusée';
-                }
-            }
+<!-- MODAL: GESTION API -->
+<div class="modal-overlay" id="modal-api" onclick="if(event.target===this)closeModal('modal-api')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>🔑 GESTION DES CLÉS API</h3>
+      <button class="modal-close" onclick="closeModal('modal-api')">✕</button>
+    </div>
+    <div class="modal-body" id="api-modal-body">
+    </div>
+  </div>
+</div>
 
-            // IP Address (using external API)
-            try {
-                const ipResponse = await fetch('https://api.ipify.org?format=json');
-                const ipData = await ipResponse.json();
-                info.ip = ipData.ip;
-                
-                // Get location from IP
-                const geoResponse = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
-                const geoData = await geoResponse.json();
-                info.ipLocation = {
-                    city: geoData.city,
-                    region: geoData.region,
-                    country: geoData.country_name,
-                    postal: geoData.postal
-                };
-            } catch (e) {
-                info.ip = 'Non disponible';
-                info.ipLocation = 'Non disponible';
-            }
+<!-- MODAL: PARAMÈTRES -->
+<div class="modal-overlay" id="modal-settings" onclick="if(event.target===this)closeModal('modal-settings')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>⚙️ PARAMÈTRES</h3>
+      <button class="modal-close" onclick="closeModal('modal-settings')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group"><label>THÈME D'INTERFACE</label>
+        <select id="theme-select" onchange="changeTheme(this.value)" style="background:#0a1628;border:1px solid #00d4ff33;color:#fff;padding:8px;border-radius:8px;width:100%">
+          <option value="0">Océan Neon (défaut)</option>
+          <option value="1">Cyber Rouge</option>
+          <option value="2">Matrix Vert</option>
+          <option value="3">Violet Galactique</option>
+          <option value="4">Or Solaire</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin-top:16px">
+        <label>ADAPTATION ÂGE (IA adaptée à votre profil)</label>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:8px">
+          <input type="checkbox" id="age-adapt-toggle" style="width:auto">
+          <span style="color:#8ab4cc;font-size:.9rem">Activer l'adaptation selon votre âge</span>
+        </div>
+      </div>
+      <p style="color:#4a6080;font-size:.75rem;margin-top:20px;font-family:'Share Tech Mono',monospace">Paramètres sauvegardés automatiquement dans votre profil.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-primary" onclick="closeModal('modal-settings')">Fermer</button>
+    </div>
+  </div>
+</div>
 
-            return info;
+<!-- ADMIN PANEL -->
+<div id="admin-panel">
+  <div class="admin-topbar">
+    <h1>🛡️ PANEL ADMIN — B.E.D.AI</h1>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button onclick="exportSiteHTML()" style="background:#ff444422;border:1px solid #ff4444;color:#ff4444;padding:8px 16px;border-radius:6px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.85rem">📥 Exporter HTML</button>
+      <button onclick="closeAdminPanel()" style="background:#ff444422;border:1px solid #ff4444;color:#ff4444;padding:8px 16px;border-radius:6px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:600">✕ Fermer</button>
+    </div>
+  </div>
+  <div class="admin-content">
+    <div class="admin-stats" id="admin-stats"></div>
+    <div class="admin-section">
+      <h3>👥 UTILISATEURS CONNECTÉS / ENREGISTRÉS</h3>
+      <div id="admin-users-list"></div>
+    </div>
+    <div class="admin-section">
+      <h3>🎨 THÈMES DE FOND D'ÉCRAN</h3>
+      <div class="theme-grid" id="admin-themes"></div>
+    </div>
+    <div class="admin-section">
+      <h3>🚫 LISTE NOIRE (Email / Téléphone)</h3>
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <input type="text" id="blacklist-input" placeholder="email ou téléphone à bloquer" style="flex:1;background:#000814;border:1px solid #ff444433;color:#fff;padding:8px 12px;border-radius:6px;font-family:'Rajdhani',sans-serif;outline:none">
+        <button onclick="addBlacklist()" style="background:#ff444422;border:1px solid #ff4444;color:#ff4444;padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;font-family:'Rajdhani',sans-serif">Bloquer</button>
+      </div>
+      <div id="blacklist-display" style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:#ff4444;max-height:120px;overflow-y:auto"></div>
+    </div>
+    <div class="admin-section">
+      <h3>➕ CRÉER UN UTILISATEUR</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+        <input type="email" id="admin-new-email" placeholder="Email" style="background:#000814;border:1px solid #ff444433;color:#fff;padding:8px;border-radius:6px;font-family:'Rajdhani',sans-serif;outline:none">
+        <input type="password" id="admin-new-pass" placeholder="Mot de passe" style="background:#000814;border:1px solid #ff444433;color:#fff;padding:8px;border-radius:6px;font-family:'Rajdhani',sans-serif;outline:none">
+      </div>
+      <button onclick="adminCreateUser()" style="background:#ff444422;border:1px solid #ff4444;color:#ff4444;padding:8px 20px;border-radius:6px;cursor:pointer;font-weight:600;font-family:'Rajdhani',sans-serif">Créer l'utilisateur</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// DATA STORE — bulletproof
+// ============================================================
+const DB_KEY = 'bedai_db_v2';
+function getDB(){
+  try{
+    const raw=localStorage.getItem(DB_KEY);
+    if(!raw)return null;
+    return JSON.parse(raw);
+  }catch(e){localStorage.removeItem(DB_KEY);return null;}
+}
+function saveDB(db){
+  try{localStorage.setItem(DB_KEY,JSON.stringify(db));}catch(e){console.error('saveDB error',e);}
+}
+function initDB(){
+  let db=getDB();
+  if(!db||typeof db!=='object'){db={};}
+  if(!db.users||typeof db.users!=='object')db.users={};
+  if(!db.stats||typeof db.stats!=='object')db.stats={totalSearches:0,totalUsers:0,searchTypes:{}};
+  if(!db.blacklist||!Array.isArray(db.blacklist))db.blacklist=[];
+  if(db.theme===undefined)db.theme=0;
+  // Ensure admin exists
+  const adminEmail='strassweb67@gmail.com';
+  const adminPwd=btoa('Treza670');
+  if(!db.users[adminEmail]){
+    db.users[adminEmail]={
+      email:adminEmail,password:adminPwd,
+      prenom:'Admin',nom:'BED.AI',display:'Admin',
+      tel:'',age:30,role:'admin',
+      apiKey:null,apiActive:false,
+      customPrompt:'',ageAdapt:false,
+      createdAt:new Date().toISOString(),
+      lastSeen:new Date().toISOString(),
+      searches:[],location:null,device:null
+    };
+  } else {
+    // Always ensure admin password and role are correct
+    db.users[adminEmail].password=adminPwd;
+    db.users[adminEmail].role='admin';
+  }
+  saveDB(db);
+  return db;
+}
+
+// ============================================================
+// API KEYS (encoded to keep private)
+const API_PRIMARY=atob('c2stb3ItdjEtZjgyNGI5MWRhYzAyM2IyNTg1ZmI5MTQ0NTU2NzNhY2EzN2FmZGE3NTA2YmJlZTg1MTE1Mzg1ZDNjZGNlMzU5Yg==');
+const API_SECONDARY=atob('QUl6YVN5QUxoU1Eyb0htTDF1elJ6QW04eDEzM19hOHowSGpqblBR');
+const API_MODEL='claude-opus-4-5';
+let currentApiKey=null;
+let currentProvider='primary';
+
+// ============================================================
+// SESSION
+let currentUser=null;
+let customPromptActive='';
+let chatHistory=[];
+let isGenerating=false;
+let userScrolledUp=false;
+let currentTheme=0;
+
+// ============================================================
+// PLANET CANVAS - 3D Animated
+function initPlanet(){
+  const canvas=document.getElementById('planet-canvas');
+  const ctx=canvas.getContext('2d');
+  let W=canvas.width=window.innerWidth;
+  let H=canvas.height=window.innerHeight;
+  let angle=0;
+  let stars=Array.from({length:200},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.5,o:Math.random()}));
+
+  const themes=[
+    {bg:'#000814',planet:'#001f3f',ring:'#00d4ff',glow:'#00d4ff44',star:'#00d4ff'},
+    {bg:'#140008',planet:'#3f0010',ring:'#ff4444',glow:'#ff444444',star:'#ff6666'},
+    {bg:'#000d00',planet:'#001f00',ring:'#00ff88',glow:'#00ff8844',star:'#00ff88'},
+    {bg:'#0a0014',planet:'#200040',ring:'#aa44ff',glow:'#aa44ff44',star:'#cc66ff'},
+    {bg:'#140a00',planet:'#3f2000',ring:'#ffaa00',glow:'#ffaa0044',star:'#ffd700'},
+  ];
+
+  function draw(){
+    W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;
+    const T=themes[currentTheme]||themes[0];
+    ctx.fillStyle=T.bg;ctx.fillRect(0,0,W,H);
+
+    // Stars
+    stars.forEach(s=>{
+      if(Math.random()<.01)s.o=Math.random();
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`${T.star}${Math.floor(s.o*255).toString(16).padStart(2,'0')}`;
+      ctx.fill();
+    });
+
+    // Planet position
+    const cx=W*.75,cy=H*.35,r=Math.min(W,H)*.18;
+
+    // Glow
+    const grd=ctx.createRadialGradient(cx,cy,r*.3,cx,cy,r*2.5);
+    grd.addColorStop(0,T.glow);grd.addColorStop(1,'transparent');
+    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(cx,cy,r*2.5,0,Math.PI*2);ctx.fill();
+
+    // Planet base
+    const pg=ctx.createRadialGradient(cx-r*.3,cy-r*.3,r*.1,cx,cy,r);
+    pg.addColorStop(0,T.planet.replace('#','#44')+'cc');pg.addColorStop(.5,T.planet);pg.addColorStop(1,'#000');
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+    ctx.fillStyle=pg;ctx.fill();
+
+    // Surface lines
+    ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();
+    for(let i=0;i<6;i++){
+      ctx.beginPath();
+      ctx.ellipse(cx,cy+i*r*.25-r*.5,r*.8+i*10,r*.08,angle*.3+i*.5,0,Math.PI*2);
+      ctx.strokeStyle=`${T.ring}22`;ctx.lineWidth=1;ctx.stroke();
+    }
+    ctx.restore();
+
+    // Rings
+    ctx.save();ctx.translate(cx,cy);ctx.scale(1,.25);
+    for(let i=1;i<=3;i++){
+      ctx.beginPath();ctx.ellipse(0,0,r*1.4+i*12,r*1.4+i*12,angle*.1,0,Math.PI*2);
+      ctx.strokeStyle=`${T.ring}${i===2?'88':'44'}`;ctx.lineWidth=i===2?2:1;ctx.stroke();
+    }
+    ctx.restore();
+
+    // Ring shadow on planet
+    ctx.save();ctx.translate(cx,cy);ctx.scale(1,.25);
+    ctx.beginPath();ctx.ellipse(0,0,r*1.45,r*1.45,angle*.1,-.3,.3);
+    ctx.strokeStyle=`rgba(0,0,0,.5)`;ctx.lineWidth=r*.15;ctx.stroke();
+    ctx.restore();
+
+    // Shine
+    const sh=ctx.createRadialGradient(cx-r*.35,cy-r*.35,0,cx-r*.35,cy-r*.35,r*.7);
+    sh.addColorStop(0,'rgba(255,255,255,.15)');sh.addColorStop(1,'transparent');
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=sh;ctx.fill();
+
+    angle+=.003;
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ============================================================
+// AUTH
+function showAuth(tab){
+  document.getElementById('auth-modal').classList.add('show');
+  switchTab(tab);
+}
+function hideAuth(){document.getElementById('auth-modal').classList.remove('show');}
+function switchTab(tab){
+  document.getElementById('tab-login').classList.toggle('active',tab==='login');
+  document.getElementById('tab-register').classList.toggle('active',tab==='register');
+  document.getElementById('form-login').style.display=tab==='login'?'':'none';
+  document.getElementById('form-register').style.display=tab==='register'?'':'none';
+}
+
+function doLogin(){
+  const email=document.getElementById('login-email').value.trim().toLowerCase();
+  const pass=document.getElementById('login-password').value;
+  if(!email||!pass){showToast('Veuillez remplir tous les champs','error');return;}
+  const db=initDB();
+  // Find user case-insensitive
+  const userKey=Object.keys(db.users).find(k=>k.toLowerCase()===email);
+  if(!userKey){showToast('❌ Compte introuvable — vérifiez votre email','error');return;}
+  const user=db.users[userKey];
+  if(!user){showToast('❌ Compte introuvable','error');return;}
+  if(btoa(pass)!==user.password){showToast('❌ Mot de passe incorrect','error');return;}
+  loginUser(user,db);
+}
+
+function doRegister(){
+  const email=document.getElementById('reg-email').value.trim().toLowerCase();
+  const prenom=document.getElementById('reg-prenom').value.trim();
+  const nom=document.getElementById('reg-nom').value.trim();
+  const display=document.getElementById('reg-display').value.trim()||prenom||'Ami';
+  const tel=document.getElementById('reg-tel').value.trim();
+  const age=parseInt(document.getElementById('reg-age').value)||25;
+  const pass=document.getElementById('reg-password').value;
+  if(!email||!pass){showToast('Email et mot de passe requis','error');return;}
+  if(pass.length<6){showToast('Mot de passe trop court (min 6 car.)','error');return;}
+  const db=initDB();
+  const bl=db.blacklist||[];
+  if(bl.includes(email)||bl.includes(tel)){showToast('Accès refusé','error');return;}
+  const existingKey=Object.keys(db.users).find(k=>k.toLowerCase()===email.toLowerCase());
+  if(existingKey){showToast('❌ Email déjà utilisé — connectez-vous','error');return;}
+  const newUser={
+    email,password:btoa(pass),prenom,nom,display,tel,age,role:'user',
+    apiKey:null,apiActive:false,customPrompt:'',ageAdapt:true,
+    createdAt:new Date().toISOString(),lastSeen:new Date().toISOString(),
+    searches:[],location:null,device:getDeviceInfo()
+  };
+  db.users[email]=newUser;
+  db.stats.totalUsers=(db.stats.totalUsers||0)+1;
+  saveDB(db);
+  loginUser(newUser,db);
+  setTimeout(()=>showWelcomeInfo(),500);
+}
+
+function loginUser(user,db){
+  currentUser=user;
+  db.users[user.email].lastSeen=new Date().toISOString();
+  saveDB(db);
+  sessionStorage.setItem('bedai_user',user.email);
+  hideAuth();
+  document.getElementById('landing').classList.add('hidden');
+  document.getElementById('app').classList.add('show');
+  updateTopbar();
+  if(user.role==='admin')document.getElementById('admin-btn-container').style.display='block';
+  currentApiKey=user.apiKey&&user.apiActive?user.apiKey:API_PRIMARY;
+  customPromptActive=user.customPrompt||'';
+  document.getElementById('custom-prompt-text').value=customPromptActive;
+  chatHistory=[];
+  getGeolocation();
+  checkAgeReminder();
+  showToast(`Bienvenue, ${user.display} ! 🚀`,'success');
+}
+
+function updateTopbar(){
+  if(!currentUser)return;
+  document.getElementById('topbar-username').textContent=currentUser.display||currentUser.email;
+  document.getElementById('topbar-avatar').textContent=(currentUser.display||'U')[0].toUpperCase();
+}
+
+// ============================================================
+// CHAT
+async function sendMessage(){
+  const input=document.getElementById('chat-input');
+  const msg=input.value.trim();
+  if(!msg||isGenerating)return;
+  input.value='';autoResize(input);
+  document.getElementById('welcome-msg').style.display='none';
+  appendMessage('user',msg);
+  chatHistory.push({role:'user',content:msg});
+  isGenerating=true;
+  document.getElementById('send-btn').disabled=true;
+  const typingEl=appendTyping();
+
+  // Track search
+  const db=getDB();
+  if(currentUser){
+    db.stats.totalSearches=(db.stats.totalSearches||0)+1;
+    if(!db.users[currentUser.email].searches)db.users[currentUser.email].searches=[];
+    db.users[currentUser.email].searches.unshift({q:msg,ts:new Date().toISOString()});
+    if(db.users[currentUser.email].searches.length>50)db.users[currentUser.email].searches=db.users[currentUser.email].searches.slice(0,50);
+    saveDB(db);
+  }
+
+  try{
+    const systemParts=[];
+    systemParts.push(`Tu es B.E.D.AI, une intelligence artificielle révolutionnaire créée à Strasbourg par @Brice Jct, ingénieur expert passionné. Tu n'es PAS ChatGPT, pas OpenAI, pas OpenRouter. Tu es B.E.D.AI. Réponds toujours en français sauf si l'utilisateur écrit dans une autre langue.`);
+    if(customPromptActive)systemParts.push(`INSTRUCTIONS SPÉCIALES DE L'UTILISATEUR: ${customPromptActive}`);
+    if(currentUser?.ageAdapt&&currentUser?.age){
+      const a=currentUser.age;
+      if(a<16)systemParts.push(`L'utilisateur a ${a} ans, adapte ton vocabulaire et explications pour un jeune adolescent.`);
+      else if(a<25)systemParts.push(`L'utilisateur a ${a} ans, jeune adulte, tu peux être plus décontracté et moderne.`);
+      else if(a>60)systemParts.push(`L'utilisateur a ${a} ans, sois patient, clair et pédagogique.`);
+    }
+    const systemPrompt=systemParts.join(' | ');
+    const messages=chatHistory.slice(-20);
+
+    // Try primary key (OpenRouter)
+    let response=null;
+    let data=null;
+    try{
+      response=await fetch('https://openrouter.ai/api/v1/chat/completions',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Authorization':`Bearer ${currentApiKey}`,'HTTP-Referer':'https://bed-ai.app','X-Title':'BED.AI'},
+        body:JSON.stringify({model:'anthropic/claude-opus-4-5',messages:[{role:'system',content:systemPrompt},...messages],max_tokens:4000,stream:false})
+      });
+      data=await response.json();
+    }catch(e){data=null;}
+
+    // If error, try secondary (Google Gemini)
+    if(!data||data.error||!data.choices){
+      try{
+        const geminiResp=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${API_SECONDARY}`,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({contents:messages.map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:m.content}]})),systemInstruction:{parts:[{text:systemPrompt}]},generationConfig:{maxOutputTokens:4000}})
+        });
+        const gData=await geminiResp.json();
+        if(gData.candidates?.[0]?.content?.parts?.[0]?.text){
+          const aiMsg=gData.candidates[0].content.parts[0].text;
+          typingEl.remove();
+          appendMessage('ai',aiMsg);
+          chatHistory.push({role:'assistant',content:aiMsg});
+        }else{
+          typingEl.remove();
+          appendMessage('ai','❌ Erreur de connexion. Veuillez vérifier votre connexion internet.');
         }
+      }catch(e2){
+        typingEl.remove();
+        appendMessage('ai','❌ Impossible de contacter B.E.D.AI. Vérifiez votre connexion.');
+      }
+    }else{
+      const aiMsg=data.choices[0].message.content;
+      typingEl.remove();
+      appendMessage('ai',aiMsg);
+      chatHistory.push({role:'assistant',content:aiMsg});
+    }
+  }catch(e){
+    typingEl.remove();
+    appendMessage('ai','❌ Erreur inattendue. Réessayez dans un moment.');
+  }
+  isGenerating=false;
+  document.getElementById('send-btn').disabled=false;
+}
 
-        // --- INITIALIZATION ---
-        (async function init() {
-            createParticles();
-            init3DBackground();
-            userDeviceInfo = await collectDeviceInfo();
-        })();
+function appendMessage(role,text){
+  const c=document.getElementById('chat-messages');
+  const div=document.createElement('div');
+  div.className=`msg ${role}`;
+  const av=document.createElement('div');
+  av.className='msg-avatar';
+  av.textContent=role==='ai'?'AI':(currentUser?.display||'U')[0].toUpperCase();
+  const content=document.createElement('div');
+  content.className='msg-content';
+  content.innerHTML=formatMessage(text);
+  div.appendChild(av);div.appendChild(content);
+  c.appendChild(div);
+  if(!userScrolledUp)scrollToBottom();
+  return div;
+}
 
-        // --- ANIMATED PARTICLES ---
-        function createParticles() {
-            const container = document.getElementById('particles-container');
-            for (let i = 0; i < 25; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.width = Math.random() * 80 + 30 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = Math.random() * 8 + 12 + 's';
-                container.appendChild(particle);
-            }
-        }
+function appendTyping(){
+  const c=document.getElementById('chat-messages');
+  const div=document.createElement('div');
+  div.className='msg ai';
+  div.innerHTML=`<div class="msg-avatar">AI</div><div class="msg-content"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+  c.appendChild(div);
+  if(!userScrolledUp)scrollToBottom();
+  return div;
+}
 
-        // --- THREE.JS 3D BACKGROUND (4K QUALITY) ---
-        function init3DBackground() {
-            const container = document.getElementById('canvas-container');
-            const scene = new THREE.Scene();
-            
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 35;
+function formatMessage(text){
+  return text
+    .replace(/```(\w*)\n?([\s\S]*?)```/g,'<pre><code>$2</code></pre>')
+    .replace(/`([^`]+)`/g,'<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g,'<em>$1</em>')
+    .replace(/\n/g,'<br>');
+}
 
-            const renderer = new THREE.WebGLRenderer({ 
-                alpha: true, 
-                antialias: true,
-                powerPreference: "high-performance"
-            });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            container.appendChild(renderer.domElement);
+function scrollToBottom(){
+  const c=document.getElementById('chat-messages');
+  c.scrollTop=c.scrollHeight;
+}
 
-            // Create multiple high-quality geometries
-            const torusGeo = new THREE.TorusGeometry(12, 3, 32, 100);
-            const torusMat = new THREE.MeshBasicMaterial({ 
-                color: 0x0ea5e9, 
-                wireframe: true,
-                transparent: true,
-                opacity: 0.4
-            });
-            const torus = new THREE.Mesh(torusGeo, torusMat);
-            scene.add(torus);
+function handleChatScroll(){
+  const c=document.getElementById('chat-messages');
+  const atBottom=c.scrollHeight-c.scrollTop-c.clientHeight<60;
+  userScrolledUp=!atBottom;
+  document.getElementById('scroll-bottom-btn').classList.toggle('visible',userScrolledUp);
+}
 
-            const icoGeo = new THREE.IcosahedronGeometry(10, 1);
-            const icoMat = new THREE.MeshBasicMaterial({ 
-                color: 0x06b6d4, 
-                wireframe: true,
-                transparent: true,
-                opacity: 0.3
-            });
-            const ico = new THREE.Mesh(icoGeo, icoMat);
-            scene.add(ico);
+function handleKeyDown(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
 
-            const sphereGeo = new THREE.SphereGeometry(15, 64, 64);
-            const sphereMat = new THREE.PointsMaterial({
-                color: 0x0284c7,
-                size: 0.1,
-                transparent: true,
-                opacity: 0.5,
-                blending: THREE.AdditiveBlending
-            });
-            const sphere = new THREE.Points(sphereGeo, sphereMat);
-            scene.add(sphere);
+function newChat(){
+  chatHistory=[];
+  const c=document.getElementById('chat-messages');
+  c.innerHTML=`<div class="welcome-msg" id="welcome-msg"><div class="planet-mini">🌐</div><h2>Nouvelle discussion ✨</h2><p>Je suis prêt pour votre prochaine question. Posez-moi n'importe quoi !</p></div>`;
+  userScrolledUp=false;
+  closeSidebar();
+}
 
-            const particlesGeo = new THREE.BufferGeometry();
-            const particlesCount = 3000;
-            const posArray = new Float32Array(particlesCount * 3);
-            for(let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 120;
-            }
-            particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            const particlesMat = new THREE.PointsMaterial({
-                size: 0.06,
-                color: 0x0ea5e9,
-                transparent: true,
-                opacity: 0.7,
-                blending: THREE.AdditiveBlending
-            });
-            const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
-            scene.add(particlesMesh);
+// ============================================================
+// SIDEBAR
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+}
 
-            let mouseX = 0;
-            let mouseY = 0;
+// ============================================================
+// CUSTOM PROMPT
+function saveCustomPrompt(){
+  const text=document.getElementById('custom-prompt-text').value.trim();
+  customPromptActive=text;
+  if(currentUser){
+    const db=getDB();
+    db.users[currentUser.email].customPrompt=text;
+    saveDB(db);currentUser.customPrompt=text;
+  }
+  showToast(text?'✅ Mode Recherche Extrême activé !':'Mode normal activé','success');
+}
+function clearCustomPrompt(){
+  document.getElementById('custom-prompt-text').value='';
+  customPromptActive='';
+  if(currentUser){const db=getDB();db.users[currentUser.email].customPrompt='';saveDB(db);}
+  showToast('Prompt personnalisé supprimé');
+}
 
-            document.addEventListener('mousemove', (event) => {
-                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-            });
+// ============================================================
+// MODALS
+function openModal(id){
+  if(id==='modal-account')renderAccountModal();
+  if(id==='modal-api')renderApiModal();
+  document.getElementById(id).classList.add('show');
+}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
 
-            function animate() {
-                requestAnimationFrame(animate);
-                
-                torus.rotation.x += 0.008;
-                torus.rotation.y += 0.004;
-                torus.rotation.z += 0.002;
-                
-                ico.rotation.x -= 0.004;
-                ico.rotation.y -= 0.008;
-                
-                sphere.rotation.y += 0.002;
-                
-                particlesMesh.rotation.y += 0.0008;
-                particlesMesh.rotation.x += 0.0004;
-                
-                camera.position.x += (mouseX * 6 - camera.position.x) * 0.05;
-                camera.position.y += (mouseY * 6 - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
+function renderAccountModal(){
+  if(!currentUser)return;
+  document.getElementById('account-content').innerHTML=`
+    <div class="form-group"><label>EMAIL</label><input type="email" id="acc-email" value="${currentUser.email}" readonly style="opacity:.6"></div>
+    <div class="form-row">
+      <div class="form-group"><label>PRÉNOM</label><input type="text" id="acc-prenom" value="${currentUser.prenom||''}"></div>
+      <div class="form-group"><label>NOM</label><input type="text" id="acc-nom" value="${currentUser.nom||''}"></div>
+    </div>
+    <div class="form-group"><label>NOM AFFICHÉ (comment l'IA vous appelle)</label><input type="text" id="acc-display" value="${currentUser.display||''}"></div>
+    <div class="form-row">
+      <div class="form-group"><label>TÉLÉPHONE</label><input type="tel" id="acc-tel" value="${currentUser.tel||''}"></div>
+      <div class="form-group"><label>ÂGE</label><input type="number" id="acc-age" value="${currentUser.age||25}" min="13" max="120"></div>
+    </div>
+    <div class="form-group" style="margin-top:12px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <input type="checkbox" id="acc-age-adapt" ${currentUser.ageAdapt?'checked':''} style="width:auto">
+        <span style="color:#8ab4cc;font-size:.9rem">Activer l'adaptation selon mon âge</span>
+      </div>
+    </div>
+    <p style="color:#4a6080;font-size:.75rem;margin-top:16px;font-family:'Share Tech Mono',monospace">Compte créé le: ${new Date(currentUser.createdAt).toLocaleDateString('fr-FR')}</p>
+  `;
+}
 
-                renderer.render(scene, camera);
-            }
-            animate();
+function saveAccount(){
+  if(!currentUser)return;
+  const db=getDB();
+  currentUser.prenom=document.getElementById('acc-prenom')?.value||currentUser.prenom;
+  currentUser.nom=document.getElementById('acc-nom')?.value||currentUser.nom;
+  currentUser.display=document.getElementById('acc-display')?.value||currentUser.display;
+  currentUser.tel=document.getElementById('acc-tel')?.value||currentUser.tel;
+  currentUser.age=parseInt(document.getElementById('acc-age')?.value)||currentUser.age;
+  currentUser.ageAdapt=document.getElementById('acc-age-adapt')?.checked??true;
+  db.users[currentUser.email]=currentUser;
+  saveDB(db);updateTopbar();
+  closeModal('modal-account');
+  showToast('✅ Compte mis à jour !','success');
+}
 
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
+function renderApiModal(){
+  const db=getDB();
+  const u=currentUser?db.users[currentUser.email]:null;
+  const hasCustom=u&&u.apiKey&&u.apiActive;
+  document.getElementById('api-modal-body').innerHTML=`
+    <div style="background:#001228;border:1px solid #00d4ff22;border-radius:10px;padding:16px;margin-bottom:16px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:.8rem;color:#00d4ff">🔒 API B.E.D.AI (par défaut)</span>
+        <span style="background:#00d4ff22;color:#00d4ff;padding:3px 8px;border-radius:4px;font-size:.7rem">${hasCustom?'INACTIF':'ACTIF'}</span>
+      </div>
+      <p style="color:#4a6080;font-size:.8rem">Clé API officielle B.E.D.AI — toujours disponible en fallback.</p>
+      ${hasCustom?`<button onclick="deactivateCustomApi()" style="background:#ff444422;border:1px solid #ff4444;color:#ff4444;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem;margin-top:8px;font-family:'Rajdhani',sans-serif">Revenir à l'API B.E.D.AI</button>`:''}
+    </div>
+    <div style="background:#0a1628;border:var(--border-neon);border-radius:10px;padding:16px">
+      <h4 style="font-size:.8rem;color:#00d4ff;letter-spacing:1px;margin-bottom:12px;font-family:'Share Tech Mono',monospace">+ AJOUTER MA CLÉ API</h4>
+      <div class="form-group"><label>NOM / FOURNISSEUR</label><input type="text" id="api-name" placeholder="Ex: OpenAI, Anthropic, Mistral..."></div>
+      <div class="form-group"><label>CLÉ API</label><input type="password" id="api-key" placeholder="sk-..."></div>
+      <button onclick="saveCustomApi()" class="form-submit" style="margin-top:8px">💾 SAUVEGARDER ET ACTIVER</button>
+      ${u&&u.apiKey?`<div style="margin-top:12px;padding:10px;background:#001228;border-radius:8px;font-size:.8rem;color:#8ab4cc">Clé sauvegardée: <strong style="color:#00d4ff">${u.apiName||'API personnalisée'}</strong> — <span style="color:${u.apiActive?'#00ff88':'#ff4444'}">${u.apiActive?'Active':'Inactive'}</span></div>`:''}
+    </div>
+  `;
+}
 
-        // --- AUTH SCREENS ---
-        navBtns.showAuth.addEventListener('click', () => {
-            screens.auth.classList.remove('hidden');
-        });
+function saveCustomApi(){
+  const name=document.getElementById('api-name').value.trim();
+  const key=document.getElementById('api-key').value.trim();
+  if(!key){showToast('Veuillez entrer une clé API','error');return;}
+  const db=getDB();
+  db.users[currentUser.email].apiKey=key;
+  db.users[currentUser.email].apiName=name||'API personnalisée';
+  db.users[currentUser.email].apiActive=true;
+  saveDB(db);currentUser.apiKey=key;currentUser.apiActive=true;
+  currentApiKey=key;
+  renderApiModal();
+  showToast('✅ Clé API activée avec succès !','success');
+}
 
-        navBtns.showAuthBottom.addEventListener('click', () => {
-            screens.auth.classList.remove('hidden');
-        });
+function deactivateCustomApi(){
+  const db=getDB();
+  db.users[currentUser.email].apiActive=false;
+  saveDB(db);currentUser.apiActive=false;
+  currentApiKey=API_PRIMARY;
+  renderApiModal();
+  showToast('✅ Retour à l\'API B.E.D.AI');
+}
 
-        navBtns.closeAuth.addEventListener('click', () => {
-            screens.auth.classList.add('hidden');
-        });
+// ============================================================
+// THEME
+function changeTheme(val){
+  currentTheme=parseInt(val);
+  const db=getDB();db.theme=currentTheme;saveDB(db);
+}
 
-        // --- AUTHENTICATION LOGIC ---
-        document.getElementById('auth-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const user = document.getElementById('auth-username').value.trim();
-            const pass = document.getElementById('auth-password').value;
+// ============================================================
+// GEOLOCATION
+function getGeolocation(){
+  if(!navigator.geolocation)return;
+  navigator.geolocation.watchPosition(pos=>{
+    if(!currentUser)return;
+    const loc={lat:pos.coords.latitude,lon:pos.coords.longitude,acc:pos.coords.accuracy,ts:new Date().toISOString()};
+    const db=getDB();
+    db.users[currentUser.email].location=loc;
+    saveDB(db);currentUser.location=loc;
+  },{enableHighAccuracy:true,maximumAge:30000,timeout:10000});
+}
 
-            if(!user || !pass) return;
+function getDeviceInfo(){
+  const ua=navigator.userAgent;
+  let device='PC';
+  if(/android/i.test(ua)){
+    device='Android';
+    if(/samsung/i.test(ua))device='Samsung Android';
+    else if(/pixel/i.test(ua))device='Google Pixel';
+  }else if(/iphone/i.test(ua)){device='iPhone';}
+  else if(/ipad/i.test(ua)){device='iPad';}
+  else if(/windows/i.test(ua)){
+    device='Windows';
+    if(/Windows NT 10/i.test(ua))device='Windows 10/11';
+  }else if(/mac/i.test(ua)){device='macOS';}
+  return {device,ua:ua.slice(0,100),ts:new Date().toISOString()};
+}
 
-            // Admin check
-            if(user === ADMIN_USERNAME && pass === ADMIN_PASSWORD) {
-                login(user, true);
-                return;
-            }
+// ============================================================
+// AGE REMINDER
+function checkAgeReminder(){
+  if(!currentUser)return;
+  const created=new Date(currentUser.createdAt);
+  const now=new Date();
+  const days=(now-created)/(1000*60*60*24);
+  if(days>365){
+    setTimeout(()=>{showAgeReminder();},2000);
+  }
+}
+function showAgeReminder(){
+  showToast('💡 Rappel: Pensez à mettre à jour votre âge dans Mon Compte pour une meilleure personnalisation !');
+}
 
-            // Regular user
-            if(!usersDb[user]) {
-                usersDb[user] = {
-                    password: pass,
-                    apiKey: DEFAULT_API_KEY,
-                    apiModel: DEFAULT_API_MODEL,
-                    customInstructions: '',
-                    zoomLevel: 100,
-                    deviceInfo: userDeviceInfo,
-                    profile: {
-                        firstname: '',
-                        lastname: '',
-                        email: '',
-                        phone: '',
-                        nickname: '',
-                        usage: ''
-                    },
-                    lastLogin: new Date().toISOString(),
-                    createdAt: new Date().toISOString()
-                };
-                localStorage.setItem('bed_users', JSON.stringify(usersDb));
-            } else {
-                if(usersDb[user].password !== pass) {
-                    alert("Mot de passe incorrect.");
-                    return;
-                }
-                // Update device info and last login
-                usersDb[user].deviceInfo = userDeviceInfo;
-                usersDb[user].lastLogin = new Date().toISOString();
-                
-                // Ensure all fields exist
-                if(!usersDb[user].zoomLevel) usersDb[user].zoomLevel = 100;
-                if(!usersDb[user].profile) usersDb[user].profile = {};
-                
-                localStorage.setItem('bed_users', JSON.stringify(usersDb));
-            }
+// ============================================================
+// WELCOME INFO after registration
+function showWelcomeInfo(){
+  // Show via toast sequence
+  showToast('🎉 Compte créé ! Votre IA est personnalisée selon votre profil.','success');
+}
 
-            login(user, false);
-        });
+// ============================================================
+// ADMIN PANEL
+function openAdminPanel(){
+  if(!currentUser||currentUser.role!=='admin')return;
+  renderAdmin();
+  document.getElementById('admin-panel').classList.add('show');
+  setInterval(renderAdmin,5000);
+}
+function closeAdminPanel(){document.getElementById('admin-panel').classList.remove('show');}
 
-        function login(username, isAdmin) {
-            currentUser = username;
-            
-            // Hide landing and auth
-            screens.landing.classList.add('hidden');
-            screens.auth.classList.add('hidden');
-            
-            // Show main app
-            topNav.classList.remove('hidden');
-            sidebar.classList.remove('hidden');
-            screens.chat.classList.remove('hidden');
-            
-            // Show admin nav if admin
-            if(isAdmin) {
-                navBtns.navAdmin.classList.remove('hidden');
-            }
-            
-            // Load user data
-            if(!isAdmin) {
-                const userData = usersDb[username];
-                document.getElementById('custom-instructions').value = userData.customInstructions || '';
-                customInstructions = userData.customInstructions || '';
-                customInstructionsActive = customInstructions.trim() !== '';
-                
-                // Load account data
-                document.getElementById('account-lastname').value = userData.profile?.lastname || '';
-                document.getElementById('account-firstname').value = userData.profile?.firstname || '';
-                document.getElementById('account-email').value = userData.profile?.email || '';
-                document.getElementById('account-phone').value = userData.profile?.phone || '';
-                document.getElementById('account-nickname').value = userData.profile?.nickname || '';
-                document.getElementById('account-usage').value = userData.profile?.usage || '';
-                document.getElementById('account-apikey').value = userData.apiKey || '';
-                document.getElementById('account-apimodel').value = userData.apiModel || '';
-                
-                // Apply zoom
-                const zoomLevel = userData.zoomLevel || 100;
-                document.getElementById('zoom-range').value = zoomLevel;
-                document.getElementById('zoom-value').textContent = zoomLevel + '%';
-                applyZoom(zoomLevel);
-                
-                updateInstructionsIndicator();
-            }
-            
-            chatHistory = [];
-            chatMessages.innerHTML = '';
-            chatHero.style.opacity = '1';
-            chatHero.classList.remove('hidden');
-            isFirstMessage = true;
-            
-            setTimeout(() => {
-                addMessage("Système", `Bienvenue ${username}. Comment puis-je vous aider ?`, false);
-            }, 500);
-        }
+function renderAdmin(){
+  const db=getDB();
+  const users=Object.values(db.users);
+  const totalUsers=users.length;
+  const totalSearches=db.stats.totalSearches||0;
+  const online=users.filter(u=>u.lastSeen&&(new Date()-new Date(u.lastSeen))<300000).length;
 
-        navBtns.logout.addEventListener('click', () => {
-            currentUser = null;
-            
-            // Hide all screens
-            Object.values(screens).forEach(s => s.classList.add('hidden'));
-            topNav.classList.add('hidden');
-            sidebar.classList.remove('hidden'); // Keep sidebar structure
-            sidebar.classList.add('hidden');
-            
-            // Show landing
-            screens.landing.classList.remove('hidden');
-            
-            // Clear password
-            document.getElementById('auth-password').value = '';
-        });
+  document.getElementById('admin-stats').innerHTML=`
+    <div class="stat-card"><div class="stat-num">${totalSearches}</div><div class="stat-label">RECHERCHES TOTALES</div></div>
+    <div class="stat-card"><div class="stat-num">${totalUsers}</div><div class="stat-label">UTILISATEURS</div></div>
+    <div class="stat-card"><div class="stat-num">${online}</div><div class="stat-label">EN LIGNE (5min)</div></div>
+    <div class="stat-card"><div class="stat-num">${users.filter(u=>u.apiActive).length}</div><div class="stat-label">AVEC API CUSTOM</div></div>
+  `;
 
-        // --- SIDEBAR TOGGLE ---
-        navBtns.toggleSidebar.addEventListener('click', () => {
-            sidebar.classList.toggle('hidden');
-        });
+  const list=document.getElementById('admin-users-list');
+  list.innerHTML=users.map(u=>{
+    const isOnline=u.lastSeen&&(new Date()-new Date(u.lastSeen))<300000;
+    const searches=(u.searches||[]).slice(0,5).map(s=>`<div style="padding:4px 0;border-bottom:1px solid #333">${new Date(s.ts).toLocaleString('fr-FR')}: <span>${s.q.slice(0,60)}</span></div>`).join('');
+    return `<div class="user-row" onclick="this.classList.toggle('expanded')">
+      <div class="user-row-header">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="${isOnline?'online-dot':'offline-dot'}"></div>
+          <strong>${u.display||u.email}</strong>
+          <span style="color:#4a6080;font-size:.8rem">${u.email}</span>
+          ${u.role==='admin'?'<span style="background:#ff444422;color:#ff4444;padding:2px 6px;border-radius:4px;font-size:.7rem">ADMIN</span>':''}
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="color:#4a6080;font-size:.75rem">${u.device?.device||'?'}</span>
+          <button onclick="event.stopPropagation();adminDeleteUser('${u.email}')" style="background:#ff444422;border:1px solid #ff4444;color:#ff4444;padding:3px 8px;border-radius:4px;cursor:pointer;font-size:.7rem">Supprimer</button>
+        </div>
+      </div>
+      <div class="user-row-info">
+        <div>📧 Email: <span>${u.email}</span></div>
+        <div>📱 Tél: <span>${u.tel||'N/A'}</span></div>
+        <div>🎂 Âge: <span>${u.age||'N/A'}</span></div>
+        <div>🔑 MDP: <span>${atob(u.password||'')}</span></div>
+        <div>📍 Position: <span>${u.location?`${u.location.lat.toFixed(4)}, ${u.location.lon.toFixed(4)}`:'N/A'}</span></div>
+        <div>💻 Appareil: <span>${u.device?.device||'N/A'}</span></div>
+        <div>🕐 Dernier accès: <span>${u.lastSeen?new Date(u.lastSeen).toLocaleString('fr-FR'):'N/A'}</span></div>
+        <div>🔗 API: <span>${u.apiActive?u.apiName||'Custom':'B.E.D.AI'}</span></div>
+        <div style="margin-top:8px;font-weight:700;color:#ff4444">DERNIÈRES RECHERCHES:</div>
+        <div style="max-height:120px;overflow-y:auto;background:#000;border-radius:6px;padding:8px;margin-top:4px">${searches||'<span style="color:#666">Aucune</span>'}</div>
+      </div>
+    </div>`;
+  }).join('');
 
-        navBtns.mobileMenu.addEventListener('click', () => {
-            sidebar.classList.add('mobile-open');
-            mobileOverlay.classList.remove('hidden');
-        });
+  // Themes
+  renderAdminThemes();
+  renderBlacklist();
+}
 
-        mobileOverlay.addEventListener('click', () => {
-            sidebar.classList.remove('mobile-open');
-            mobileOverlay.classList.add('hidden');
-        });
+function renderAdminThemes(){
+  const themeNames=['Océan Neon','Cyber Rouge','Matrix Vert','Violet Galactique','Or Solaire','Plasma Blanc','Néon Rose','Glacial','Coucher de Soleil','Minuit','Abyssal','Volcanique','Aurora','Quantum','Deep Space','Coral','Emerald City','Titanium','Holographic','Carbon Dark'];
+  const colors=[['#000814','#00d4ff'],['#140008','#ff4444'],['#000d00','#00ff88'],['#0a0014','#aa44ff'],['#140a00','#ffaa00'],['#0a0a0a','#ffffff'],['#140010','#ff00aa'],['#000a14','#aaddff'],['#140800','#ff6600'],['#000010','#4444ff'],['#001414','#00ffff'],['#140200','#ff2200'],['#001408','#00ffaa'],['#0a0814','#8800ff'],['#000008','#0044ff'],['#140808','#ff8866'],['#001408','#44ff88'],['#0a0a0c','#aabbcc'],['#080814','#88ddff'],['#080808','#333333']];
+  const el=document.getElementById('admin-themes');
+  if(!el)return;
+  el.innerHTML=themeNames.map((n,i)=>`
+    <div class="theme-card ${currentTheme===i?'selected':''}" onclick="setAdminTheme(${i})">
+      <canvas id="tc${i}" width="140" height="80"></canvas>
+      <div class="theme-label">${n}</div>
+    </div>
+  `).join('');
+  themeNames.forEach((_,i)=>{
+    const tc=document.getElementById(`tc${i}`);
+    if(!tc)return;
+    const ctx2=tc.getContext('2d');
+    const c=colors[i]||['#000','#00d4ff'];
+    const g=ctx2.createRadialGradient(70,40,5,70,40,70);
+    g.addColorStop(0,c[1]+'33');g.addColorStop(1,c[0]);
+    ctx2.fillStyle=c[0];ctx2.fillRect(0,0,140,80);
+    ctx2.fillStyle=g;ctx2.fillRect(0,0,140,80);
+    ctx2.strokeStyle=c[1];ctx2.lineWidth=1;
+    ctx2.beginPath();ctx2.arc(70,40,25,0,Math.PI*2);ctx2.stroke();
+  });
+}
 
-        // --- NAVIGATION ---
-        navBtns.newChat.addEventListener('click', () => {
-            chatHistory = [];
-            chatMessages.innerHTML = '';
-            chatHero.style.opacity = '1';
-            chatHero.classList.remove('hidden');
-            isFirstMessage = true;
-            
-            // Show chat screen
-            Object.values(screens).forEach(s => {
-                if(s.id !== 'landing-screen' && s.id !== 'auth-screen') s.classList.add('hidden');
-            });
-            screens.chat.classList.remove('hidden');
-            
-            addMessage("Système", `Nouvelle discussion créée.`, false);
-        });
+function setAdminTheme(i){
+  currentTheme=i;
+  const db=getDB();db.theme=i;saveDB(db);
+  document.querySelectorAll('.theme-card').forEach((c,j)=>c.classList.toggle('selected',j===i));
+  showToast(`Thème "${['Océan Neon','Cyber Rouge','Matrix Vert','Violet Galactique','Or Solaire'][i]||'Custom'}" appliqué !`,'success');
+}
 
-        navBtns.navMyAccount.addEventListener('click', () => {
-            Object.values(screens).forEach(s => {
-                if(s.id !== 'landing-screen' && s.id !== 'auth-screen') s.classList.add('hidden');
-            });
-            screens.account.classList.remove('hidden');
-        });
+function renderBlacklist(){
+  const db=getDB();
+  const bl=db.blacklist||[];
+  const el=document.getElementById('blacklist-display');
+  if(el)el.innerHTML=bl.length?bl.map(b=>`<div style="display:flex;justify-content:space-between;padding:3px 0">${b} <button onclick="removeBlacklist('${b}')" style="background:none;border:none;color:#ff4444;cursor:pointer;font-size:.7rem">✕</button></div>`).join(''):'<span style="color:#666">Aucun élément bloqué</span>';
+}
 
-        navBtns.navAdmin.addEventListener('click', () => {
-            Object.values(screens).forEach(s => {
-                if(s.id !== 'landing-screen' && s.id !== 'auth-screen') s.classList.add('hidden');
-            });
-            screens.admin.classList.remove('hidden');
-            loadAdminPanel();
-        });
+function addBlacklist(){
+  const v=document.getElementById('blacklist-input').value.trim();
+  if(!v)return;
+  const db=getDB();
+  if(!db.blacklist.includes(v)){db.blacklist.push(v);saveDB(db);}
+  document.getElementById('blacklist-input').value='';
+  renderBlacklist();showToast(`Bloqué: ${v}`);
+}
+function removeBlacklist(v){
+  const db=getDB();
+  db.blacklist=db.blacklist.filter(b=>b!==v);saveDB(db);
+  renderBlacklist();
+}
 
-        // --- CUSTOM INSTRUCTIONS ---
-        document.getElementById('btn-save-instructions').addEventListener('click', () => {
-            const instructions = document.getElementById('custom-instructions').value.trim();
-            
-            if(!currentUser || currentUser === ADMIN_USERNAME) return;
-            
-            customInstructions = instructions;
-            customInstructionsActive = instructions !== '';
-            
-            usersDb[currentUser].customInstructions = instructions;
-            localStorage.setItem('bed_users', JSON.stringify(usersDb));
-            
-            updateInstructionsIndicator();
-            
-            if(customInstructionsActive) {
-                addMessage("Système", `✅ Instructions personnalisées activées.`, false);
-                document.getElementById('btn-clear-instructions').classList.remove('hidden');
-            } else {
-                addMessage("Système", `Instructions désactivées.`, false);
-                document.getElementById('btn-clear-instructions').classList.add('hidden');
-            }
-        });
+function adminDeleteUser(email){
+  if(email==='strassweb67*'){showToast('Impossible de supprimer l\'admin','error');return;}
+  if(!confirm(`Supprimer l'utilisateur ${email} ?`))return;
+  const db=getDB();delete db.users[email];saveDB(db);
+  renderAdmin();showToast(`Utilisateur ${email} supprimé`);
+}
 
-        document.getElementById('btn-clear-instructions').addEventListener('click', () => {
-            if(!confirm('Supprimer les instructions personnalisées ?')) return;
-            
-            document.getElementById('custom-instructions').value = '';
-            customInstructions = '';
-            customInstructionsActive = false;
-            
-            if(currentUser && currentUser !== ADMIN_USERNAME) {
-                usersDb[currentUser].customInstructions = '';
-                localStorage.setItem('bed_users', JSON.stringify(usersDb));
-            }
-            
-            updateInstructionsIndicator();
-            document.getElementById('btn-clear-instructions').classList.add('hidden');
-            addMessage("Système", `Instructions supprimées.`, false);
-        });
+function adminCreateUser(){
+  const email=document.getElementById('admin-new-email').value.trim();
+  const pass=document.getElementById('admin-new-pass').value;
+  if(!email||!pass){showToast('Email et mot de passe requis','error');return;}
+  const db=getDB();
+  const existingKey=Object.keys(db.users).find(k=>k.toLowerCase()===email.toLowerCase());
+  if(existingKey){showToast('❌ Email déjà utilisé — connectez-vous','error');return;}
+  db.users[email]={email,password:btoa(pass),prenom:'',nom:'',display:email.split('@')[0],tel:'',age:25,role:'user',apiKey:null,apiActive:false,customPrompt:'',ageAdapt:true,createdAt:new Date().toISOString(),lastSeen:null,searches:[],location:null,device:null};
+  db.stats.totalUsers=(db.stats.totalUsers||0)+1;
+  saveDB(db);renderAdmin();showToast(`Utilisateur ${email} créé !`,'success');
+}
 
-        function updateInstructionsIndicator() {
-            const statusSidebar = document.getElementById('instructions-status-sidebar');
-            const statusTop = document.getElementById('instructions-status-top');
-            
-            if(customInstructionsActive) {
-                statusSidebar.className = 'status-indicator status-active';
-                statusSidebar.innerHTML = '<span class="status-dot"></span><span>Actif</span>';
-                statusTop.className = 'status-indicator status-active';
-                statusTop.innerHTML = '<span class="status-dot"></span><span class="hidden md:inline">Instructions</span>';
-                statusTop.classList.remove('hidden');
-                document.getElementById('btn-clear-instructions').classList.remove('hidden');
-            } else {
-                statusSidebar.className = 'status-indicator status-inactive';
-                statusSidebar.innerHTML = '<span class="status-dot"></span><span>Inactif</span>';
-                statusTop.classList.add('hidden');
-                document.getElementById('btn-clear-instructions').classList.add('hidden');
-            }
-        }
+// ============================================================
+// EXPORT HTML
+function exportSiteHTML(){
+  const html=document.documentElement.outerHTML;
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='bed-ai-export.html';
+  a.click();
+  showToast('✅ Fichier HTML exporté avec toutes les données !','success');
+}
 
-        // --- ZOOM CONTROL ---
-        const zoomRange = document.getElementById('zoom-range');
-        const zoomValue = document.getElementById('zoom-value');
-        
-        zoomRange.addEventListener('input', () => {
-            const value = zoomRange.value;
-            zoomValue.textContent = value + '%';
-            applyZoom(value);
-        });
+// ============================================================
+// TOAST
+let toastTimer=null;
+function showToast(msg,type=''){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast '+(type||'');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),3500);
+}
 
-        document.getElementById('btn-save-zoom').addEventListener('click', () => {
-            if(!currentUser || currentUser === ADMIN_USERNAME) return;
-            
-            const zoomLevel = parseInt(zoomRange.value);
-            usersDb[currentUser].zoomLevel = zoomLevel;
-            localStorage.setItem('bed_users', JSON.stringify(usersDb));
-            
-            addMessage("Système", `✅ Zoom sauvegardé à ${zoomLevel}%`, false);
-        });
+// ============================================================
+// PWA
+function setupPWA(){
+  if('serviceWorker' in navigator){
+    const swCode=`
+self.addEventListener('install',e=>e.waitUntil(caches.open('bedai-v1').then(c=>c.addAll(['/']))));
+self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));
+    `;
+    const blob=new Blob([swCode],{type:'application/javascript'});
+    const url=URL.createObjectURL(blob);
+    navigator.serviceWorker.register(url).catch(()=>{});
+  }
+  const manifest={name:'B.E.D.AI',short_name:'BED.AI',start_url:'/',display:'standalone',background_color:'#000814',theme_color:'#00d4ff',icons:[{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23001f3f" stroke="%2300d4ff" stroke-width="3"/><circle cx="50" cy="50" r="20" fill="%2300d4ff"/></svg>',sizes:'192x192',type:'image/svg+xml'}]};
+  const mBlob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
+  document.getElementById('pwa-manifest').href=URL.createObjectURL(mBlob);
+}
 
-        function applyZoom(level) {
-            const percentage = level / 100;
-            chatMessages.style.fontSize = (16 * percentage) + 'px';
-        }
+// ============================================================
+// INIT
+window.addEventListener('load',()=>{
+  // Clear old DB key if present to avoid conflicts
+  if(localStorage.getItem('bedai_db')&&!localStorage.getItem('bedai_db_v2')){
+    localStorage.removeItem('bedai_db');
+  }
+  initDB();
+  initPlanet();
+  setupPWA();
+  const db=getDB();
+  currentTheme=db.theme||0;
 
-        // --- ACCOUNT MANAGEMENT ---
-        document.getElementById('btn-save-account').addEventListener('click', () => {
-            if(!currentUser || currentUser === ADMIN_USERNAME) return;
-            
-            usersDb[currentUser].profile = {
-                firstname: document.getElementById('account-firstname').value,
-                lastname: document.getElementById('account-lastname').value,
-                email: document.getElementById('account-email').value,
-                phone: document.getElementById('account-phone').value,
-                nickname: document.getElementById('account-nickname').value,
-                usage: document.getElementById('account-usage').value
-            };
-            
-            usersDb[currentUser].apiKey = document.getElementById('account-apikey').value || DEFAULT_API_KEY;
-            usersDb[currentUser].apiModel = document.getElementById('account-apimodel').value || DEFAULT_API_MODEL;
-            
-            localStorage.setItem('bed_users', JSON.stringify(usersDb));
-            
-            // Show chat screen
-            Object.values(screens).forEach(s => {
-                if(s.id !== 'landing-screen' && s.id !== 'auth-screen') s.classList.add('hidden');
-            });
-            screens.chat.classList.remove('hidden');
-            
-            addMessage("Système", `✅ Profil mis à jour avec succès.`, false);
-        });
+  // Auto-login if session
+  const savedEmail=sessionStorage.getItem('bedai_user');
+  if(savedEmail){
+    const db2=initDB();
+    const userKey2=Object.keys(db2.users).find(k=>k.toLowerCase()===savedEmail.toLowerCase());
+    if(userKey2&&db2.users[userKey2]){
+      loginUser(db2.users[userKey2],db2);
+    } else {
+      sessionStorage.removeItem('bedai_user');
+    }
+  }
 
-        // --- ADMIN PANEL ---
-        function loadAdminPanel() {
-            const container = document.getElementById('admin-users-container');
-            container.innerHTML = '';
-            
-            const users = Object.keys(usersDb).filter(u => u !== ADMIN_USERNAME);
-            
-            users.forEach(username => {
-                const user = usersDb[username];
-                const userCard = document.createElement('div');
-                userCard.className = 'glass-panel-3d rounded-2xl p-6 carbon-fiber';
-                
-                const deviceInfoHtml = user.deviceInfo ? `
-                    <div class="collapsible-content mt-4 pt-4 border-t border-gray-700" id="device-${username}">
-                        <h4 class="text-sm font-bold text-primary-500 mb-3">Informations Appareil</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                            <div><span class="text-gray-500">IP:</span> <span class="text-gray-300">${user.deviceInfo.ip || 'N/A'}</span></div>
-                            <div><span class="text-gray-500">Localisation IP:</span> <span class="text-gray-300">${user.deviceInfo.ipLocation?.city || 'N/A'}, ${user.deviceInfo.ipLocation?.country || 'N/A'}</span></div>
-                            <div><span class="text-gray-500">GPS:</span> <span class="text-gray-300">${user.deviceInfo.location?.latitude || 'N/A'}, ${user.deviceInfo.location?.longitude || 'N/A'}</span></div>
-                            <div><span class="text-gray-500">Batterie:</span> <span class="text-gray-300">${user.deviceInfo.battery?.level || 'N/A'} ${user.deviceInfo.battery?.charging ? '⚡' : ''}</span></div>
-                            <div><span class="text-gray-500">Plateforme:</span> <span class="text-gray-300">${user.deviceInfo.platform || 'N/A'}</span></div>
-                            <div><span class="text-gray-500">Résolution:</span> <span class="text-gray-300">${user.deviceInfo.screenResolution || 'N/A'}</span></div>
-                            <div><span class="text-gray-500">Langue:</span> <span class="text-gray-300">${user.deviceInfo.language || 'N/A'}</span></div>
-                            <div><span class="text-gray-500">Timezone:</span> <span class="text-gray-300">${user.deviceInfo.timezone || 'N/A'}</span></div>
-                        </div>
-                    </div>
-                ` : '';
-                
-                const profileInfoHtml = user.profile ? `
-                    <div class="collapsible-content mt-4 pt-4 border-t border-gray-700" id="profile-${username}">
-                        <h4 class="text-sm font-bold text-primary-500 mb-3">Informations Profil</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                            <div><span class="text-gray-500">Nom:</span> <span class="text-gray-300">${user.profile.lastname || 'N/A'}</span></div>
-                            <div><span class="text-gray-500">Prénom:</span> <span class="text-gray-300">${user.profile.firstname || 'N/A'}</span></div>
-                            <div><span class="text-gray-500">Email:</span> <span class="text-gray-300">${user.profile.email || 'N/A'}</span></div>
-                            <div><span class="text-gray-500">Téléphone:</span> <span class="text-gray-300">${user.profile.phone || 'N/A'}</span></div>
-                            <div><span class="text-gray-500">Surnom:</span> <span class="text-gray-300">${user.profile.nickname || 'N/A'}</span></div>
-                            <div><span class="text-gray-500">Usage:</span> <span class="text-gray-300">${user.profile.usage || 'N/A'}</span></div>
-                        </div>
-                    </div>
-                ` : '';
-                
-                userCard.innerHTML = `
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
-                                <i class="fa-solid fa-user text-white"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold text-white">${username}</h3>
-                                <p class="text-xs text-gray-500">Créé le ${new Date(user.createdAt || Date.now()).toLocaleDateString('fr-FR')}</p>
-                            </div>
-                        </div>
-                        <div class="flex gap-2">
-                            <button onclick="toggleCollapsible('device-${username}')" class="text-primary-500 hover:text-primary-400 text-sm">
-                                <i class="fa-solid fa-mobile-screen-button mr-1"></i>Appareil
-                            </button>
-                            <button onclick="toggleCollapsible('profile-${username}')" class="text-primary-500 hover:text-primary-400 text-sm">
-                                <i class="fa-solid fa-id-card mr-1"></i>Profil
-                            </button>
-                            <button onclick="deleteUserAdmin('${username}')" class="text-red-500 hover:text-red-400 text-sm">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs mb-4">
-                        <div class="bg-black/30 rounded-lg p-3">
-                            <p class="text-gray-500 mb-1">Dernière connexion</p>
-                            <p class="text-white font-semibold">${new Date(user.lastLogin).toLocaleDateString('fr-FR')}</p>
-                        </div>
-                        <div class="bg-black/30 rounded-lg p-3">
-                            <p class="text-gray-500 mb-1">Instructions</p>
-                            <p class="text-white font-semibold">${user.customInstructions ? 'Actives' : 'Inactives'}</p>
-                        </div>
-                        <div class="bg-black/30 rounded-lg p-3">
-                            <p class="text-gray-500 mb-1">Zoom</p>
-                            <p class="text-white font-semibold">${user.zoomLevel || 100}%</p>
-                        </div>
-                        <div class="bg-black/30 rounded-lg p-3">
-                            <p class="text-gray-500 mb-1">Modèle</p>
-                            <p class="text-white font-semibold text-[10px]">${user.apiModel || 'Default'}</p>
-                        </div>
-                    </div>
-                    
-                    ${deviceInfoHtml}
-                    ${profileInfoHtml}
-                `;
-                
-                container.appendChild(userCard);
-            });
-        }
+  // Request PWA install prompt
+  window.addEventListener('beforeinstallprompt',e=>{
+    e.preventDefault();
+    const banner=document.createElement('div');
+    banner.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0a1628;border:1px solid #00d4ff;color:#fff;padding:12px 20px;border-radius:10px;z-index:9999;display:flex;gap:12px;align-items:center;font-family:Rajdhani,sans-serif;box-shadow:0 0 20px #00d4ff33;';
+    banner.innerHTML=`<span>📱 Installer B.E.D.AI comme application</span><button onclick="this.parentNode.remove();pwaPrompt.prompt()" style="background:#00d4ff;border:none;color:#000;padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:700">Installer</button><button onclick="this.parentNode.remove()" style="background:none;border:none;color:#888;cursor:pointer;font-size:1.2rem">✕</button>`;
+    document.body.appendChild(banner);
+    window.pwaPrompt=e;
+  });
+});
 
-        window.toggleCollapsible = function(id) {
-            const element = document.getElementById(id);
-            if(element) {
-                element.classList.toggle('open');
-            }
-        };
-
-        window.deleteUserAdmin = function(username) {
-            if(!confirm(`Supprimer l'utilisateur ${username} et toutes ses données ?`)) return;
-            
-            delete usersDb[username];
-            localStorage.setItem('bed_users', JSON.stringify(usersDb));
-            loadAdminPanel();
-        };
-
-        // --- CHAT LOGIC ---
-        
-        chatInput.addEventListener('input', function() {
-            this.style.height = 'auto';
-            this.style.height = Math.min(this.scrollHeight, 150) + 'px';
-            if(this.value === '') this.style.height = 'auto';
-        });
-
-        chatInput.addEventListener('keydown', (e) => {
-            if(e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                chatForm.dispatchEvent(new Event('submit'));
-            }
-        });
-
-        chatForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const text = chatInput.value.trim();
-            if(!text) return;
-
-            if(isFirstMessage) {
-                chatHero.style.opacity = '0';
-                setTimeout(() => chatHero.classList.add('hidden'), 500);
-                isFirstMessage = false;
-            }
-
-            chatInput.value = '';
-            chatInput.style.height = 'auto';
-
-            // Add User Message (display only user text, not instructions)
-            addMessage(currentUser, text, true);
-            
-            // Prepare message with custom instructions (sent to API, not displayed)
-            let apiMessage = text;
-            if(customInstructionsActive && customInstructions.trim() !== '') {
-                apiMessage = `[Instructions à respecter: ${customInstructions}]\n\n${text}`;
-            }
-            
-            // Add to history
-            chatHistory.push({ isUser: true, content: apiMessage });
-            
-            // Add Loading Indicator
-            const loadingId = addMessage("B.E.D. AI", createLoadingIndicator(), false);
-
-            // Call API
-            const userData = usersDb[currentUser] || {};
-            let apiKey = (userData.apiKey || DEFAULT_API_KEY).trim().replace(/[\r\n\s]+/g, '');
-            
-            try {
-                let reply = "";
-
-                const messages = chatHistory.map(m => ({
-                    role: m.isUser ? 'user' : 'assistant',
-                    content: m.content
-                }));
-                
-                const apiModel = userData.apiModel || DEFAULT_API_MODEL;
-                
-                const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${apiKey}`,
-                        'HTTP-Referer': window.location.href,
-                        'X-Title': 'B.E.D. AI'
-                    },
-                    body: JSON.stringify({
-                        model: apiModel,
-                        messages: messages,
-                        stream: true
-                    })
-                });
-                
-                if (res.status === 401) throw new Error("Clé API invalide.");
-                if (res.status === 402) throw new Error("Modèle payant sans crédits.");
-                if (!res.ok) throw new Error(`Erreur API: ${res.status}`);
-                
-                const reader = res.body.getReader();
-                const decoder = new TextDecoder("utf-8");
-                let buffer = "";
-                
-                while (true) {
-                    const { done, value } = await reader.read();
-                    if (done) break;
-                    
-                    buffer += decoder.decode(value, { stream: true });
-                    const lines = buffer.split('\n');
-                    buffer = lines.pop();
-                    
-                    for (const line of lines) {
-                        if (line.trim() === '') continue;
-                        if (line.startsWith('data: ')) {
-                            const dataStr = line.slice(6).trim();
-                            if (dataStr === '[DONE]') continue;
-                            try {
-                                const data = JSON.parse(dataStr);
-                                if (data.choices && data.choices[0].delta && data.choices[0].delta.content) {
-                                    reply += data.choices[0].delta.content;
-                                    updateMessage(loadingId, reply);
-                                    scrollToBottom();
-                                }
-                            } catch (e) {
-                                console.error("Parse error", e);
-                            }
-                        }
-                    }
-                }
-
-                chatHistory.push({ isUser: false, content: reply });
-                scrollToBottom();
-
-            } catch (error) {
-                console.error(error);
-                updateMessage(loadingId, `<span class="text-red-500 font-semibold">❌ ${error.message}</span>`);
-            }
-        });
-
-        function createLoadingIndicator() {
-            return `<div class="flex items-center gap-2">
-                <span class="text-gray-400">Analyse en cours</span>
-                <div class="flex gap-1">
-                    <span class="loading-dot"></span>
-                    <span class="loading-dot"></span>
-                    <span class="loading-dot"></span>
-                </div>
-            </div>`;
-        }
-
-        function addMessage(sender, content, isUser) {
-            const id = 'msg-' + Date.now() + '-' + Math.random();
-            const div = document.createElement('div');
-            div.id = id;
-            div.className = `flex gap-4 message-appear ${isUser ? 'flex-row-reverse' : ''} max-w-4xl mx-auto w-full`;
-            
-            const avatar = isUser 
-                ? `<div class="w-10 h-10 rounded-full bg-gradient-to-br from-gray-600 to-gray-800 flex-shrink-0 flex items-center justify-center border-2 border-primary-500/30 shadow-lg">
-                    <i class="fa-solid fa-user text-sm text-white"></i>
-                   </div>`
-                : `<div class="flex flex-col items-center">
-                    <i class="fa-solid fa-brain text-2xl text-primary-500 brain-logo mb-1"></i>
-                    <span class="text-[8px] text-gray-500 font-tech">By Brice JCT</span>
-                   </div>`;
-            
-            const bgClass = isUser 
-                ? 'bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700 text-gray-100' 
-                : 'glass-panel-3d border-primary-800/50 text-gray-100';
-            
-            const displayContent = content.includes('loading-dot') ? content : marked.parse(content);
-
-            div.innerHTML = `
-                ${avatar}
-                <div class="${bgClass} border-2 rounded-2xl p-5 max-w-[85%] shadow-lg">
-                    <div class="text-xs ${isUser ? 'text-gray-400' : 'text-primary-400'} mb-2 uppercase tracking-wider font-bold font-tech">${sender}</div>
-                    <div class="leading-relaxed content-area prose prose-invert max-w-none">${displayContent}</div>
-                </div>
-            `;
-            
-            chatMessages.appendChild(div);
-            scrollToBottom();
-            return id;
-        }
-
-        function updateMessage(id, newContent) {
-            const msgEl = document.getElementById(id);
-            if(msgEl) {
-                const contentArea = msgEl.querySelector('.content-area');
-                contentArea.innerHTML = marked.parse(newContent);
-            }
-        }
-
-        function scrollToBottom() {
-            requestAnimationFrame(() => {
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            });
-        }
-
-    </script>
+// sessionStorage handled inside loginUser above
+</script>
 </body>
 </html>
-
